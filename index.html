@@ -528,14 +528,8 @@ body.gb-open{overflow:hidden}
 .dd-yes:disabled{opacity:.6}
 .gl-row .del{border:1.5px solid #b33a12;border-radius:99px;background:none;padding:2px 14px;margin-left:16px;font:inherit;font-size:.72em;color:#b33a12;cursor:pointer;text-transform:none;vertical-align:2px}
 .gl-row .del:hover{background:#b33a12;color:#fff}
-.gl-foot{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;margin-top:44px;font-family:var(--font-kr);font-size:21px;color:#555}
-.gl-hint{margin:0}.gl-hint b{color:#b33a12;font-weight:600}
-.gl-admin{display:flex;align-items:center;gap:12px;margin:0}
-.ga-open{border:0;background:none;padding:0;font:inherit;color:#888;text-decoration:underline;cursor:pointer}
-.ga-box{display:inline-flex;gap:8px}
-.ga-box input{font:inherit;padding:6px 12px;border:1px solid #bbb;border-radius:8px;width:220px;background:#fff}
-.ga-go{font:inherit;padding:6px 16px;border:0;border-radius:8px;background:var(--text-primary);color:#fff;cursor:pointer}
-.ga-note{color:#b33a12}
+.dd-code{margin-top:14px}
+.dd-code input{width:100%;font:inherit;font-size:15px;padding:10px 14px;border:1px solid #ccc;border-radius:12px;background:#fff;color:var(--text-primary)}
 
 @media (max-width:999px){.toc{grid-template-columns:1fr}}
 /* ---------- 02b2 touch interaction 11: eleven soft columns, one per way of touching ---------- */
@@ -947,7 +941,7 @@ body.gb-open{overflow:hidden}
         <div class="from"><label class="lb" for="gbName"><svg viewBox="0 0 16.414 35.914" aria-hidden="true"><path d="M8.207 0V34.5M15.707 27L8.207 34.5L.707 27" stroke-width="2" stroke="#1A1A1A" fill="none"/></svg>From</label><input id="gbName" name="name" maxlength="24" required placeholder="NAME"></div>
         <div class="msg"><textarea id="gbMsg" name="message" maxlength="200" required aria-label="메시지" placeholder="Hello — 한 줄 메시지를 남겨주세요"></textarea></div>
         <div class="shot" id="gbShot"><label class="pick"><span id="gbShotLbl">Take Photo</span><input type="file" id="gbFile" accept="image/*"><img id="gbPrev" alt="첨부한 사진 미리보기" hidden></label><button type="button" class="rm" id="gbRm" aria-label="사진 빼기" hidden>×</button></div>
-        <p style="font-size:12px;line-height:1.5">이름·편지·사진은 모두에게 공개돼요. 본인 글은 작성한 브라우저에서 삭제할 수 있어요.</p><div class="ft"><span class="note" id="gbNote" aria-live="polite"></span><button class="send-btn" type="submit" id="gbSend">Send</button></div>
+        <div class="ft"><span class="note" id="gbNote" aria-live="polite"></span><button class="send-btn" type="submit" id="gbSend">Send</button></div>
       </form>
     </div>
   </section>
@@ -958,8 +952,6 @@ body.gb-open{overflow:hidden}
     <div class="gl-cols" aria-hidden="true"><span>Message</span><span>Name</span><span>Date</span></div>
     <div class="gl-rows" id="glRows" role="list"></div>
     <p class="gl-empty" id="glEmpty">아직 남겨진 글이 없어요. 첫 메시지를 보내주세요.</p>
-    <div class="gl-foot"><p class="gl-hint">내가 쓴 편지는 그 편지를 쓴 브라우저에서 <b>Delete</b>를 눌러 지울 수 있어요.</p>
-      <form class="gl-admin" id="glAdmin" autocomplete="off"><button type="button" class="ga-open" id="gaOpen">관리자</button><span class="ga-box" id="gaBox" hidden><label class="sr" for="gaCode">관리자 코드</label><input type="password" id="gaCode" placeholder="관리자 코드"><button type="submit" class="ga-go">확인</button></span><span class="ga-note" id="gaNote" aria-live="polite"></span></form></div>
   </section>
 </div>
 </div>
@@ -1442,7 +1434,7 @@ body.gb-open{overflow:hidden}
     const frag=document.createDocumentFragment();
     if(!mineTo.length){const a=document.createElement('article');a.className='lcard empty';a.innerHTML=head+`<div class="from"><span class="lb">${arrowFrom}From</span><span class="nm">—</span></div><p class="msg">아직 ${PEOPLE[curTo].label}에게 도착한 편지가 없어요. 왼쪽 카드에 첫 편지를 써주세요.</p><div class="shot"><span>No Photo</span></div><div class="ft"><span class="dt">DD MM YY</span><span>To. ${PEOPLE[curTo].label}</span></div>`;frag.append(a)}
     mineTo.slice(0,24).forEach(e=>{const a=document.createElement('article');a.className='lcard';
-      a.innerHTML=(canDel(e)?`<button type="button" class="delx" data-del="${esc(e.uid)}|${e.at}" aria-label="${esc(e.name)}님의 편지 삭제">×</button>`:'')+head+`<div class="from"><span class="lb">${arrowFrom}From</span><span class="nm">${esc(e.name)}</span></div><p class="msg">${esc(e.message)}</p><div class="shot">${e.photo&&/^data:image\/(webp|jpeg|png);base64,/.test(e.photo)?`<img src="${e.photo}" alt="${esc(e.name)}님이 보낸 사진">`:'<span>No Photo</span>'}</div><div class="ft"><span class="dt">${fmt(e.at)}</span><span>To. ${PEOPLE[curTo].label}</span></div>`;
+      a.innerHTML=(db?`<button type="button" class="delx" data-del="${esc(e.uid)}|${e.at}" aria-label="${esc(e.name)}님의 편지 삭제">×</button>`:'')+head+`<div class="from"><span class="lb">${arrowFrom}From</span><span class="nm">${esc(e.name)}</span></div><p class="msg">${esc(e.message)}</p><div class="shot">${e.photo&&/^data:image\/(webp|jpeg|png);base64,/.test(e.photo)?`<img src="${e.photo}" alt="${esc(e.name)}님이 보낸 사진">`:'<span>No Photo</span>'}</div><div class="ft"><span class="dt">${fmt(e.at)}</span><span>To. ${PEOPLE[curTo].label}</span></div>`;
       frag.append(a)});
     gbCards.append(frag);
   }
@@ -1510,19 +1502,16 @@ body.gb-open{overflow:hidden}
   /* operators (Karyn, Jinhee) can hide any letter after entering the code set in guestbook-admin.sql */
   let adminCode=null; try{ adminCode=sessionStorage.getItem('mimoAdmin') }catch(e){}
   function canDel(e){ return !!db && ((!!uid && e.uid===uid) || !!adminCode || isOwner) }
-  { const form=document.getElementById('glAdmin'), box=document.getElementById('gaBox'), open=document.getElementById('gaOpen'), code=document.getElementById('gaCode'), note=document.getElementById('gaNote');
-    const showOn=()=>{ open.textContent='관리자 모드 끄기'; box.hidden=true; note.textContent='관리자 모드: 모든 편지를 지울 수 있어요.' };
-    if(adminCode) showOn();
-    open.addEventListener('click',()=>{ if(adminCode){ adminCode=null; try{sessionStorage.removeItem('mimoAdmin')}catch(e){} open.textContent='관리자'; note.textContent=''; render(); return } box.hidden=!box.hidden; if(!box.hidden) code.focus() });
-    form.addEventListener('submit',async ev=>{ ev.preventDefault(); const c=code.value.trim(); if(!c||!db) return; note.textContent='확인 중…';
-      try{ const {data,error}=await db.rpc('mimo_admin_check',{code:c}); if(error) throw error;
-        if(data===true){ adminCode=c; try{sessionStorage.setItem('mimoAdmin',c)}catch(e){} code.value=''; showOn(); render() } else note.textContent='코드가 맞지 않아요.' }
-      catch(err){ note.textContent='관리자 기능이 아직 설정되지 않았어요. (guestbook-admin.sql 실행 필요)' } }) }
   const delDlg=document.createElement('div'); delDlg.className='deldlg'; delDlg.hidden=true;
-  delDlg.innerHTML='<div class="deldlg-box" role="alertdialog" aria-modal="true" aria-labelledby="delQ"><p id="delQ">삭제하겠습니까?</p><p class="deldlg-sub">편지가 공개 목록에서 사라집니다.</p><div class="deldlg-row"><button type="button" class="dd-no">취소</button><button type="button" class="dd-yes">삭제</button></div></div>';
+  delDlg.innerHTML='<div class="deldlg-box" role="alertdialog" aria-modal="true" aria-labelledby="delQ"><p id="delQ">삭제하겠습니까?</p><p class="deldlg-sub">편지가 공개 목록에서 사라집니다.</p><div class="dd-code" hidden><label class="sr" for="ddCode">관리자 코드</label><input type="password" id="ddCode" placeholder="관리자 코드" autocomplete="off"></div><div class="deldlg-row"><button type="button" class="dd-no">취소</button><button type="button" class="dd-yes">삭제</button></div></div>';
   document.body.append(delDlg);
   let delKey=null, delBtn=null;
-  function askDel(key,btn){ delKey=key; delBtn=btn; delDlg.hidden=false; delDlg.querySelector('.dd-no').focus() }
+  const ddCode=delDlg.querySelector('#ddCode'), ddWrap=delDlg.querySelector('.dd-code'), ddSub=delDlg.querySelector('.deldlg-sub');
+  function askDel(key,btn){ delKey=key; delBtn=btn; const [owner]=key.split('|'); const mine=!!uid&&owner===uid;
+    const needCode=!mine&&!adminCode; ddWrap.hidden=!needCode; ddCode.value='';
+    ddSub.textContent=needCode?'직접 쓴 편지는 쓴 브라우저에서 바로 지울 수 있어요. 다른 편지는 관리자 코드를 넣어 주세요.':'편지가 공개 목록에서 사라집니다.';
+    delDlg.hidden=false; (needCode?ddCode:delDlg.querySelector('.dd-no')).focus() }
+  ddCode.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); doDel() } });
   function closeDel(){ delDlg.hidden=true; if(delBtn&&delBtn.isConnected) delBtn.focus({preventScroll:true}); delKey=null }
   delDlg.addEventListener('click',e=>{ if(e.target===delDlg||e.target.closest('.dd-no')) closeDel(); else if(e.target.closest('.dd-yes')) doDel() });
   addEventListener('keydown',e=>{ if(e.key==='Escape'&&!delDlg.hidden) closeDel() });
@@ -1534,13 +1523,16 @@ body.gb-open{overflow:hidden}
       if(uid&&entry.uid===uid){
         const {data,error}=await db.from('mimo_letters').update({deleted_at:new Date().toISOString()}).eq('id',entry.id).select('id');
         if(error||!data?.length) throw error||new Error('Not allowed');
-      } else if(adminCode){
-        const {data,error}=await db.rpc('mimo_admin_hide',{letter_id:entry.id,code:adminCode});
-        if(error||data!==true) throw error||new Error('Not allowed');
-      } else throw new Error('Not allowed');
+      } else {
+        const code=adminCode||ddCode.value.trim(); if(!code){ ddSub.textContent='관리자 코드를 넣어 주세요.'; yes.disabled=false; yes.textContent='삭제'; return }
+        const {data,error}=await db.rpc('mimo_admin_hide',{letter_id:entry.id,code});
+        if(error) throw error;
+        if(data!==true){ if(adminCode){ adminCode=null; try{sessionStorage.removeItem('mimoAdmin')}catch(e){} } ddWrap.hidden=false; ddSub.textContent='관리자 코드가 맞지 않아요.'; yes.disabled=false; yes.textContent='삭제'; return }
+        adminCode=code; try{sessionStorage.setItem('mimoAdmin',code)}catch(e){}
+      }
       all=all.filter(e=>e.id!==entry.id);render();delDlg.hidden=true;
     }
-    catch(err){ delDlg.querySelector('.deldlg-sub').textContent='지우지 못했어요. 잠시 후 다시 시도해 주세요.' }
+    catch(err){ ddSub.textContent=(err&&/mimo_admin_hide|function/.test(err.message||''))?'관리자 삭제가 아직 설정되지 않았어요. (guestbook-admin.sql 실행 필요)':'지우지 못했어요. 잠시 후 다시 시도해 주세요.' }
     yes.disabled=false; yes.textContent='삭제';
   }
   function delEntry(key,btn){ askDel(key,btn) }
