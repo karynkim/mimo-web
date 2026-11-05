@@ -384,8 +384,12 @@ body.gb-open{overflow:hidden}
 .disc svg{display:block;overflow:visible}
 .disc .union,.disc .handle,.disc .win{pointer-events:none}
 .disc .union path,.disc .handle path{pointer-events:visiblePainted}
-/* over the pink and red discs the pointer becomes a round "open" cursor */
-.disc-wrap,.disc-wrap *,.disc .union path{cursor:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%220%200%2040%2040%22%3E%3Ccircle%20cx%3D%2220%22%20cy%3D%2220%22%20r%3D%2217%22%20fill%3D%22%231A1A1A%22%20fill-opacity%3D%22.88%22%20stroke%3D%22%23FCFBFA%22%20stroke-width%3D%222%22/%3E%3Cpath%20d%3D%22M20%2012v16M12%2020h16%22%20stroke%3D%22%23FCFBFA%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22/%3E%3C/svg%3E") 20 20, pointer}
+/* over the pink and red discs the mouse becomes a '작성하기' cursor (drawn by .wcur) */
+@media (hover:hover) and (pointer:fine){ .disc-wrap,.disc-wrap *,.disc .union path{cursor:none} }
+.wcur{position:fixed;left:0;top:0;z-index:200;pointer-events:none;display:flex;flex-direction:column;align-items:center;gap:6px;transform:translate(-50%,-100%);opacity:0;transition:opacity .15s}
+.wcur.on{opacity:1}
+.wcur b{font-family:var(--font-kr);font-weight:800;font-size:22px;letter-spacing:-.6px;color:#111;line-height:1;white-space:nowrap;text-shadow:0 0 6px rgba(255,255,255,.55)}
+.wcur i{width:28px;height:28px;border-radius:50%;background:#111;margin-bottom:-14px}
 .disc .handle,.disc .handle path{cursor:grab}
 .disc.drag .handle,.disc.drag .handle path{cursor:grabbing}
 .disc .handle{left:984.99px;top:426.75px;width:1070.61px;height:542.9px;transform-origin:0 542.897px;will-change:transform;cursor:grab;touch-action:none}
@@ -1154,6 +1158,15 @@ body.gb-open{overflow:hidden}
     if(reduce) wv.classList.add('in');
     else { const wfx=()=>{ const r=wv.getBoundingClientRect(); if(r.top<innerHeight*.8&&r.bottom>innerHeight*.1) wv.classList.add('in'); else if(r.top>innerHeight||r.bottom<0) wv.classList.remove('in') };
       addEventListener('scroll',()=>requestAnimationFrame(wfx),{passive:true}); wfx() } }
+
+  /* '작성하기' cursor over the discs; clicking a disc opens the letter window */
+  { const wc=document.createElement('div'); wc.className='wcur'; wc.setAttribute('aria-hidden','true'); wc.innerHTML='<b>작성하기</b><i></i>'; document.body.append(wc);
+    const fine=matchMedia('(hover:hover) and (pointer:fine)');
+    document.querySelectorAll('.disc-wrap').forEach(w=>{
+      w.addEventListener('pointermove',e=>{ if(e.pointerType!=='mouse'||!fine.matches) return; const onHandle=!!e.target.closest('.handle');
+        wc.style.left=e.clientX+'px'; wc.style.top=e.clientY+'px'; wc.classList.toggle('on',!onHandle) });
+      w.addEventListener('pointerleave',()=>wc.classList.remove('on'));
+    }) }
   /* pies sweep in, numbers count up */
   const pio=new IntersectionObserver(es=>es.forEach(e=>{
     const panel=e.target.parentElement.closest('.a'); const arc=e.target.querySelector('.arc'); const p=+arc.dataset.p;
@@ -1363,8 +1376,9 @@ body.gb-open{overflow:hidden}
       e.preventDefault(); d.el.classList.add('used'); snap(d,Math.round(d.theta/STEP)*STEP+dir*STEP);
     });
     d.el.addEventListener('click',e=>{
-      const t=e.target.closest('[data-act]'); if(!t) return;
-      if(t.dataset.act==='list') document.getElementById('gbList').scrollIntoView({behavior:reduce?'auto':'smooth'});
+      if(e.target.closest('.handle')) return;
+      const t=e.target.closest('[data-act]');
+      if(t&&t.dataset.act==='list') document.getElementById('gbList').scrollIntoView({behavior:reduce?'auto':'smooth'});
       else openLetter(d.p.id);
     });
     drawDisc(d);
