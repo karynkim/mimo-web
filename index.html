@@ -1391,6 +1391,8 @@ body.gb-open{overflow:hidden}
   /* choosing a disc opens the letter card over the discs */
   const lm=document.getElementById('letterModal'), lmSlot=document.getElementById('lmSlot');
   let lmReturn=null;
+  /* the write card lives only in the 'Write a letter' window; the letters row shows received letters only */
+  lmSlot.append(gbForm);
   function openLetter(who){
     setTo(who); if(!lm.hidden){document.getElementById('gbName').focus({preventScroll:true});return}
     lmReturn=document.activeElement; lmSlot.append(gbForm); lm.hidden=false;
@@ -1399,7 +1401,7 @@ body.gb-open{overflow:hidden}
   }
   function closeLetter(){
     if(lm.hidden) return; lm.classList.remove('on');
-    setTimeout(()=>{lm.hidden=true; gbCards.prepend(gbForm); if(lmReturn&&lmReturn.focus) lmReturn.focus({preventScroll:true})},reduce?0:300);
+    setTimeout(()=>{lm.hidden=true; if(lmReturn&&lmReturn.focus) lmReturn.focus({preventScroll:true})},reduce?0:300);
   }
   lm.addEventListener('click',e=>{ if(e.target===lm||e.target.closest('.lm-x')) closeLetter() });
   addEventListener('keydown',e=>{ if(e.key==='Escape') closeLetter() });
@@ -1432,7 +1434,7 @@ body.gb-open{overflow:hidden}
     gbCards.querySelectorAll('article').forEach(a=>a.remove());
     const head=`<div class="hd"><svg viewBox="0 0 192 54" role="img" aria-label="mimo"><use href="#sym-wordmark"/></svg><div class="who"><button type="button" data-to="karyn" aria-pressed="${curTo==='karyn'}">Karyn</button><button type="button" data-to="jinhee" aria-pressed="${curTo==='jinhee'}">Jinhee</button></div></div>`;
     const frag=document.createDocumentFragment();
-    if(!mineTo.length){const a=document.createElement('article');a.className='lcard empty';a.innerHTML=head+`<div class="from"><span class="lb">${arrowFrom}From</span><span class="nm">—</span></div><p class="msg">아직 ${PEOPLE[curTo].label}에게 도착한 편지가 없어요. 왼쪽 카드에 첫 편지를 써주세요.</p><div class="shot"><span>No Photo</span></div><div class="ft"><span class="dt">DD MM YY</span><span>To. ${PEOPLE[curTo].label}</span></div>`;frag.append(a)}
+    if(!mineTo.length){const a=document.createElement('article');a.className='lcard empty';a.innerHTML=head+`<div class="from"><span class="lb">${arrowFrom}From</span><span class="nm">—</span></div><p class="msg">아직 ${PEOPLE[curTo].label}에게 도착한 편지가 없어요. 첫 편지를 남겨주세요.</p><div class="shot"><span>No Photo</span></div><div class="ft"><span class="dt">DD MM YY</span><span>To. ${PEOPLE[curTo].label}</span></div>`;frag.append(a)}
     mineTo.slice(0,24).forEach(e=>{const a=document.createElement('article');a.className='lcard';
       a.innerHTML=(db?`<button type="button" class="delx" data-del="${esc(e.uid)}|${e.at}" aria-label="${esc(e.name)}님의 편지 삭제">×</button>`:'')+head+`<div class="from"><span class="lb">${arrowFrom}From</span><span class="nm">${esc(e.name)}</span></div><p class="msg">${esc(e.message)}</p><div class="shot">${e.photo&&/^data:image\/(webp|jpeg|png);base64,/.test(e.photo)?`<img src="${e.photo}" alt="${esc(e.name)}님이 보낸 사진">`:'<span>No Photo</span>'}</div><div class="ft"><span class="dt">${fmt(e.at)}</span><span>To. ${PEOPLE[curTo].label}</span></div>`;
       frag.append(a)});
