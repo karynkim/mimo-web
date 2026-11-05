@@ -539,6 +539,46 @@ body.gb-open{overflow:hidden}
 .dd-code input{width:100%;font:inherit;font-size:15px;padding:10px 14px;border:1px solid #ccc;border-radius:12px;background:#fff;color:var(--text-primary)}
 
 @media (max-width:999px){.toc{grid-template-columns:1fr}}
+/* ---------- 02d key finding: the cushion lands, its ring orbits, the lights talk ---------- */
+#s02d{height:918px;background:#fff;overflow:hidden}
+#s02d .kf-blob{left:905px;top:30px;width:720px;height:900px;border-radius:48% 52% 46% 54%/40% 42% 58% 60%;background:radial-gradient(60% 55% at 45% 55%,rgba(250,160,135,.42),rgba(252,205,190,.22) 55%,rgba(255,255,255,0) 78%);filter:blur(18px);transition:transform 1.6s cubic-bezier(.2,.8,.2,1),opacity 1.4s ease}
+#s02d .kf-art{left:836px;top:83px;width:520px;height:520px}
+#s02d .kf-in{position:absolute;inset:0;transition:transform 1.2s cubic-bezier(.34,1.45,.55,1) .15s,opacity .6s ease .15s}
+#s02d .kf-float{position:absolute;inset:0;animation:kfFloat 5s ease-in-out infinite}
+#s02d .kf-base{position:absolute;left:16.154%;top:15.769%;width:73.077%;height:73.077%;border-radius:50%;background:radial-gradient(circle at 40% 35%,#ef6a22,#d9561a 70%);box-shadow:0 30px 60px rgba(200,80,30,.18)}
+#s02d .kf-face{position:absolute;left:14.808%;top:14.808%;width:70.385%;height:70.385%;border-radius:50%;overflow:hidden;background:radial-gradient(circle at 38% 32%,#ff7a2a,#fb671c 55%,#f25d17);box-shadow:inset 0 0 0 2px rgba(255,255,255,.85)}
+#s02d .kf-face::after{content:"";position:absolute;inset:0;background:radial-gradient(circle,rgba(60,25,8,.75) 1.1px,transparent 1.6px) 0 0/9px 9px;-webkit-mask-image:radial-gradient(circle at 96% 98%,#000 0 20%,transparent 42%);mask-image:radial-gradient(circle at 96% 98%,#000 0 20%,transparent 42%);transition:opacity 1s ease .9s}
+#s02d .kf-ringin{position:absolute;inset:0;transform-origin:50% 50%;transition:transform 1.4s cubic-bezier(.2,.8,.2,1) .05s,opacity .8s ease .05s}
+#s02d .kf-ring{position:absolute;left:9.423%;top:9.615%;width:73.846%;height:73.846%;border-radius:50%;border:1.6px solid #ff7b39;transform-origin:54.948% 54.688%;animation:kfOrbit 9s linear infinite}
+#s02d .kf-lights{position:absolute;left:50%;top:49.038%;transform:translate(-50%,-50%);display:flex;align-items:center;gap:15px}
+#s02d .kf-lights i{display:block;width:10px;height:10px;border-radius:5px;background:#fff;box-shadow:0 0 10px rgba(255,255,255,.9);animation:kfTalk 1.4s ease-in-out infinite}
+#s02d .kf-lights i:nth-child(2),#s02d .kf-lights i:nth-child(3){height:20px}
+#s02d .kf-lights i:nth-child(2){animation-delay:.15s} #s02d .kf-lights i:nth-child(3){animation-delay:.3s} #s02d .kf-lights i:nth-child(4){animation-delay:.45s}
+#s02d .kf-k{left:80px;top:54px;margin:0;font-family:var(--font-dm);font-variation-settings:"opsz" 14;font-weight:600;font-size:16px;letter-spacing:-.4px;color:var(--brown)}
+#s02d .kf-h{left:80px;top:452px;margin:0;font-size:62px;line-height:77px;font-weight:800;letter-spacing:-3.2px;color:var(--brown)}
+#s02d .kf-h span{display:block;overflow:hidden}
+#s02d .kf-h span>b{display:block;font-weight:inherit;transition:transform .9s cubic-bezier(.2,.8,.2,1),opacity .9s ease}
+#s02d .kf-h span:nth-child(2)>b{transition-delay:.12s} #s02d .kf-h span:nth-child(3)>b{transition-delay:.24s}
+#s02d .kf-p{left:80px;top:722px;width:520px;margin:0;font-size:15px;line-height:1.55;letter-spacing:-.4px;color:var(--brown);transition:opacity .9s ease .5s,transform .9s ease .5s}
+#s02d .kf-p b{font-weight:700}
+#s02d.off .kf-blob{transform:scale(.55) rotate(-12deg);opacity:0}
+#s02d.off .kf-in{transform:translate(120px,-60px) scale(.3) rotate(-70deg);opacity:0}
+#s02d.off .kf-ringin{transform:scale(1.6) rotate(160deg);opacity:0}
+#s02d.off .kf-face::after{opacity:0}
+#s02d.off .kf-h span>b{transform:translateY(105%);opacity:0}
+#s02d.off .kf-p{opacity:0;transform:translateY(16px)}
+@keyframes kfFloat{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-14px) rotate(3deg)}}
+@keyframes kfOrbit{to{transform:rotate(360deg)}}
+@keyframes kfTalk{0%,100%{transform:scaleY(1);opacity:1}50%{transform:scaleY(1.7);opacity:.75}}
+@media (prefers-reduced-motion:reduce){#s02d .kf-float,#s02d .kf-ring,#s02d .kf-lights i{animation:none}}
+@media (max-width:999px){
+  #s02d{padding:48px 20px 56px!important}
+  #s02d .kf-blob{display:none}
+  #s02d .kf-art{width:min(320px,80vw)!important;height:min(320px,80vw);align-self:center}
+  #s02d .kf-h{font-size:36px;line-height:1.25;letter-spacing:-1.6px}
+  #s02d .kf-lights{gap:9px} #s02d .kf-lights i{width:6px;height:6px} #s02d .kf-lights i:nth-child(2),#s02d .kf-lights i:nth-child(3){height:12px}
+}
+
 /* ---------- 02b2 touch interaction 11: eleven soft columns, one per way of touching ---------- */
 #s02t{height:870px;background:var(--bg-canvas)}
 #s02t .hl{left:82px;top:168px;margin:0;font-size:44px;line-height:51px;font-weight:300;letter-spacing:-1.6px;color:var(--text-primary)}
@@ -742,6 +782,15 @@ body.gb-open{overflow:hidden}
   <p class="a wd" style="left:1006px;top:368px">흔들림에 버티기</p>
   <p class="a cap">예를 들어, <b>두드리는 행동</b>은 음악에 박자를 맞추는 움직임,<br>이야기의 한 부분을 강조하거나 상대의 관심을 부르는 표현이 되기도 합니다</p>
   <p class="a fn">운전 시뮬레이터에서 참여자 15명의 행동을 기록한 약 12시간·960만 프레임 이상의 데이터셋. 12개 과업, 34개<br>세부 활동, 행동·대상·위치로 구성된 최소 행동 단위와 372개의 관측된 조합을 제시함. 본 프로젝트는 해당 연구의<br>분류체계를 참고하여 미모의 사례를 재구성함.</p>
+</section>
+
+<!-- ============ 02d KEY FINDING ============ -->
+<section class="sec off" id="s02d" data-label="Key Finding" data-tone="light">
+  <div class="a kf-blob" aria-hidden="true"></div>
+  <p class="a kf-k">Key Finding</p>
+  <div class="a kf-art" aria-hidden="true"><div class="kf-ringin"><i class="kf-ring"></i></div><div class="kf-in"><div class="kf-float"><i class="kf-base"></i><div class="kf-face"><div class="kf-lights"><i></i><i></i><i></i><i></i></div></div></div></div></div>
+  <h2 class="a kf-h"><span><b>신체 접촉을</b></span><span><b>통한 비언어적</b></span><span><b>표현의 발견</b></span></h2>
+  <p class="a kf-p"><b>신체 행위 중</b>에는 무언가를 조작하려는 행동뿐 아니라, 대화와 감정의<br>흐름 속에서 <b>의식적으로 또는 무심결에 드러나는 표현</b>을 발견하여<br>이를 통해 신체 접촉을 통한 <b>비언어적 의사소통의 기반을 정의</b>했습니다</p>
 </section>
 
 <!-- ============ 03 RESEARCH ============ -->
@@ -1164,6 +1213,11 @@ body.gb-open{overflow:hidden}
         wc.style.left=e.clientX+'px'; wc.style.top=e.clientY+'px'; wc.classList.toggle('on',!onHandle) });
       w.addEventListener('pointerleave',()=>wc.classList.remove('on'));
     }) }
+
+  /* key finding: the whole scene plays in every time it comes into view */
+  { const kf=document.getElementById('s02d');
+    if(reduce) kf.classList.remove('off');
+    else new IntersectionObserver(es=>es.forEach(e=>{ if(e.intersectionRatio>=.3) kf.classList.remove('off'); else if(e.intersectionRatio===0) kf.classList.add('off') }),{threshold:[0,.3]}).observe(kf) }
   /* pies sweep in, numbers count up */
   const pio=new IntersectionObserver(es=>es.forEach(e=>{
     const panel=e.target.parentElement.closest('.a'); const arc=e.target.querySelector('.arc'); const p=+arc.dataset.p;
