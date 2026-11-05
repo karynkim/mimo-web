@@ -152,7 +152,8 @@ svg.logo{display:block;overflow:visible}
 
 /* ---------- 07 ---------- */
 #s07{height:2337px;background:var(--bg-canvas)}
-.wave{left:-80px;top:-80px;width:1680px;height:530px;transform-origin:50% 0}
+.wave{left:-80px;top:-80px;width:1680px;height:530px;transform-origin:50% 0;clip-path:inset(-10% 100% -10% 0);transition:clip-path 2.6s cubic-bezier(.55,.05,.25,1)}
+.wave.in{clip-path:inset(-10% 0 -10% 0)}
 .line{left:0;top:651px;width:1518px;text-align:center;font-weight:500;font-size:47.359px;line-height:49px;letter-spacing:-2.368px;color:#000}
 .line svg{display:inline-block;width:124px;height:35.79px;vertical-align:-3px;color:var(--accent);margin-left:2px}
 .construct{left:480px;top:1020px;width:560px;height:195px}
@@ -1140,6 +1141,12 @@ body.gb-open{overflow:hidden}
   { const t11=document.getElementById('s02t');
     if(reduce) t11.classList.remove('off');
     else new IntersectionObserver(es=>es.forEach(e=>{ if(e.intersectionRatio>=.35) t11.classList.remove('off'); else if(e.intersectionRatio===0) t11.classList.add('off') }),{threshold:[0,.35]}).observe(t11) }
+
+  /* the brand wave draws itself in from the left, every time it comes into view */
+  { const wv=document.getElementById('wave');
+    if(reduce) wv.classList.add('in');
+    else { const wfx=()=>{ const r=wv.getBoundingClientRect(); if(r.top<innerHeight*.8&&r.bottom>innerHeight*.1) wv.classList.add('in'); else if(r.top>innerHeight||r.bottom<0) wv.classList.remove('in') };
+      addEventListener('scroll',()=>requestAnimationFrame(wfx),{passive:true}); wfx() } }
   /* pies sweep in, numbers count up */
   const pio=new IntersectionObserver(es=>es.forEach(e=>{
     const panel=e.target.parentElement.closest('.a'); const arc=e.target.querySelector('.arc'); const p=+arc.dataset.p;
