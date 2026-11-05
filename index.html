@@ -386,10 +386,9 @@ body.gb-open{overflow:hidden}
 .disc .union path,.disc .handle path{pointer-events:visiblePainted}
 /* over the pink and red discs the mouse becomes a '작성하기' cursor (drawn by .wcur) */
 @media (hover:hover) and (pointer:fine){ .disc-wrap,.disc-wrap *,.disc .union path{cursor:none} }
-.wcur{position:fixed;left:0;top:0;z-index:200;pointer-events:none;display:flex;flex-direction:column;align-items:center;gap:6px;transform:translate(-50%,-100%);opacity:0;transition:opacity .15s}
-.wcur.on{opacity:1}
-.wcur b{font-family:var(--font-kr);font-weight:800;font-size:22px;letter-spacing:-.6px;color:#111;line-height:1;white-space:nowrap;text-shadow:0 0 6px rgba(255,255,255,.55)}
-.wcur i{width:28px;height:28px;border-radius:50%;background:#111;margin-bottom:-14px}
+.wcur{position:fixed;left:0;top:0;z-index:200;pointer-events:none;transform:translate(-50%,-50%) scale(.9);opacity:0;transition:opacity .15s,transform .15s}
+.wcur.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.wcur b{display:block;padding:12px 26px;border-radius:999px;background:#000;color:#fff;font-family:var(--font-kr);font-weight:700;font-size:20px;letter-spacing:-.4px;line-height:1;white-space:nowrap}
 .disc .handle,.disc .handle path{cursor:grab}
 .disc.drag .handle,.disc.drag .handle path{cursor:grabbing}
 .disc .handle{left:984.99px;top:426.75px;width:1070.61px;height:542.9px;transform-origin:0 542.897px;will-change:transform;cursor:grab;touch-action:none}
@@ -529,8 +528,8 @@ body.gb-open{overflow:hidden}
 .deldlg-box{width:min(340px,100%);background:var(--bg-canvas);border-radius:20px;padding:24px 22px 18px;box-shadow:0 30px 80px rgba(0,0,0,.3);font-family:var(--font-kr);color:var(--text-primary)}
 .deldlg-box #delQ{font-size:18px;font-weight:600;letter-spacing:-.4px}
 .deldlg-sub{margin-top:6px;font-size:14px;opacity:.6}
-.deldlg-row{display:flex;gap:8px;margin-top:20px;justify-content:flex-end}
-.deldlg-row button{height:40px;padding:0 18px;border:0;border-radius:20px;font:inherit;font-size:15px;cursor:pointer}
+.deldlg-row{display:grid;gap:8px;margin-top:20px}
+.deldlg-row button{height:46px;padding:0 18px;border:0;border-radius:23px;font:inherit;font-size:15px;font-weight:600;cursor:pointer}
 .dd-no{background:#e7e5e3}
 .dd-yes{background:#f54d20;color:#fff}
 .dd-yes:disabled{opacity:.6}
@@ -1158,7 +1157,7 @@ body.gb-open{overflow:hidden}
       addEventListener('scroll',()=>requestAnimationFrame(wfx),{passive:true}); wfx() } }
 
   /* '작성하기' cursor over the discs; clicking a disc opens the letter window */
-  { const wc=document.createElement('div'); wc.className='wcur'; wc.setAttribute('aria-hidden','true'); wc.innerHTML='<b>작성하기</b><i></i>'; document.body.append(wc);
+  { const wc=document.createElement('div'); wc.className='wcur'; wc.setAttribute('aria-hidden','true'); wc.innerHTML='<b>작성하기</b>'; document.body.append(wc);
     const fine=matchMedia('(hover:hover) and (pointer:fine)');
     document.querySelectorAll('.disc-wrap').forEach(w=>{
       w.addEventListener('pointermove',e=>{ if(e.pointerType!=='mouse'||!fine.matches) return; const onHandle=!!e.target.closest('.handle');
@@ -1521,14 +1520,14 @@ body.gb-open{overflow:hidden}
   let adminCode=null; try{ adminCode=sessionStorage.getItem('mimoAdmin') }catch(e){}
   function canDel(e){ return !!db && ((!!uid && e.uid===uid) || !!adminCode || isOwner) }
   const delDlg=document.createElement('div'); delDlg.className='deldlg'; delDlg.hidden=true;
-  delDlg.innerHTML='<div class="deldlg-box" role="alertdialog" aria-modal="true" aria-labelledby="delQ"><p id="delQ">삭제하겠습니까?</p><p class="deldlg-sub">편지가 공개 목록에서 사라집니다.</p><div class="dd-code" hidden><label class="sr" for="ddCode">관리자 코드</label><input type="password" id="ddCode" placeholder="관리자 코드" autocomplete="off"></div><div class="deldlg-row"><button type="button" class="dd-no">취소</button><button type="button" class="dd-yes">삭제</button></div></div>';
+  delDlg.innerHTML='<div class="deldlg-box" role="alertdialog" aria-modal="true" aria-labelledby="delQ"><p id="delQ">정말로 삭제하시겠습니까?</p><p class="deldlg-sub">편지가 공개 목록에서 사라집니다.</p><div class="dd-code" hidden><label class="sr" for="ddCode">관리자 코드</label><input type="password" id="ddCode" placeholder="관리자 코드" autocomplete="off"></div><div class="deldlg-row"><button type="button" class="dd-yes">삭제하기</button><button type="button" class="dd-no">취소</button></div></div>';
   document.body.append(delDlg);
   let delKey=null, delBtn=null;
   const ddCode=delDlg.querySelector('#ddCode'), ddWrap=delDlg.querySelector('.dd-code'), ddSub=delDlg.querySelector('.deldlg-sub');
   function askDel(key,btn){ delKey=key; delBtn=btn; const [owner]=key.split('|'); const mine=!!uid&&owner===uid;
     const needCode=!mine&&!adminCode; ddWrap.hidden=!needCode; ddCode.value='';
-    ddSub.textContent=needCode?'직접 쓴 편지는 쓴 브라우저에서 바로 지울 수 있어요. 다른 편지는 관리자 코드를 넣어 주세요.':'편지가 공개 목록에서 사라집니다.';
-    delDlg.hidden=false; (needCode?ddCode:delDlg.querySelector('.dd-no')).focus() }
+    ddSub.textContent=needCode?'다른 사람이 쓴 편지는 관리자 코드를 넣어야 지울 수 있어요.':'삭제한 편지는 방명록에서 사라져요.';
+    delDlg.hidden=false; (needCode?ddCode:delDlg.querySelector('.dd-no')).focus({focusVisible:false}) }
   ddCode.addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); doDel() } });
   function closeDel(){ delDlg.hidden=true; if(delBtn&&delBtn.isConnected) delBtn.focus({preventScroll:true}); delKey=null }
   delDlg.addEventListener('click',e=>{ if(e.target===delDlg||e.target.closest('.dd-no')) closeDel(); else if(e.target.closest('.dd-yes')) doDel() });
@@ -1542,16 +1541,16 @@ body.gb-open{overflow:hidden}
         const {data,error}=await db.from('mimo_letters').update({deleted_at:new Date().toISOString()}).eq('id',entry.id).select('id');
         if(error||!data?.length) throw error||new Error('Not allowed');
       } else {
-        const code=adminCode||ddCode.value.trim(); if(!code){ ddSub.textContent='관리자 코드를 넣어 주세요.'; yes.disabled=false; yes.textContent='삭제'; return }
+        const code=adminCode||ddCode.value.trim(); if(!code){ ddSub.textContent='관리자 코드를 넣어 주세요.'; yes.disabled=false; yes.textContent='삭제하기'; return }
         const {data,error}=await db.rpc('mimo_admin_hide',{letter_id:entry.id,code});
         if(error) throw error;
-        if(data!==true){ if(adminCode){ adminCode=null; try{sessionStorage.removeItem('mimoAdmin')}catch(e){} } ddWrap.hidden=false; ddSub.textContent='관리자 코드가 맞지 않아요.'; yes.disabled=false; yes.textContent='삭제'; return }
+        if(data!==true){ if(adminCode){ adminCode=null; try{sessionStorage.removeItem('mimoAdmin')}catch(e){} } ddWrap.hidden=false; ddSub.textContent='관리자 코드가 맞지 않아요.'; yes.disabled=false; yes.textContent='삭제하기'; return }
         adminCode=code; try{sessionStorage.setItem('mimoAdmin',code)}catch(e){}
       }
       all=all.filter(e=>e.id!==entry.id);render();delDlg.hidden=true;
     }
     catch(err){ ddSub.textContent=(err&&/mimo_admin_hide|function/.test(err.message||''))?'관리자 삭제가 아직 설정되지 않았어요. (guestbook-admin.sql 실행 필요)':'지우지 못했어요. 잠시 후 다시 시도해 주세요.' }
-    yes.disabled=false; yes.textContent='삭제';
+    yes.disabled=false; yes.textContent='삭제하기';
   }
   function delEntry(key,btn){ askDel(key,btn) }
   document.addEventListener('click',e=>{const b=e.target.closest('[data-del]'); if(b&&!b.disabled) delEntry(b.dataset.del,b)});
