@@ -526,7 +526,16 @@ body.gb-open{overflow:hidden}
 .dd-no{background:#e7e5e3}
 .dd-yes{background:#f54d20;color:#fff}
 .dd-yes:disabled{opacity:.6}
-.gl-row .del{border:0;background:none;padding:0;margin-left:14px;font:inherit;font-size:.7em;color:#b33a12;cursor:pointer;text-decoration:underline;text-transform:none}
+.gl-row .del{border:1.5px solid #b33a12;border-radius:99px;background:none;padding:2px 14px;margin-left:16px;font:inherit;font-size:.72em;color:#b33a12;cursor:pointer;text-transform:none;vertical-align:2px}
+.gl-row .del:hover{background:#b33a12;color:#fff}
+.gl-foot{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;margin-top:44px;font-family:var(--font-kr);font-size:21px;color:#555}
+.gl-hint{margin:0}.gl-hint b{color:#b33a12;font-weight:600}
+.gl-admin{display:flex;align-items:center;gap:12px;margin:0}
+.ga-open{border:0;background:none;padding:0;font:inherit;color:#888;text-decoration:underline;cursor:pointer}
+.ga-box{display:inline-flex;gap:8px}
+.ga-box input{font:inherit;padding:6px 12px;border:1px solid #bbb;border-radius:8px;width:220px;background:#fff}
+.ga-go{font:inherit;padding:6px 16px;border:0;border-radius:8px;background:var(--text-primary);color:#fff;cursor:pointer}
+.ga-note{color:#b33a12}
 
 @media (max-width:999px){.toc{grid-template-columns:1fr}}
 /* ---------- 02b2 touch interaction 11: eleven soft columns, one per way of touching ---------- */
@@ -949,6 +958,8 @@ body.gb-open{overflow:hidden}
     <div class="gl-cols" aria-hidden="true"><span>Message</span><span>Name</span><span>Date</span></div>
     <div class="gl-rows" id="glRows" role="list"></div>
     <p class="gl-empty" id="glEmpty">아직 남겨진 글이 없어요. 첫 메시지를 보내주세요.</p>
+    <div class="gl-foot"><p class="gl-hint">내가 쓴 편지는 그 편지를 쓴 브라우저에서 <b>Delete</b>를 눌러 지울 수 있어요.</p>
+      <form class="gl-admin" id="glAdmin" autocomplete="off"><button type="button" class="ga-open" id="gaOpen">관리자</button><span class="ga-box" id="gaBox" hidden><label class="sr" for="gaCode">관리자 코드</label><input type="password" id="gaCode" placeholder="관리자 코드"><button type="submit" class="ga-go">확인</button></span><span class="ga-note" id="gaNote" aria-live="polite"></span></form></div>
   </section>
 </div>
 </div>
@@ -1496,7 +1507,17 @@ body.gb-open{overflow:hidden}
   })();
 
   /* delete: your own letters, or any letter for the page owner */
-  function canDel(e){ return !!db && !!uid && (e.uid===uid || isOwner) }
+  /* operators (Karyn, Jinhee) can hide any letter after entering the code set in guestbook-admin.sql */
+  let adminCode=null; try{ adminCode=sessionStorage.getItem('mimoAdmin') }catch(e){}
+  function canDel(e){ return !!db && ((!!uid && e.uid===uid) || !!adminCode || isOwner) }
+  { const form=document.getElementById('glAdmin'), box=document.getElementById('gaBox'), open=document.getElementById('gaOpen'), code=document.getElementById('gaCode'), note=document.getElementById('gaNote');
+    const showOn=()=>{ open.textContent='관리자 모드 끄기'; box.hidden=true; note.textContent='관리자 모드: 모든 편지를 지울 수 있어요.' };
+    if(adminCode) showOn();
+    open.addEventListener('click',()=>{ if(adminCode){ adminCode=null; try{sessionStorage.removeItem('mimoAdmin')}catch(e){} open.textContent='관리자'; note.textContent=''; render(); return } box.hidden=!box.hidden; if(!box.hidden) code.focus() });
+    form.addEventListener('submit',async ev=>{ ev.preventDefault(); const c=code.value.trim(); if(!c||!db) return; note.textContent='확인 중…';
+      try{ const {data,error}=await db.rpc('mimo_admin_check',{code:c}); if(error) throw error;
+        if(data===true){ adminCode=c; try{sessionStorage.setItem('mimoAdmin',c)}catch(e){} code.value=''; showOn(); render() } else note.textContent='코드가 맞지 않아요.' }
+      catch(err){ note.textContent='관리자 기능이 아직 설정되지 않았어요. (guestbook-admin.sql 실행 필요)' } }) }
   const delDlg=document.createElement('div'); delDlg.className='deldlg'; delDlg.hidden=true;
   delDlg.innerHTML='<div class="deldlg-box" role="alertdialog" aria-modal="true" aria-labelledby="delQ"><p id="delQ">삭제하겠습니까?</p><p class="deldlg-sub">편지가 공개 목록에서 사라집니다.</p><div class="deldlg-row"><button type="button" class="dd-no">취소</button><button type="button" class="dd-yes">삭제</button></div></div>';
   document.body.append(delDlg);
@@ -1510,8 +1531,13 @@ body.gb-open{overflow:hidden}
     yes.disabled=true; yes.textContent='삭제 중…';
     const entry=all.find(e=>e.uid===owner&&e.at===at);
     try{ if(!entry) throw new Error('Missing letter');
-      const {data,error}=await db.from('mimo_letters').update({deleted_at:new Date().toISOString()}).eq('id',entry.id).select('id');
-      if(error||!data?.length) throw error||new Error('Not allowed');
+      if(uid&&entry.uid===uid){
+        const {data,error}=await db.from('mimo_letters').update({deleted_at:new Date().toISOString()}).eq('id',entry.id).select('id');
+        if(error||!data?.length) throw error||new Error('Not allowed');
+      } else if(adminCode){
+        const {data,error}=await db.rpc('mimo_admin_hide',{letter_id:entry.id,code:adminCode});
+        if(error||data!==true) throw error||new Error('Not allowed');
+      } else throw new Error('Not allowed');
       all=all.filter(e=>e.id!==entry.id);render();delDlg.hidden=true;
     }
     catch(err){ delDlg.querySelector('.deldlg-sub').textContent='지우지 못했어요. 잠시 후 다시 시도해 주세요.' }
