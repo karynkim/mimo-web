@@ -1454,7 +1454,8 @@ body.gb-open{overflow:hidden}
   async function refreshLetters(){
     const {data,error}=await db.from('mimo_letters').select('*').is('deleted_at',null).order('created_at',{ascending:false}).limit(200);
     if(error) throw error;
-    all=data.map(e=>({...e,uid:e.author_id,to:e.recipient,at:Date.parse(e.created_at)}));
+    /* the setup test letter stays out of the public list */
+    all=data.filter(e=>!(e.name==='연결 확인'&&String(e.message||'').startsWith('방명록 화면 테스트'))).map(e=>({...e,uid:e.author_id,to:e.recipient,at:Date.parse(e.created_at)}));
     render();
   }
   async function post(name,message){
