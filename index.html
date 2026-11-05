@@ -1322,7 +1322,7 @@ body.gb-open{overflow:hidden}
       const a=theta-k*STEP; if(Math.abs(a)>40) continue;
       let lines,who;
       if(!list.length){lines=k%2?['첫 번째 편지를','남겨주세요']:['아직 도착한','메시지가 없어요'];who=''}
-      else{const e=list[((k%list.length)+list.length)%list.length];lines=wrapLines(e.message,440,3);who='— '+e.name}
+      else{const e=list[((k%list.length)+list.length)%list.length];lines=['도착한 메시지',e.name];who=''}
       lines.forEach((l,j)=>{svg+=`<text transform="rotate(${(a+SP_ANG[j]).toFixed(2)} ${PX} ${PY})" x="${PX+R0}" y="${PY}">${esc(l)}</text>`});
       if(who) svg+=`<text class="who" transform="rotate(${(a+11.6).toFixed(2)} ${PX} ${PY})" x="${PX+R0+2}" y="${PY}">${esc(who)}</text>`;
     }
