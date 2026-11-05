@@ -766,7 +766,7 @@ body.gb-open{overflow:hidden}
         <div class="from"><label class="lb" for="gbName"><svg viewBox="0 0 16.414 35.914" aria-hidden="true"><path d="M8.207 0V34.5M15.707 27L8.207 34.5L.707 27" stroke-width="2" stroke="#1A1A1A" fill="none"/></svg>From</label><input id="gbName" name="name" maxlength="24" required placeholder="NAME"></div>
         <div class="msg"><textarea id="gbMsg" name="message" maxlength="200" required aria-label="메시지" placeholder="Hello — 한 줄 메시지를 남겨주세요"></textarea></div>
         <div class="shot" id="gbShot"><label class="pick"><span id="gbShotLbl">Take Photo</span><input type="file" id="gbFile" accept="image/*"><img id="gbPrev" alt="첨부한 사진 미리보기" hidden></label><button type="button" class="rm" id="gbRm" aria-label="사진 빼기" hidden>×</button></div>
-        <div class="ft"><span class="note" id="gbNote" aria-live="polite"></span><button class="send-btn" type="submit" id="gbSend">Send</button></div>
+        <p style="font-size:12px;line-height:1.5">이름·편지·사진은 모두에게 공개돼요. 본인 글은 작성한 브라우저에서 삭제할 수 있어요.</p><div class="ft"><span class="note" id="gbNote" aria-live="polite"></span><button class="send-btn" type="submit" id="gbSend">Send</button></div>
       </form>
     </div>
   </section>
@@ -854,6 +854,7 @@ body.gb-open{overflow:hidden}
 </div>
 
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 (function(){
   const root=document.documentElement;
@@ -1235,14 +1236,29 @@ body.gb-open{overflow:hidden}
     setTimeout(()=>{ticker.textContent=tickerMsgs[tIdx++%tickerMsgs.length];ticker.classList.remove('out')},350);
   },3600);
   function lockForm(t){canWrite=false;gbSend.disabled=true;gbNote.textContent=t}
+  async function visitor(){
+    if(uid) return uid;
+    const {data,error}=await db.auth.signInAnonymously();
+    if(error) throw error;
+    uid=data.user.id; render(); return uid;
+  }
+  async function refreshLetters(){
+    const {data,error}=await db.from('mimo_letters').select('*').is('deleted_at',null).order('created_at',{ascending:false}).limit(200);
+    if(error) throw error;
+    all=data.map(e=>({...e,uid:e.author_id,to:e.recipient,at:Date.parse(e.created_at)}));
+    render();
+  }
   async function post(name,message){
-    if(!db||!uid){gbNote.textContent='로그인한 방문자만 글을 남길 수 있어요.';return false}
-    const entry={name:name.slice(0,24),message:message.slice(0,200),at:Date.now(),uid,to:curTo};
-    if(photo) entry.photo=photo;
-    let next=[entry,...mine].slice(0,30);
-    for(let i=next.length-1;JSON.stringify(next).length>220000&&i>0;i--) if(next[i].photo){next[i]={...next[i]};delete next[i].photo}
-    try{ await db.doc('guestbook/'+uid).set({entries:next}); mine=next; gbNote.textContent='보냈어요. 고마워요!'; return true }
-    catch(err){ if(err&&err.code==='invalid_argument'){lockForm('이 링크에서는 글을 남길 수 없어요. 읽기만 가능해요.')} else if(err&&err.code==='quota_exceeded'){gbNote.textContent='방명록이 가득 찼어요.'} else {gbNote.textContent='잠시 후 다시 보내주세요.'} return false }
+    if(!db){gbNote.textContent='연결을 확인한 뒤 새로고침해 주세요.';return false}
+    try{
+      await visitor();
+      if(photo&&photo.length>80000) {gbNote.textContent='사진 용량이 커요. 다른 사진을 선택해 주세요.';return false}
+      const {error}=await db.from('mimo_letters').insert({author_id:uid,recipient:curTo,name:name.slice(0,24),message:message.slice(0,200),photo:photo||null});
+      if(error) throw error;
+      gbNote.textContent='보냈어요. 고마워요!';
+      try{await refreshLetters()}catch(e){gbNote.textContent='편지는 저장됐어요. 목록은 새로고침하면 볼 수 있어요.'}
+      return true;
+    }catch(err){gbNote.textContent=err.code==='P0001'?'30초 뒤 다시 보내주세요. 하루에 20개까지 보낼 수 있어요.':'전송하지 못했어요. 잠시 후 다시 시도해 주세요.';return false}
   }
   gbForm.addEventListener('submit',async e=>{e.preventDefault(); if(!canWrite) return;
     const nI=document.getElementById('gbName'), mI=document.getElementById('gbMsg');
@@ -1252,24 +1268,20 @@ body.gb-open{overflow:hidden}
     if(ok){mI.value=''; clearPhoto(); const d=discs[curTo]; setTimeout(()=>{closeLetter(); gbHero.scrollIntoView({behavior:reduce?'auto':'smooth'}); snap(d,0)},700)}
   });
   (async()=>{
+    lockForm('방명록을 불러오는 중이에요…');
     try{
-      db=window.claude?await window.claude.use('db'):null;
-      const user=window.claude?await window.claude.use('user'):null;
-      if(user){ uid=await user.id(); try{isOwner=!!user.isOwner()}catch(e){} }
-    }catch(e){}
-    if(!db){lockForm('이 웹사이트에서는 아직 편지를 보낼 수 없어요. 방명록을 준비 중이에요.');return}
-    if(!uid){lockForm('로그인하면 글을 남길 수 있어요.')}
-    db.collection('guestbook').onSnapshot(snap=>{
-      const list=[];
-      docs={}; snap.docs.forEach(d=>{const v=d.data()||{}; docs[d.id]=Array.isArray(v.entries)?v.entries:[]; (Array.isArray(v.entries)?v.entries:[]).forEach(e=>{ if(e&&typeof e.message==='string') list.push({name:String(e.name||'Someone'),message:e.message,at:+e.at||0,uid:d.id,to:e.to==='jinhee'?'jinhee':'karyn',photo:typeof e.photo==='string'?e.photo:''}) }); if(d.id===uid) mine=Array.isArray(v.entries)?v.entries.slice():[] });
-      list.sort((a,b)=>b.at-a.at); all=list; render();
-    },()=>{gbNote.textContent='방명록을 불러오지 못했어요. 새로고침해 주세요.'});
+      db=window.supabase.createClient('https://mhjdiqjabmvripevxujx.supabase.co','sb_publishable_0JyBrIQZxkFe1f61nFq0UA_cvOAjOQ8');
+      const {data}=await db.auth.getSession(); uid=data.session?.user?.id||null;
+      await refreshLetters(); canWrite=true;gbSend.disabled=false;
+      gbNote.textContent='이름·편지·사진은 모든 방문자에게 공개돼요.';
+      setInterval(()=>{if(!document.hidden)refreshLetters().catch(()=>{})},30000);
+    }catch(e){lockForm('방명록을 불러오지 못했어요. 새로고침해 주세요.')}
   })();
 
   /* delete: your own letters, or any letter for the page owner */
   function canDel(e){ return !!db && !!uid && (e.uid===uid || isOwner) }
   const delDlg=document.createElement('div'); delDlg.className='deldlg'; delDlg.hidden=true;
-  delDlg.innerHTML='<div class="deldlg-box" role="alertdialog" aria-modal="true" aria-labelledby="delQ"><p id="delQ">삭제하겠습니까?</p><p class="deldlg-sub">지운 편지는 되돌릴 수 없어요.</p><div class="deldlg-row"><button type="button" class="dd-no">취소</button><button type="button" class="dd-yes">삭제</button></div></div>';
+  delDlg.innerHTML='<div class="deldlg-box" role="alertdialog" aria-modal="true" aria-labelledby="delQ"><p id="delQ">삭제하겠습니까?</p><p class="deldlg-sub">편지가 공개 목록에서 사라집니다.</p><div class="deldlg-row"><button type="button" class="dd-no">취소</button><button type="button" class="dd-yes">삭제</button></div></div>';
   document.body.append(delDlg);
   let delKey=null, delBtn=null;
   function askDel(key,btn){ delKey=key; delBtn=btn; delDlg.hidden=false; delDlg.querySelector('.dd-no').focus() }
@@ -1279,8 +1291,12 @@ body.gb-open{overflow:hidden}
   async function doDel(){
     const [owner,atS]=delKey.split('|'); const at=+atS; const yes=delDlg.querySelector('.dd-yes');
     yes.disabled=true; yes.textContent='삭제 중…';
-    const next=(docs[owner]||[]).filter(x=>!(+x.at===at));
-    try{ if(next.length) await db.doc('guestbook/'+owner).set({entries:next}); else await db.doc('guestbook/'+owner).delete(); if(owner===uid) mine=next; delDlg.hidden=true }
+    const entry=all.find(e=>e.uid===owner&&e.at===at);
+    try{ if(!entry) throw new Error('Missing letter');
+      const {data,error}=await db.from('mimo_letters').update({deleted_at:new Date().toISOString()}).eq('id',entry.id).select('id');
+      if(error||!data?.length) throw error||new Error('Not allowed');
+      all=all.filter(e=>e.id!==entry.id);render();delDlg.hidden=true;
+    }
     catch(err){ delDlg.querySelector('.deldlg-sub').textContent='지우지 못했어요. 잠시 후 다시 시도해 주세요.' }
     yes.disabled=false; yes.textContent='삭제';
   }
