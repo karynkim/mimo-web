@@ -384,7 +384,10 @@ body.gb-open{overflow:hidden}
 .disc svg{display:block;overflow:visible}
 .disc .union,.disc .handle,.disc .win{pointer-events:none}
 .disc .union path,.disc .handle path{pointer-events:visiblePainted}
-.disc,.disc .union path,.disc img,.disc .msgs{cursor:pointer}
+/* over the pink and red discs the pointer becomes a round "open" cursor */
+.disc-wrap,.disc-wrap *,.disc .union path{cursor:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2240%22%20height%3D%2240%22%20viewBox%3D%220%200%2040%2040%22%3E%3Ccircle%20cx%3D%2220%22%20cy%3D%2220%22%20r%3D%2217%22%20fill%3D%22%231A1A1A%22%20fill-opacity%3D%22.88%22%20stroke%3D%22%23FCFBFA%22%20stroke-width%3D%222%22/%3E%3Cpath%20d%3D%22M20%2012v16M12%2020h16%22%20stroke%3D%22%23FCFBFA%22%20stroke-width%3D%222.6%22%20stroke-linecap%3D%22round%22/%3E%3C/svg%3E") 20 20, pointer}
+.disc .handle,.disc .handle path{cursor:grab}
+.disc.drag .handle,.disc.drag .handle path{cursor:grabbing}
 .disc .handle{left:984.99px;top:426.75px;width:1070.61px;height:542.9px;transform-origin:0 542.897px;will-change:transform;cursor:grab;touch-action:none}
 .disc .handle path{cursor:grab}
 .disc.drag .handle,.disc.drag .handle path{cursor:grabbing}
