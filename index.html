@@ -62,7 +62,7 @@ img{display:block}
 .iv-skip{right:24px}
 
 /* ---------- canvas ---------- */
-.stage{width:1518px;zoom:var(--z);position:relative;overflow:hidden;overflow:clip}
+.stage{width:1518px;zoom:var(--z);position:relative}
 .sec{position:relative;width:1518px;overflow:hidden}
 .a{position:absolute}
 .trim{text-box:trim-both cap alphabetic}
@@ -1156,11 +1156,13 @@ body.gb-open{overflow:hidden}
   }
 
 
+  try{
   /* domain research: the four columns come in one after another, every time */
   { const dr=document.getElementById('s02b');
     if(reduce) dr.classList.remove('off'); else {
       new IntersectionObserver(es=>es.forEach(e=>{ if(e.intersectionRatio>=.25) dr.classList.remove('off'); else if(e.intersectionRatio===0) dr.classList.add('off') }),{threshold:[0,.25]}).observe(dr) } }
-
+  }catch(err){ console.warn(err) }
+  try{
   /* light states: the section pins while the next GIF slides up into the centre and grows */
   { const sx=document.getElementById('s05b'), items=[...sx.querySelectorAll('.st-item')], N=items.length;
     const L=sx.querySelector('.st-l'), Rt=sx.querySelector('.st-r'), TXT=[["01 대기", "입력 대기", "네 점이 하나로 모여 천천히 밝아졌다 어두워집니다.<br>대화를 기다리는 미모의 숨결을 표현합니다."], ["02 듣는 중", "사용자 음성 수신", "하나로 모였던 빛이 네 점으로 펼쳐집니다.<br>가운데 두 점은 목소리 크기에 따라 길어졌다 짧아집니다."], ["03 생각·처리 중", "입력 분석 및 응답 생성", "네 점이 차례로 밝아지며 빛의 흐름을 만듭니다.<br>들은 말을 처리하고 응답을 준비하는 상태를 보여줍니다."], ["04 응답·말하기", "음성 응답 출력", "점들이 잠시 모였다가 빛과 함께 펼쳐집니다.<br>미모가 말을 시작하면 가운데 두 점이 말소리에 맞춰 움직입니다."], ["05 터치·동작 인식", "터치 입력 확인", "손이 닿은 방향에서 둥근 파문이 짧게 퍼져 나갑니다.<br>터치가 전달되었음을 빛으로 알려줍니다."], ["06 둘만의 신호", "상호작용 리듬 동기화", "두 점이 서로 다가와 만나고, 반짝인 뒤 다시 벌어집니다.<br>하이파이브와 리듬을 주고받는 순간을 표현합니다."]], small=matchMedia('(max-width:999px)');
@@ -1171,30 +1173,34 @@ body.gb-open{overflow:hidden}
       swapT=setTimeout(()=>{ L.innerHTML='<span class="k">'+TXT[i][0]+'</span><span class="h">'+TXT[i][1]+'</span>'; Rt.innerHTML=TXT[i][2]; L.classList.remove('swap'); Rt.classList.remove('swap') },220) };
     const sm=x=>x*x*(3-2*x);
     const lay=()=>{ if(small.matches){ items.forEach(el=>el.removeAttribute('style')); return }
-      const r=sx.getBoundingClientRect(), total=Math.max(1,r.height-innerHeight), p=Math.max(0,Math.min(1,-r.top/total));
+      const r=sx.getBoundingClientRect(), vh=sx.querySelector('.stick').getBoundingClientRect().height||innerHeight, total=Math.max(1,r.height-vh), p=Math.max(0,Math.min(1,-r.top/total));
       const f=Math.max(0,Math.min(N-1,p*N-.5)), i=Math.floor(f), t=f-i, cur=i+sm(Math.max(0,Math.min(1,(t-.3)/.4)));
       items.forEach((el,k)=>{ const [,top,w,h,o]=at(k-cur); el.style.top=top+'px'; el.style.width=w+'px'; el.style.height=h+'px'; el.style.opacity=o; el.style.zIndex=10-Math.round(Math.abs(k-cur)) });
       setText(Math.round(cur)) };
-    addEventListener('scroll',()=>requestAnimationFrame(lay),{passive:true}); addEventListener('resize',lay); small.addEventListener('change',lay); lay() }
-
+    addEventListener('scroll',()=>requestAnimationFrame(lay),{passive:true}); addEventListener('resize',lay); if(small.addEventListener) small.addEventListener('change',lay); else if(small.addListener) small.addListener(lay); lay() }
+  }catch(err){ console.warn(err) }
+  try{
   /* tap meanings: as the band scrolls up, the words a tap can mean light up one after another */
   { const tp=document.getElementById('s02c'), hits=[...tp.querySelectorAll('.wd.hit')], cap=tp.querySelector('.cap');
     const row=tp.querySelector('.wd');
     const tfx=()=>{ const r=row.getBoundingClientRect(), p=reduce?1:(innerHeight*.78-r.top)/(innerHeight*.5);
       hits.forEach((w,k)=>w.classList.toggle('lit',p>(k+1)/5)) };
     addEventListener('scroll',()=>requestAnimationFrame(tfx),{passive:true}); addEventListener('resize',tfx); tfx() }
-
+  }catch(err){ console.warn(err) }
+  try{
   /* touch 11: the columns rise one after another, every time the chart comes into view */
   { const t11=document.getElementById('s02t');
     if(reduce) t11.classList.remove('off');
     else new IntersectionObserver(es=>es.forEach(e=>{ if(e.intersectionRatio>=.35) t11.classList.remove('off'); else if(e.intersectionRatio===0) t11.classList.add('off') }),{threshold:[0,.35]}).observe(t11) }
-
+  }catch(err){ console.warn(err) }
+  try{
   /* the brand wave draws itself in from the left, every time it comes into view */
   { const wv=document.getElementById('wave');
     if(reduce) wv.classList.add('in');
     else { const wfx=()=>{ const r=wv.getBoundingClientRect(); if(r.top<innerHeight*.8&&r.bottom>innerHeight*.1) wv.classList.add('in'); else if(r.top>innerHeight||r.bottom<0) wv.classList.remove('in') };
       addEventListener('scroll',()=>requestAnimationFrame(wfx),{passive:true}); wfx() } }
-
+  }catch(err){ console.warn(err) }
+  try{
   /* '작성하기' cursor over the discs; clicking a disc opens the letter window */
   { const wc=document.createElement('div'); wc.className='wcur'; wc.setAttribute('aria-hidden','true'); wc.innerHTML='<b>작성하기</b>'; document.body.append(wc);
     const fine=matchMedia('(hover:hover) and (pointer:fine)');
@@ -1203,11 +1209,13 @@ body.gb-open{overflow:hidden}
         wc.style.left=e.clientX+'px'; wc.style.top=e.clientY+'px'; wc.classList.toggle('on',!onHandle) });
       w.addEventListener('pointerleave',()=>wc.classList.remove('on'));
     }) }
-
+  }catch(err){ console.warn(err) }
+  try{
   /* key finding: the whole scene plays in every time it comes into view */
   { const kf=document.getElementById('s02d');
     if(reduce) kf.classList.remove('off');
     else new IntersectionObserver(es=>es.forEach(e=>{ if(e.intersectionRatio>=.3) kf.classList.remove('off'); else if(e.intersectionRatio===0) kf.classList.add('off') }),{threshold:[0,.3]}).observe(kf) }
+  }catch(err){ console.warn(err) }
   /* pies sweep in, numbers count up */
   const pio=new IntersectionObserver(es=>es.forEach(e=>{
     const panel=e.target.parentElement.closest('.a'); const arc=e.target.querySelector('.arc'); const p=+arc.dataset.p;
