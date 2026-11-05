@@ -630,7 +630,7 @@ body.gb-open{overflow:hidden}
 /* ---------- 05b light states: pinned while six GIFs move up into the centre ---------- */
 #s05b{height:calc(100vh / var(--z) + 2400px);overflow:visible;background:var(--bg-canvas)}
 #s05b .stick{position:sticky;top:0;height:calc(100vh / var(--z));overflow:hidden}
-#s05b .board{position:absolute;left:0;top:50%;width:1518px;height:903px;margin-top:-451.5px}
+#s05b .board{position:absolute;left:0;top:50%;width:1518px;height:903px;margin-top:-451.5px;transform-origin:50% 50%}
 #s05b .st-item{position:absolute;left:495px;top:285px;width:529px;height:342px;overflow:hidden;background:#d9d9d9;will-change:top,width,height,opacity}
 #s05b .st-item img{display:block;width:100%;height:100%;object-fit:cover}
 #s05b .st-cap{display:none}
@@ -1182,7 +1182,9 @@ body.gb-open{overflow:hidden}
     const setText=i=>{ if(i===shown) return; shown=i; L.classList.add('swap'); Rt.classList.add('swap'); clearTimeout(swapT);
       swapT=setTimeout(()=>{ L.innerHTML='<span class="k">'+TXT[i][0]+'</span><span class="h">'+TXT[i][1]+'</span>'; Rt.innerHTML=TXT[i][2]; L.classList.remove('swap'); Rt.classList.remove('swap') },220) };
     const sm=x=>x*x*(3-2*x);
-    const lay=()=>{ if(small.matches){ items.forEach(el=>el.removeAttribute('style')); return }
+    const board=sx.querySelector('.board'), stick=sx.querySelector('.stick');
+    const lay=()=>{ if(small.matches){ items.forEach(el=>el.removeAttribute('style')); board.style.transform=''; return }
+      board.style.transform='scale('+Math.min(1,(stick.offsetHeight||903)/940).toFixed(4)+')';
       const r=sx.getBoundingClientRect(), vh=sx.querySelector('.stick').getBoundingClientRect().height||innerHeight, total=Math.max(1,r.height-vh), p=Math.max(0,Math.min(1,-r.top/total));
       const f=Math.max(0,Math.min(N-1,p*N-.5)), i=Math.floor(f), t=f-i, cur=i+sm(Math.max(0,Math.min(1,(t-.3)/.4)));
       items.forEach((el,k)=>{ const [,top,w,h,o]=at(k-cur); el.style.top=top+'px'; el.style.width=w+'px'; el.style.height=h+'px'; el.style.opacity=o; el.style.zIndex=10-Math.round(Math.abs(k-cur)) });
