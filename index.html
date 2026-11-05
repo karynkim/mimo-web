@@ -1,4 +1,14 @@
 <!doctype html><html lang="ko"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<script>
+/* open the page with #debug to see script errors and browser details on screen (for testing on other computers) */
+(function(){ if(location.hash!=='#debug') return; var errs=[];
+  function show(){ var b=document.getElementById('dbgBox'); if(!b){ b=document.createElement('pre'); b.id='dbgBox'; b.style.cssText='position:fixed;left:8px;right:8px;bottom:8px;z-index:99999;max-height:45vh;overflow:auto;margin:0;padding:12px;background:#111;color:#0f0;font:12px/1.5 monospace;white-space:pre-wrap;border-radius:8px'; (document.body||document.documentElement).appendChild(b) }
+    b.textContent='UA: '+navigator.userAgent+'\nCSS zoom: '+(CSS&&CSS.supports&&CSS.supports('zoom','2'))+' | sticky: '+(CSS&&CSS.supports&&CSS.supports('position','sticky'))+' | discs: '+document.querySelectorAll('.disc').length+'\nerrors ('+errs.length+'):\n'+errs.join('\n') }
+  window.addEventListener('error',function(e){ errs.push((e.message||'error')+' @'+(e.lineno||'?')+':'+(e.colno||'?')); show() });
+  window.addEventListener('unhandledrejection',function(e){ errs.push('promise: '+(e.reason&&e.reason.message||e.reason)); show() });
+  window.addEventListener('load',function(){ setTimeout(show,1500) });
+})();
+</script>
 <title>MiMO — 쿠션형 동반 로봇</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
