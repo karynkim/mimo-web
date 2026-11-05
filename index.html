@@ -567,16 +567,16 @@ body.gb-open{overflow:hidden}
 }
 
 /* ---------- 05b light states: pinned while six GIFs move up into the centre ---------- */
-#s05b{height:calc(100vh / var(--z) + 2400px);overflow:visible;background:var(--accent)}
+#s05b{height:calc(100vh / var(--z) + 2400px);overflow:visible;background:var(--bg-canvas)}
 #s05b .stick{position:sticky;top:0;height:calc(100vh / var(--z));overflow:hidden}
 #s05b .board{position:absolute;left:0;top:50%;width:1518px;height:903px;margin-top:-451.5px}
 #s05b .st-item{position:absolute;left:495px;top:285px;width:529px;height:342px;overflow:hidden;background:#d9d9d9;will-change:top,width,height,opacity}
 #s05b .st-item img{display:block;width:100%;height:100%;object-fit:cover}
 #s05b .st-cap{display:none}
-#s05b .st-l{position:absolute;left:0;top:398px;width:471px;text-align:right;color:var(--on-accent)}
+#s05b .st-l{position:absolute;left:0;top:398px;width:471px;text-align:right;color:var(--accent)}
 #s05b .st-l .k{display:block;font-size:15px;letter-spacing:-.4px;margin-bottom:10px}
 #s05b .st-l .h{display:block;font-size:38px;font-weight:700;letter-spacing:-1.4px;line-height:1.15;white-space:nowrap}
-#s05b .st-r{position:absolute;left:1055px;top:404px;width:440px;margin:0;font-size:15px;line-height:1.6;letter-spacing:-.4px;color:var(--on-accent)}
+#s05b .st-r{position:absolute;left:1055px;top:404px;width:440px;margin:0;font-size:15px;line-height:1.6;letter-spacing:-.4px;color:var(--accent)}
 #s05b .st-l,#s05b .st-r{transition:opacity .35s ease,transform .35s ease}
 #s05b .swap{opacity:0;transform:translateY(8px)}
 @media (max-width:999px){
@@ -585,8 +585,8 @@ body.gb-open{overflow:hidden}
   #s05b .board{position:static;width:auto;height:auto;margin:0;display:grid;gap:14px}
   #s05b .st-item{position:relative!important;left:auto!important;top:auto!important;width:100%!important;height:auto!important;opacity:1!important;aspect-ratio:1060/676}
   #s05b .st-l,#s05b .st-r{display:none}
-  #s05b .st-cap{display:grid;gap:6px;margin-bottom:26px;color:var(--on-accent)}
-  #s05b .st-cap .k{font-size:13px} #s05b .st-cap .h{font-size:22px;font-weight:700;letter-spacing:-.6px} #s05b .st-cap p{margin:0;font-size:14px;line-height:1.6;color:var(--on-accent)}
+  #s05b .st-cap{display:grid;gap:6px;margin-bottom:26px;color:var(--accent)}
+  #s05b .st-cap .k{font-size:13px} #s05b .st-cap .h{font-size:22px;font-weight:700;letter-spacing:-.6px} #s05b .st-cap p{margin:0;font-size:14px;line-height:1.6;color:var(--accent)}
   #s05b .st-cap br{display:none}
 }
 
@@ -803,7 +803,7 @@ body.gb-open{overflow:hidden}
 </section>
 
 <!-- ============ 05b LIGHT STATES ============ -->
-<section class="sec" id="s05b" data-label="Light" data-tone="dark" aria-label="MiMO 빛 상태 여섯 가지">
+<section class="sec" id="s05b" data-label="Light" data-tone="light" aria-label="MiMO 빛 상태 여섯 가지">
  <div class="stick"><div class="board">
   <div class="st-item" data-i="0"><img src="img/state1.gif" alt="01 대기 상태의 빛 움직임" loading="lazy"></div><div class="st-cap"><span class="k">01 대기</span><span class="h">입력 대기</span><p>네 점이 하나로 모여 천천히 밝아졌다 어두워집니다. 대화를 기다리는 미모의 숨결을 표현합니다.</p></div>
   <div class="st-item" data-i="1"><img src="img/state2.gif" alt="02 듣는 중 상태의 빛 움직임" loading="lazy"></div><div class="st-cap"><span class="k">02 듣는 중</span><span class="h">사용자 음성 수신</span><p>하나로 모였던 빛이 네 점으로 펼쳐집니다. 가운데 두 점은 목소리 크기에 따라 길어졌다 짧아집니다.</p></div>
