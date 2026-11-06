@@ -1183,13 +1183,15 @@ body.gb-open{overflow:hidden}
       swapT=setTimeout(()=>{ L.innerHTML='<span class="k">'+TXT[i][0]+'</span><span class="h">'+TXT[i][1]+'</span>'; Rt.innerHTML=TXT[i][2]; L.classList.remove('swap'); Rt.classList.remove('swap') },220) };
     const sm=x=>x*x*(3-2*x);
     const board=sx.querySelector('.board'), stick=sx.querySelector('.stick');
+    /* sizes in page units from the real window height: Safari does not scale vh inside the zoomed page the way Chrome does */
+    const size=()=>{ if(small.matches){ sx.style.height=''; stick.style.height=''; return } const z=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--z'))||1, h=innerHeight/z;
+      stick.style.height=h+'px'; sx.style.height=(h+2400)+'px'; board.style.transform='scale('+Math.min(1,h/940).toFixed(4)+')' };
     const lay=()=>{ if(small.matches){ items.forEach(el=>el.removeAttribute('style')); board.style.transform=''; return }
-      board.style.transform='scale('+Math.min(1,(stick.offsetHeight||903)/940).toFixed(4)+')';
       const r=sx.getBoundingClientRect(), vh=sx.querySelector('.stick').getBoundingClientRect().height||innerHeight, total=Math.max(1,r.height-vh), p=Math.max(0,Math.min(1,-r.top/total));
       const f=Math.max(0,Math.min(N-1,p*N-.5)), i=Math.floor(f), t=f-i, cur=i+sm(Math.max(0,Math.min(1,(t-.3)/.4)));
       items.forEach((el,k)=>{ const [,top,w,h,o]=at(k-cur); el.style.top=top+'px'; el.style.width=w+'px'; el.style.height=h+'px'; el.style.opacity=o; el.style.zIndex=10-Math.round(Math.abs(k-cur)) });
       setText(Math.round(cur)) };
-    addEventListener('scroll',()=>requestAnimationFrame(lay),{passive:true}); addEventListener('resize',lay); if(small.addEventListener) small.addEventListener('change',lay); else if(small.addListener) small.addListener(lay); lay() }
+    addEventListener('scroll',()=>requestAnimationFrame(lay),{passive:true}); addEventListener('resize',()=>{ size(); lay() }); size(); const re=()=>{ size(); lay() }; if(small.addEventListener) small.addEventListener('change',re); else if(small.addListener) small.addListener(re); lay() }
   }catch(err){ console.warn(err) }
   try{
   /* tap meanings: as the band scrolls up, the words a tap can mean light up one after another */
