@@ -1328,9 +1328,13 @@ body.gb-open{overflow:hidden}
  <button type="button" class="turn" style="position:absolute;left:1700px;top:420px;width:1px;height:1px;opacity:0;padding:0;border:0" role="slider" aria-label="${p.label}의 방명록 넘기기" aria-valuemin="1" aria-valuenow="1" aria-valuemax="1"></button>
 </div>`}
 
+  const IS_SAFARI=/Safari\//.test(navigator.userAgent)&&!/Chrome|Chromium|CriOS|FxiOS|Edg|OPR|Claude/.test(navigator.userAgent);
   const discs={};
   document.querySelectorAll('.disc-wrap').forEach(w=>{
     const p=PEOPLE[w.dataset.who]; w.innerHTML=discHTML(p);
+    /* Safari can't draw SVG filters this large on Retina screens and drops the whole shape;
+       there the discs use their plain colours (no grain or soft shadow) so they always show */
+    if(IS_SAFARI) w.querySelectorAll('g[filter]').forEach(g=>g.removeAttribute('filter'));
     const el=w.firstElementChild;
     discs[p.id]={p,wrap:w,el,theta:0,anim:0,hdl:el.querySelector('.handle'),msgs:el.querySelector('.msgs'),turn:el.querySelector('.turn'),list:[],last:''};
   });
