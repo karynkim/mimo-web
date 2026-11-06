@@ -3,10 +3,10 @@
 /* open the page with #debug to see script errors and browser details on screen (for testing on other computers) */
 (function(){ if(location.hash!=='#debug') return; var errs=[];
   function show(){ var b=document.getElementById('dbgBox'); if(!b){ b=document.createElement('pre'); b.id='dbgBox'; b.style.cssText='position:fixed;left:8px;right:8px;bottom:8px;z-index:99999;max-height:45vh;overflow:auto;margin:0;padding:12px;background:#111;color:#0f0;font:12px/1.5 monospace;white-space:pre-wrap;border-radius:8px'; (document.body||document.documentElement).appendChild(b) }
-    b.textContent='UA: '+navigator.userAgent+'\nCSS zoom: '+(CSS&&CSS.supports&&CSS.supports('zoom','2'))+' | sticky: '+(CSS&&CSS.supports&&CSS.supports('position','sticky'))+' | discs: '+document.querySelectorAll('.disc').length+'\nerrors ('+errs.length+'):\n'+errs.join('\n') }
+    b.textContent='UA: '+navigator.userAgent+'\nCSS zoom: '+(CSS&&CSS.supports&&CSS.supports('zoom','2'))+' | sticky: '+(CSS&&CSS.supports&&CSS.supports('position','sticky'))+' | discs: '+document.querySelectorAll('.disc').length+'\n'+(window.__lightDbg||'light: -')+'\nerrors ('+errs.length+'):\n'+errs.join('\n') }
   window.addEventListener('error',function(e){ errs.push((e.message||'error')+' @'+(e.lineno||'?')+':'+(e.colno||'?')); show() });
   window.addEventListener('unhandledrejection',function(e){ errs.push('promise: '+(e.reason&&e.reason.message||e.reason)); show() });
-  window.addEventListener('load',function(){ setTimeout(show,1500) });
+  window.addEventListener('load',function(){ setTimeout(show,1500); setInterval(show,1000) });
 })();
 </script>
 <title>MiMO — 쿠션형 동반 로봇</title>
@@ -630,6 +630,7 @@ body.gb-open{overflow:hidden}
 /* ---------- 05b light states: pinned while six GIFs move up into the centre ---------- */
 #s05b{height:calc(100vh / var(--z) + 2400px);overflow:visible;background:var(--bg-canvas)}
 #s05b .stick{position:sticky;top:0;height:calc(100vh / var(--z));overflow:hidden}
+#s05b.jspin .stick{position:absolute;left:0;right:0;top:0;will-change:transform}
 #s05b .board{position:absolute;left:0;top:50%;width:1518px;height:903px;margin-top:-451.5px;transform-origin:50% 50%}
 #s05b .st-item{position:absolute;left:495px;top:285px;width:529px;height:342px;overflow:hidden;background:#d9d9d9;will-change:top,width,height,opacity}
 #s05b .st-item img{display:block;width:100%;height:100%;object-fit:cover}
@@ -1186,8 +1187,12 @@ body.gb-open{overflow:hidden}
     /* sizes in page units from the real window height: Safari does not scale vh inside the zoomed page the way Chrome does */
     const size=()=>{ if(small.matches){ sx.style.height=''; stick.style.height=''; return } const z=parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--z'))||1, h=innerHeight/z;
       stick.style.height=h+'px'; sx.style.height=(h+2400)+'px'; board.style.transform='scale('+Math.min(1,h/940).toFixed(4)+')' };
-    const lay=()=>{ if(small.matches){ items.forEach(el=>el.removeAttribute('style')); board.style.transform=''; return }
-      const r=sx.getBoundingClientRect(), vh=sx.querySelector('.stick').getBoundingClientRect().height||innerHeight, total=Math.max(1,r.height-vh), p=Math.max(0,Math.min(1,-r.top/total));
+    const jsPin=/Safari\//.test(navigator.userAgent)&&!/Chrome|Chromium|CriOS|FxiOS|Edg|OPR|Claude/.test(navigator.userAgent);
+    if(jsPin) sx.classList.add('jspin');
+    const lay=()=>{ if(small.matches){ items.forEach(el=>el.removeAttribute('style')); board.style.transform=''; stick.style.transform=''; return }
+      const r=sx.getBoundingClientRect(), k=r.height/(sx.offsetHeight||1), vh=stick.offsetHeight*k||innerHeight, total=Math.max(1,r.height-vh), p=Math.max(0,Math.min(1,-r.top/total));
+      if(jsPin) stick.style.transform='translateY('+Math.max(0,Math.min(sx.offsetHeight-stick.offsetHeight,-r.top/k)).toFixed(1)+'px)';
+      window.__lightDbg='light: z='+(getComputedStyle(document.documentElement).getPropertyValue('--z')||'').trim()+' vh='+innerHeight+' k='+k.toFixed(3)+' frame='+stick.offsetHeight+' sec='+sx.offsetHeight+' p='+p.toFixed(2)+(jsPin?' jspin':'');
       const f=Math.max(0,Math.min(N-1,p*N-.5)), i=Math.floor(f), t=f-i, cur=i+sm(Math.max(0,Math.min(1,(t-.3)/.4)));
       items.forEach((el,k)=>{ const [,top,w,h,o]=at(k-cur); el.style.top=top+'px'; el.style.width=w+'px'; el.style.height=h+'px'; el.style.opacity=o; el.style.zIndex=10-Math.round(Math.abs(k-cur)) });
       setText(Math.round(cur)) };
