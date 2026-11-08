@@ -131,11 +131,11 @@ svg.logo{display:block;overflow:visible}
 .stat .dd{margin-top:-12px;font-weight:300;font-size:16px;line-height:1.35;letter-spacing:-.32px}
 
 /* ---------- 04 ---------- */
-#s04{height:1588px;background:var(--bg-canvas)}
+#s04{height:1749px;background:var(--bg-canvas)}
 .band{left:0;top:0;width:1518px;height:769px;background:var(--accent)}
 .touch{top:85px;display:flex;flex-direction:column;color:var(--on-accent)}
 .touch .ph{background:#fff8ef}
-.touch .tt{font-weight:600;font-size:24px;line-height:1.33;letter-spacing:-.72px;white-space:nowrap}
+.touch .tt{font-weight:600;font-size:22px;line-height:1.33;letter-spacing:-.72px;white-space:nowrap}
 .touch .dd{margin-top:8px;font-weight:300;font-size:16px;line-height:1.42;letter-spacing:-.64px}
 .cite4{left:1041px;top:558px;width:400px;text-align:right;font-weight:200;font-size:16px;line-height:1.37;letter-spacing:-.48px;color:var(--on-accent);white-space:nowrap}
 .h64{left:80px;top:855px;width:640px;font-weight:700;font-size:64px;line-height:1.2;letter-spacing:-3.84px;color:var(--accent)}
@@ -869,6 +869,12 @@ body.gb-open{overflow:hidden}
 .pdemo h3{margin:18px 0 0;font-size:32px;font-weight:700}
 .pdemo p{margin:16px 0 0;font-size:19px;line-height:1.6;color:rgba(252,251,250,.75)}
 .sec-off{display:none!important}
+#pAd{height:auto;background:#111;padding:0}
+#pAd video{display:block;width:100%;aspect-ratio:16/9;background:#111}
+.pgo{display:inline-flex;align-items:center;gap:12px;margin-top:28px;padding:16px 28px;border-radius:99px;background:var(--accent);color:#fff;font-size:19px;font-weight:700;text-decoration:none}
+.pgo svg{width:22px;height:12px}
+.pgo:hover{background:var(--accent-2)}
+.pdemo .pfine{margin-top:12px;font-size:15px;color:rgba(252,251,250,.55)}
 @media (max-width:999px){
   .sec.psec{padding:56px 20px 64px;gap:0}
   .psec .ph2{font-size:32px}
@@ -887,6 +893,7 @@ body.gb-open{overflow:hidden}
   .pin b{font-size:21px}.pin svg{display:none}
   #pProc{padding:56px 20px 64px!important}
   #pProc .pflow{text-align:left;font-size:15px;line-height:1.6}
+  #pAd{padding:0!important;margin:0 -20px}
 }
 
 </style>
@@ -906,6 +913,11 @@ body.gb-open{overflow:hidden}
   <p class="a tag trim rv">나의 몸짓을 AI에게 전하고,<br>움직임으로 답하는 감정 매개체</p>
   <p class="a body b16 trim rv" style="left:771px;width:318px">자율주행이 확대되며 차 안은 이동 뿐 아니라 생활 공간이 되었습니다. 차량 속 AI는 발전하지만, 소통은 여전히 화면과의 대화입니다. 그러나 사람은 말뿐 아니라 손길과 몸짓으로 감정을 전합니다. 연구에 따르면, 손길만으로 50%의 감정이 전달됩니다.</p>
   <p class="a body b16 trim rv" style="left:1120.4px;width:330px">우리는 사람 사이의 비언어적 소통을 연구하고, 차 안에서 꼭 필요한 다섯 가지 상호작용을 찾았습니다. MiMO는 그 표현을 AI에게 전하고, 움직임과 빛으로 답합니다. 말하지 않아도, 감각으로 전해지는 호응. MiMO.</p>
+</section>
+
+<!-- ============ P0 AD FILM (presentation) ============ -->
+<section class="sec" id="pAd" data-label="Film" data-tone="dark" aria-label="MiMO 광고 영상">
+  <video id="adFilm" src="../v3/mimo_ad.mp4" poster="../v3/mimo_ad_poster.jpg" controls playsinline preload="metadata"></video>
 </section>
 
 <!-- ============ P1 BACKGROUND (presentation) ============ -->
@@ -1062,20 +1074,26 @@ body.gb-open{overflow:hidden}
 
 <!-- ============ 04 TOUCH ============ -->
 <section class="sec" id="s04" data-label="Touch" data-tone="light">
-  <div class="a band">
-    <figure class="a touch rv" style="left:89.5px;width:391px"><div class="ph" style="height:269.17px;--ar:391/269"><img src="../v3/t1.webp" alt="손바닥을 들어 MiMO과 하이파이브하는 일러스트" loading="lazy"></div><figcaption style="margin-top:22.67px;width:369px"><p class="tt">인사·의례</p><p class="dd" style="width:394px">악수나 하이파이브처럼 만남과 마무리를 함께 확인하는 접촉입니다. 서로의 존재를 반기고, 함께한 순간에 의미를 더합니다.</p></figcaption></figure>
-    <figure class="a touch rv" style="left:504.5px;width:197px"><div class="ph" style="height:399px;--ar:197/399"><img src="../v3/t2.webp" alt="커다란 손이 MiMO을 감싸듯 토닥이는 일러스트" loading="lazy"></div><figcaption style="margin-top:19px"><p class="tt">위로·지지</p><p class="dd">손을 잡거나 등을 토닥이며 곁에 있음을 전하는 접촉입니다. 말로 설명하기 어려운 순간에도 상대를 받아주고 지지합니다.</p></figcaption></figure>
-    <figure class="a touch rv" style="left:725.5px;width:198px"><div class="ph" style="height:228px;--ar:198/228"><img src="../v3/t3.webp" alt="손가락으로 MiMO을 톡 건드리는 일러스트" loading="lazy"></div><figcaption style="margin-top:24px"><p class="tt">주의·유도</p><p class="dd">몸을 톡 건드려 관심을 요청하는 접촉입니다. 말없이 상대를 부르고, 행동의 전환을 제안합니다.</p></figcaption></figure>
-    <figure class="a touch rv" style="left:947.5px;width:197px"><div class="ph" style="height:513px;--ar:197/513"><img src="../v3/t4.webp" alt="손가락으로 MiMO을 콕 찌르며 장난치는 일러스트" loading="lazy"></div><figcaption style="margin-top:24px"><p class="tt">친근·놀이</p><p class="dd">가볍게 건드리거나 손뼉을 맞추며 놀이를 건네는 접촉입니다. 반응을 보며 즐겁게 교류합니다.</p></figcaption></figure>
-    <figure class="a touch rv" style="left:1168.5px;width:259px"><div class="ph" style="height:228px;--ar:259/228"><img src="../v3/t5.webp" alt="두 손으로 MiMO을 감싸 안는 일러스트" loading="lazy"></div><figcaption style="margin-top:24px"><p class="tt">애정·유대</p><p class="dd">끌어안거나 가까이 기대며 친밀함을 나누는 접촉입니다. 특별한 말이나 목적 없이도 함께 있다는 감각을 전합니다.</p></figcaption></figure>
+  <div class="a band" style="height:930px">
+    <figure class="a touch rv" style="left:80px;top:85px;width:260px"><div class="ph" style="height:200px;--ar:260/200"><img src="../v3/tc01.webp" alt="손을 펴고 MiMO에게 다가가 인사하는 일러스트" loading="lazy" style="object-position:60% 50%"></div><figcaption style="margin-top:14px"><p class="tt">인사·연결 시작</p></figcaption></figure>
+    <figure class="a touch rv" style="left:362px;top:85px;width:180px"><div class="ph" style="height:300px;--ar:180/300"><img src="../v3/tc02.webp" alt="손가락으로 MiMO 옆을 톡 건드리는 일러스트" loading="lazy" style="object-position:72% 50%"></div><figcaption style="margin-top:14px"><p class="tt">주의 끌기·부르기</p></figcaption></figure>
+    <figure class="a touch rv" style="left:564px;top:85px;width:200px"><div class="ph" style="height:180px;--ar:200/180"><img src="../v3/tc03.webp" alt="손바닥을 MiMO 옆에 대자 반응하는 일러스트" loading="lazy" style="object-position:32% 50%"></div><figcaption style="margin-top:14px"><p class="tt">경청·반응</p></figcaption></figure>
+    <figure class="a touch rv" style="left:786px;top:85px;width:220px"><div class="ph" style="height:260px;--ar:220/260"><img src="../v3/tc04.webp" alt="MiMO 위로 엄지를 세우는 일러스트" loading="lazy" style="object-position:38% 50%"></div><figcaption style="margin-top:14px"><p class="tt">동의·긍정</p></figcaption></figure>
+    <figure class="a touch rv" style="left:1028px;top:85px;width:180px"><div class="ph" style="height:220px;--ar:180/220"><img src="../v3/tc05.webp" alt="손바닥으로 MiMO를 밀어내는 일러스트" loading="lazy" style="object-position:36% 50%"></div><figcaption style="margin-top:14px"><p class="tt">부정·거절</p></figcaption></figure>
+    <figure class="a touch rv" style="left:1230px;top:85px;width:208px"><div class="ph" style="height:160px;--ar:208/160"><img src="../v3/tc06.webp" alt="MiMO 위에서 두 손이 하이파이브하는 일러스트" loading="lazy" style="object-position:50% 40%"></div><figcaption style="margin-top:14px"><p class="tt">기쁨·축하</p></figcaption></figure>
+    <figure class="a touch rv" style="left:80px;top:477px;width:230px"><div class="ph" style="height:260px;--ar:230/260"><img src="../v3/tc07.webp" alt="MiMO 위에 손을 얹어 토닥이는 일러스트" loading="lazy" style="object-position:50% 50%"></div><figcaption style="margin-top:14px"><p class="tt">위로·격려</p></figcaption></figure>
+    <figure class="a touch rv" style="left:332px;top:477px;width:300px"><div class="ph" style="height:180px;--ar:300/180"><img src="../v3/tc08.webp" alt="두 손으로 MiMO를 감싸 안는 일러스트" loading="lazy" style="object-position:50% 50%"></div><figcaption style="margin-top:14px"><p class="tt">친밀·애정</p></figcaption></figure>
+    <figure class="a touch rv" style="left:654px;top:477px;width:200px"><div class="ph" style="height:320px;--ar:200/320"><img src="../v3/tc09.webp" alt="두 손가락으로 MiMO를 콕 찌르는 일러스트" loading="lazy" style="object-position:45% 50%"></div><figcaption style="margin-top:14px"><p class="tt">장난·친근함</p></figcaption></figure>
+    <figure class="a touch rv" style="left:876px;top:477px;width:280px"><div class="ph" style="height:200px;--ar:280/200"><img src="../v3/tc10.webp" alt="MiMO 앞에서 두 손을 펼치며 놀라는 일러스트" loading="lazy" style="object-position:50% 50%"></div><figcaption style="margin-top:14px"><p class="tt">놀람</p></figcaption></figure>
+    <figure class="a touch rv" style="left:1178px;top:477px;width:260px"><div class="ph" style="height:240px;--ar:260/240"><img src="../v3/tc11.webp" alt="MiMO 위에서 두 손을 맞잡고 긴장하는 일러스트" loading="lazy" style="object-position:50% 50%"></div><figcaption style="margin-top:14px"><p class="tt">불만·긴장</p></figcaption></figure>
     <audio id="touchSnd" src="../mimo_sound.mp3" preload="auto"></audio>
-    <p class="a cite4 trim">Heslin(1974), Jones &amp; Yarbrough(1985)</p>
+    <p class="a cite4 trim" style="top:872px">Heslin(1974), Jones &amp; Yarbrough(1985)</p>
   </div>
-  <h2 class="a h64 trim rv">몸의 언어로<br>AI와의 소통을 넓힙니다</h2>
-  <div class="a blk rv">
+  <h2 class="a h64 trim rv" style="top:1016px">몸의 언어로<br>AI와의 소통을 넓힙니다</h2>
+  <div class="a blk rv" style="top:1225px">
     <h3 class="trim">MiMO는 자율주행 시대의<br>AI 소통 방식을 고민했습니다</h3>
     <div>
-      <p>사람 사이에서 몸으로 나누는 표현의 의미를 인사·의례, 위로·지지, 애정·유대, 친근·놀이, 주의·유도의 다섯 가지 유형으로 재구성하고, 사용자의 접촉에 AI가 움직임으로 호응하는 상호작용을 설계했습니다.</p>
+      <p>사람 사이에서 몸으로 나누는 표현의 의미를 인사·연결 시작부터 불만·긴장까지 열한 가지 의도로 재구성하고, 사용자의 접촉에 AI가 움직임으로 호응하는 상호작용을 설계했습니다.</p>
       <p>MiMO와 앱, AI가 연동되어 사용자의 접촉과 움직임, 소리, 콘텐츠, 이동 상황을 함께 이해합니다. 위아래 원판의 움직임과 네 개의 빛, 소리로 호응하며, 말로 다 설명하지 않은 의도를 헤아립니다.</p>
       <p>함께 즐길 때는 두드린 리듬을 이어받고, 춤과 화음, 하이파이브로 함께 움직입니다. 지치고 힘들 때는 한숨에 먼저 말을 걸고, 끌어안으면 안아주듯 몸을 움직이며, 기대어 잠들면 도착에 맞춰 살며시 깨워줍니다.</p>
     </div>
@@ -1210,7 +1228,7 @@ body.gb-open{overflow:hidden}
   <ol class="pdemo">
     <li class="rv"><b>01</b><h3>디스플레이 영상</h3><p>MiMO 윗면의 빛이 AI의 상태에 따라 바뀌는 모습을 보여줍니다.</p></li>
     <li class="rv"><b>02</b><h3>기계 동작 영상</h3><p>원판과 몸체의 실제 구동을 30초 영상으로 보여줍니다.</p></li>
-    <li class="rv"><b>03</b><h3>손 카메라 인터랙션</h3><p>카메라 앞에서 하이파이브하고 토닥이면, MiMO가 그 손길에 반응합니다.</p></li>
+    <li class="rv"><b>03</b><h3>손 카메라 인터랙션</h3><p>카메라 앞에서 하이파이브하고 토닥이면, MiMO가 그 손길에 반응합니다.</p><a class="pgo" href="../present/simulation.html" target="_blank" rel="noopener">시뮬레이션 열기<svg viewBox="0 0 22 12" aria-hidden="true"><path d="M1 6 H19 M14 1 L20 6 L14 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a><p class="pfine">열면 바로 카메라와 마이크가 켜져요.</p></li>
   </ol>
 </section>
 
