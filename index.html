@@ -869,6 +869,12 @@ body.gb-open{overflow:hidden}
 .pdemo h3{margin:18px 0 0;font-size:32px;font-weight:700}
 .pdemo p{margin:16px 0 0;font-size:19px;line-height:1.6;color:rgba(252,251,250,.75)}
 .sec-off{display:none!important}
+#pAd{height:auto;background:#111;padding:0}
+#pAd video{display:block;width:100%;aspect-ratio:16/9;background:#111}
+.pgo{display:inline-flex;align-items:center;gap:12px;margin-top:28px;padding:16px 28px;border-radius:99px;background:var(--accent);color:#fff;font-size:19px;font-weight:700;text-decoration:none}
+.pgo svg{width:22px;height:12px}
+.pgo:hover{background:var(--accent-2)}
+.pdemo .pfine{margin-top:12px;font-size:15px;color:rgba(252,251,250,.55)}
 @media (max-width:999px){
   .sec.psec{padding:56px 20px 64px;gap:0}
   .psec .ph2{font-size:32px}
@@ -887,6 +893,7 @@ body.gb-open{overflow:hidden}
   .pin b{font-size:21px}.pin svg{display:none}
   #pProc{padding:56px 20px 64px!important}
   #pProc .pflow{text-align:left;font-size:15px;line-height:1.6}
+  #pAd{padding:0!important;margin:0 -20px}
 }
 
 </style>
@@ -906,6 +913,11 @@ body.gb-open{overflow:hidden}
   <p class="a tag trim rv">나의 몸짓을 AI에게 전하고,<br>움직임으로 답하는 감정 매개체</p>
   <p class="a body b16 trim rv" style="left:771px;width:318px">자율주행이 확대되며 차 안은 이동 뿐 아니라 생활 공간이 되었습니다. 차량 속 AI는 발전하지만, 소통은 여전히 화면과의 대화입니다. 그러나 사람은 말뿐 아니라 손길과 몸짓으로 감정을 전합니다. 연구에 따르면, 손길만으로 50%의 감정이 전달됩니다.</p>
   <p class="a body b16 trim rv" style="left:1120.4px;width:330px">우리는 사람 사이의 비언어적 소통을 연구하고, 차 안에서 꼭 필요한 다섯 가지 상호작용을 찾았습니다. MiMO는 그 표현을 AI에게 전하고, 움직임과 빛으로 답합니다. 말하지 않아도, 감각으로 전해지는 호응. MiMO.</p>
+</section>
+
+<!-- ============ P0 AD FILM (presentation) ============ -->
+<section class="sec" id="pAd" data-label="Film" data-tone="dark" aria-label="MiMO 광고 영상">
+  <video id="adFilm" src="v3/mimo_ad.mp4" poster="v3/mimo_ad_poster.jpg" controls playsinline preload="metadata"></video>
 </section>
 
 <!-- ============ P1 BACKGROUND (presentation) ============ -->
@@ -1210,7 +1222,7 @@ body.gb-open{overflow:hidden}
   <ol class="pdemo">
     <li class="rv"><b>01</b><h3>디스플레이 영상</h3><p>MiMO 윗면의 빛이 AI의 상태에 따라 바뀌는 모습을 보여줍니다.</p></li>
     <li class="rv"><b>02</b><h3>기계 동작 영상</h3><p>원판과 몸체의 실제 구동을 30초 영상으로 보여줍니다.</p></li>
-    <li class="rv"><b>03</b><h3>손 카메라 인터랙션</h3><p>카메라 앞에서 하이파이브하고 토닥이면, MiMO가 그 손길에 반응합니다.</p></li>
+    <li class="rv"><b>03</b><h3>손 카메라 인터랙션</h3><p>카메라 앞에서 하이파이브하고 토닥이면, MiMO가 그 손길에 반응합니다.</p><a class="pgo" href="present/simulation.html" target="_blank" rel="noopener">시뮬레이션 열기<svg viewBox="0 0 22 12" aria-hidden="true"><path d="M1 6 H19 M14 1 L20 6 L14 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a><p class="pfine">열면 바로 카메라와 마이크가 켜져요.</p></li>
   </ol>
 </section>
 
