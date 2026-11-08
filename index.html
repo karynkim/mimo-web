@@ -549,6 +549,45 @@ body.gb-open{overflow:hidden}
 .dd-code input{width:100%;font:inherit;font-size:15px;padding:10px 14px;border:1px solid #ccc;border-radius:12px;background:#fff;color:var(--text-primary)}
 
 @media (max-width:999px){.toc{grid-template-columns:1fr}}
+/* ---------- 05c input data / 05d scenarios (Figma 3378:8322, 3378:8350) ---------- */
+#s05c{height:915px;background:var(--bg-canvas)}
+#s05c .lbl,#s05d .lbl{left:80px;top:54px;margin:0;font-size:17px;font-weight:600;line-height:1.33;letter-spacing:-.5px;color:#fc5814}
+#s05c .bar{left:633px;width:805px;height:0;border-top:1px solid #fc5814;transform:rotate(.28deg);transform-origin:0 0}
+#s05c .no{left:633px;margin:0;font-size:17px;font-weight:600;line-height:1.33;letter-spacing:-.5px;color:#fc5814}
+#s05c .big{left:674px;margin:0;font-size:34px;font-weight:600;line-height:47.5px;color:#fc5814;white-space:nowrap}
+#s05c .it{left:1125px;width:311px;margin:0;display:grid;grid-template-columns:61px 1fr;font-size:16px;line-height:1.41;letter-spacing:-.48px;color:#fc5814;font-variant-numeric:tabular-nums}
+#s05c .it span:first-child{padding-left:8px}
+#s05c .ln{left:1125px;width:311px;height:0;border-top:.5px solid rgba(252,88,20,.55)}
+#s05d{height:1736px;background:#53350f;color:#fff}
+#s05d .ttl{left:80px;top:46px;margin:0;font-size:64px;font-weight:700;line-height:1.2;letter-spacing:-3.84px;color:#ff7b39;white-space:nowrap}
+#s05d .grp{left:81px;margin:0;font-size:24px;font-weight:700;line-height:28.3px;letter-spacing:-.72px;color:var(--on-accent)}
+#s05d .hd{top:100px;width:101px;height:60px;margin:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:6px;font-size:12px;font-weight:700;line-height:22.95px;color:#fff}
+#s05d .hd img{display:block}
+#s05d .hd .ui{width:36.4px;height:22.6px;border-radius:3px;background:#ff7b39;border:1px solid #f50;box-sizing:border-box}
+#s05d .hl{left:70px;width:1334px;height:0;border-top:1px solid rgba(252,251,250,.85)}
+#s05d .hl.thin{border-top:.5px solid rgba(252,251,250,.35)}
+#s05d .vl{left:609.8px;width:0;border-left:.5px solid rgba(252,251,250,.6)}
+#s05d .row{left:0;width:1518px;height:170px}
+#s05d .row img{position:absolute;left:80px;width:168.4px;height:112.3px;border-radius:3.2px;object-fit:cover;background:#fef8f2}
+#s05d .row h3{position:absolute;left:150px;width:429px;margin:0;text-align:right;font-size:22.79px;font-weight:700;line-height:1.25;letter-spacing:-.91px}
+#s05d .row .cp{position:absolute;left:399px;width:180px;margin:0;text-align:right;font-size:13px;font-weight:300;line-height:1.37;letter-spacing:-.39px}
+#s05d .row .c{position:absolute;width:160.25px;margin:0;font-size:16px;font-weight:300;line-height:1.53;letter-spacing:-.32px}
+@media (max-width:999px){
+  #s05c,#s05d{height:auto!important;padding:40px 20px 56px!important}
+  #s05c .bar,#s05c .ln,#s05d .hl,#s05d .vl,#s05d .hd{display:none}
+  #s05c .big{font-size:26px}
+  #s05c .it{width:100%!important;border-bottom:.5px solid rgba(252,88,20,.4);padding:6px 0}
+  #s05d .ttl{font-size:40px;letter-spacing:-2px}
+  #s05d .grp{margin-top:20px}
+  #s05d .row{height:auto!important;display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;padding:18px 0;border-top:.5px solid rgba(252,251,250,.4)}
+  #s05d .row>*{position:static!important;width:auto!important;text-align:left!important}
+  #s05d .row img{grid-column:1/-1;width:100%!important;height:auto!important;aspect-ratio:3/2}
+  #s05d .row h3,#s05d .row .cp{grid-column:1/-1}
+  #s05d .row h3 br,#s05d .row .cp br{display:none}
+  #s05d .row .c{font-size:14px}
+  #s05d .row .c::before{content:attr(data-k);display:block;font-size:11px;font-weight:700;opacity:.6;margin-bottom:2px}
+}
+
 /* ---------- 02e findings: fixed left title, six findings slide on the right over a slowly rippling field ---------- */
 #s02e{height:848px;overflow:hidden;background:#f6efe9}
 #s02e .fb{left:-60px;top:-50px;width:1638px;height:948px;background:url(img/findings_bg.jpg) center/cover no-repeat;transform-origin:62% 55%;animation:fbWave 9s ease-in-out infinite alternate;will-change:transform}
@@ -902,6 +941,56 @@ body.gb-open{overflow:hidden}
   <p class="a moment rv">The Moment of You &amp; Me</p>
   <div class="a ph ill rv" tabindex="0" style="left:642px;top:1511px;width:386px;height:427px;--ar:386/427"><img src="v3/e7.webp" alt="쿠션 로봇을 꼭 끌어안은 사람 일러스트" loading="lazy"><p class="cap"><b>끌어안으면, 안아주듯<br>몸을 움직여요</b><span>접촉한 쪽으로 몸을 움직이고,<br>닿은 부위를 감싸듯 다가가요.<br>손을 놓으면 돌아와요.</span></p></div>
   <div class="a ph ill rv" tabindex="0" style="left:1052px;top:1511px;width:386px;height:427px;--ar:386/427;--r:1.2deg"><img src="v3/e8.webp" alt="쿠션 로봇에 얼굴을 기대고 잠든 사람 일러스트" loading="lazy"><p class="cap"><b>기대어 잠들면, 몸을 살짝 움직<br>여 깨워줘요</b><span>설정한 시간이나 도착 시점에<br>맞춰 작게 움직여요. 몸을<br>일으키거나 대답하면 멈춰요.</span></p></div>
+</section>
+
+<!-- ============ 05c INPUT DATA ============ -->
+<section class="sec" id="s05c" data-label="Input Data" data-tone="light">
+  <p class="a lbl">사용자 INPUT DATA</p>
+  <i class="a bar" style="top:563px" aria-hidden="true"></i><i class="a bar" style="top:738.2px" aria-hidden="true"></i>
+  <p class="a no" style="top:578px">01</p><h3 class="a big" style="top:562px">User Signal</h3>
+  <p class="a no" style="top:761px">02</p><h3 class="a big" style="top:745px">Context</h3>
+  <p class="a it" style="top:577.9px"><span>01.1</span><span>접촉</span></p>
+  <p class="a it" style="top:620.0px"><span>01.2</span><span>소리</span></p>
+  <p class="a it" style="top:663.5px"><span>01.3</span><span>몸의 움직임</span></p>
+  <p class="a it" style="top:706.3px"><span>01.4</span><span>MiMO 호출</span></p>
+  <p class="a it" style="top:753.1px"><span>02.1</span><span>콘텐츠</span></p>
+  <p class="a it" style="top:795.9px"><span>02.2</span><span>이동상황</span></p>
+  <p class="a it" style="top:838.7px"><span>02.3</span><span>이전 교류</span></p>
+  <i class="a ln" style="top:609.8px" aria-hidden="true"></i>
+  <i class="a ln" style="top:652.8px" aria-hidden="true"></i>
+  <i class="a ln" style="top:694.8px" aria-hidden="true"></i>
+  <i class="a ln" style="top:784.8px" aria-hidden="true"></i>
+  <i class="a ln" style="top:827.8px" aria-hidden="true"></i>
+</section>
+
+<!-- ============ 05d SCENARIOS ============ -->
+<section class="sec" id="s05d" data-label="Scenarios" data-tone="dark">
+  <h2 class="a ttl">SCENARIOS</h2>
+  <p class="a grp" style="top:136px">함께 즐기기</p>
+  <p class="a grp" style="top:931px">보살핌 받기</p>
+  <p class="a hd" style="left:669px"><img src="img/ic_sound.svg" alt="" width="26.25" height="25.36">소리</p>
+  <p class="a hd" style="left:862px"><img src="img/ic_disc.svg" alt="" width="45.6" height="12.05">원판</p>
+  <p class="a hd" style="left:1053px"><img src="img/ic_display.svg" alt="" width="30.83" height="31.83">MiMO 디스플레이</p>
+  <p class="a hd" style="left:1223px"><i class="ui"></i>UI</p>
+  <i class="a hl" style="top:171.1px" aria-hidden="true"></i>
+  <i class="a hl" style="top:855px" aria-hidden="true"></i>
+  <i class="a hl" style="top:968px" aria-hidden="true"></i>
+  <i class="a hl" style="top:1655px" aria-hidden="true"></i>
+  <i class="a hl thin" style="top:341.1px" aria-hidden="true"></i>
+  <i class="a hl thin" style="top:515.1px" aria-hidden="true"></i>
+  <i class="a hl thin" style="top:681.1px" aria-hidden="true"></i>
+  <i class="a hl thin" style="top:1138px" aria-hidden="true"></i>
+  <i class="a hl thin" style="top:1312px" aria-hidden="true"></i>
+  <i class="a hl thin" style="top:1478px" aria-hidden="true"></i>
+  <i class="a vl" style="top:173px;height:682px" aria-hidden="true"></i><i class="a vl" style="top:968px;height:685px" aria-hidden="true"></i>
+  <div class="a row" style="top:171.1px"><img src="img/sc_tap.webp" alt="톡톡 두드려 나만의 리듬을 만들어요 장면 일러스트" loading="lazy" style="top:30.0px"><h3 style="top:25.0px">톡톡 두드려<br>나만의 리듬을 만들어요</h3><p class="cp" style="top:95.0px">앱에서 루프스테이션 모드를 켜보세요. 위치별로 악기 소리가 나고, 리듬을 반복하며 새 박자를 더해요.</p><p class="c" data-k="소리" style="left:657px;top:47.0px">설정한 로봇 음색으로 기분 좋다는 듯한 짧고 부드러운 호응 소리</p><p class="c" data-k="원판" style="left:841.25px;top:47.0px">상하단 원판을 접촉 방향<br>으로 바깥 이동, 접촉 부위를 감싸듯 접근</p><p class="c" data-k="MiMO 디스플레이" style="left:1025.5px;top:47.0px">상단 디스플레이에 눈이 깜빡이는 표정 표시</p><p class="c" data-k="UI" style="left:1209.75px;top:47.0px">“안아주니까 나도 좋아.”<br>라는 메세지 제공</p></div>
+  <div class="a row" style="top:341.1px"><img src="img/sc_dance.webp" alt="내 어깨와 팔의 움직임에 맞춰 함께 춤춰요 장면 일러스트" loading="lazy" style="top:31.9px"><h3 style="top:26.0px">내 어깨와 팔의 움직임에<br>맞춰 함께 춤춰요</h3><p class="cp" style="top:101.0px">방향과 속도, 음악 박자에 맞춰<br>좌우와 위아래로 움직여요.<br>내가 멈추면 MIMO도 멈춰요.</p><p class="c" data-k="소리" style="left:657px;top:51.4px">작고 부드러운 깨우는 소리</p><p class="c" data-k="원판" style="left:841.25px;top:51.4px">상단 원판을 작은 범위로 상승·하강</p><p class="c" data-k="MiMO 디스플레이" style="left:1025.5px;top:51.4px">감긴 눈이 졸리듯 천천히 뜨이는 상단 디스플레이 표현</p><p class="c" data-k="UI" style="left:1209.75px;top:51.4px">“곧 도착해. 이제 천천히<br>일어날까?” 깨우는 이유와 시점 표시</p></div>
+  <div class="a row" style="top:515.1px"><img src="img/sc_harmony.webp" alt="누르는 힘에 맞춰 듣고 있는 노래에 화음을 더해요 장면 일러스트" loading="lazy" style="top:29.8px"><h3 style="top:23.0px">누르는 힘에 맞춰 듣고 있는<br>노래에 화음을 더해요</h3><p class="cp" style="top:96.0px">앱에서 화음 모드를 켜고 꾹<br>눌러보세요. 힘에 따라 화음이<br>커지고, 손을 떼면 잦아들어요.</p><p class="c" data-k="소리" style="left:657px;top:51.8px">음악을 가리지 않는 짧고 경쾌한 호응 소리</p><p class="c" data-k="원판" style="left:841.25px;top:51.8px">박자와 사용자의 움직임에 따라 상단 원판 상승·하강</p><p class="c" data-k="MiMO 디스플레이" style="left:1025.5px;top:51.8px">박자에 맞춰 빛의 위치·밝기 변화</p><p class="c" data-k="UI" style="left:1209.75px;top:51.8px">“네 박자에 나도 맞춰볼게!” 라는 메세지 제공</p></div>
+  <div class="a row" style="top:681.1px"><img src="img/sc_highfive.webp" alt="하이파이브나 주먹인사를 나눠 축하해요 장면 일러스트" loading="lazy" style="top:35.6px"><h3 style="top:29.0px">하이파이브나<br>주먹인사를 나눠 축하해요</h3><p class="cp" style="top:101.0px">손을 내밀면 인사할 면을 내밀어요. 손이 닿으면 축하 소리와<br>빛으로 함께 기뻐해요.</p><p class="c" data-k="소리" style="left:657px;top:60.1px">녹음한 박자를 반복 재생</p><p class="c" data-k="원판" style="left:841.25px;top:60.1px">상단 원판을 올려 두드릴 면을 제공</p><p class="c" data-k="MiMO 디스플레이" style="left:1025.5px;top:60.1px">두드린 위치에 순간적으로 빛이 켜짐</p><p class="c" data-k="UI" style="left:1209.75px;top:60.1px">선택한 악기 표시<br>녹음·반복 상태 표시</p></div>
+  <div class="a row" style="top:968px"><img src="img/sc_laugh.webp" alt="반복해서 웃으면, 무슨 좋은 일이 있는지 물어요 장면 일러스트" loading="lazy" style="top:30.5px"><h3 style="top:25.0px">반복해서 웃으면, 무슨<br>좋은 일이 있는지 물어요</h3><p class="cp" style="top:95.0px">나를 향해 짧게 끄덕이고 무엇이 재미있는지 물어요. 대답하면<br>이야기를 이어가요.</p><p class="c" data-k="소리" style="left:657px;top:57.5px">접촉 순간에 맞춘 짧은 축하 소리</p><p class="c" data-k="원판" style="left:841.25px;top:57.5px">상단 원판이 손을 내민 방향으로 회전·바깥 이동</p><p class="c" data-k="MiMO 디스플레이" style="left:1025.5px;top:57.5px">접촉 순간 짧게 퍼지는 빛<br>웃는 눈 표현</p><p class="c" data-k="UI" style="left:1209.75px;top:57.5px">“해냈네! 우리 하이파이브!” 라는 메세지 제공</p></div>
+  <div class="a row" style="top:1138px"><img src="img/sc_sigh.webp" alt="한숨을 쉬면, 무슨 일이 있는지 물어요 장면 일러스트" loading="lazy" style="top:32.4px"><h3 style="top:25.0px">한숨을 쉬면, 무슨 일이<br>있는지 물어요</h3><p class="cp" style="top:100.0px">나를 향해 몸을 천천히 들고,<br>이야기하고 싶은지 물으며<br>대답을 기다려요.</p><p class="c" data-k="소리" style="left:657px;top:61.9px">현재 음악에 맞는 화음 재생, 누르는 힘에 따라 화음의 크기 변화</p><p class="c" data-k="원판" style="left:841.25px;top:61.9px">두 원판을 중심의 안정적인 자세로 유지</p><p class="c" data-k="MiMO 디스플레이" style="left:1025.5px;top:61.9px">압력에 따라 접촉 위치의 빛이 밝아짐</p><p class="c" data-k="UI" style="left:1209.75px;top:61.9px">선택한 음색·입력 강도<br>표시</p></div>
+  <div class="a row" style="top:1312px"><img src="img/sc_hug.webp" alt="끌어안으면, 안아주듯 몸을 움직여요 장면 일러스트" loading="lazy" style="top:30.2px"><h3 style="top:22.0px">끌어안으면, 안아주듯<br>몸을 움직여요</h3><p class="cp" style="top:93.0px">접촉한 쪽으로 몸을 움직이고,<br>닿은 부위를 감싸듯 다가가요.<br>손을 놓으면 돌아와요.</p><p class="c" data-k="소리" style="left:657px;top:62.2px">부드러운 관심 표현 소리</p><p class="c" data-k="원판" style="left:841.25px;top:62.2px">천천히 바깥 이동·상승. 대답을 기다리는 동안 자세 유지</p><p class="c" data-k="MiMO 디스플레이" style="left:1025.5px;top:62.2px">사용자를 바라보며 천천히 깜빡이는 눈</p><p class="c" data-k="UI" style="left:1209.75px;top:62.2px">“무슨 일 있어? 이야기하고 싶으면 듣고 있을게.” 라는 메세지 제공</p></div>
+  <div class="a row" style="top:1478px"><img src="img/sc_sleep.webp" alt="기대어 잠들면, 몸을 살짝 움직여 깨워줘요 장면 일러스트" loading="lazy" style="top:36.5px"><h3 style="top:27.0px">기대어 잠들면,<br>몸을 살짝 움직여 깨워줘요</h3><p class="cp" style="top:98.0px">설정한 시간이나 도착 시점에<br>맞춰 작게 움직여요. 몸을<br>일으키거나 대답하면 멈춰요.</p><p class="c" data-k="소리" style="left:657px;top:70.6px">경쾌한 짧은 호응 소리</p><p class="c" data-k="원판" style="left:841.25px;top:70.6px">상단 원판을 짧게 상승·<br>하강하며 끄덕임</p><p class="c" data-k="MiMO 디스플레이" style="left:1025.5px;top:70.6px">웃는 눈에서 듣는 표정으로 전환</p><p class="c" data-k="UI" style="left:1209.75px;top:70.6px">“뭐가 그렇게 재미있어? 나도 궁금해!” 라는 메세지<br>제공</p></div>
 </section>
 
 <!-- ============ 05b LIGHT STATES ============ -->
