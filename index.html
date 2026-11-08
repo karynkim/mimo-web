@@ -598,6 +598,14 @@ body.gb-open{overflow:hidden}
 
 /* ---------- 05c input data / 05d scenarios (Figma 3378:8322, 3378:8350) ---------- */
 #s05c{height:915px;background:var(--bg-canvas)}
+#s05c .pdc{top:104px;width:216px;margin:0;text-align:center;transition:opacity .8s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
+#s05c .pdc:nth-of-type(2){transition-delay:.08s}#s05c .pdc:nth-of-type(3){transition-delay:.16s}#s05c .pdc:nth-of-type(4){transition-delay:.24s}
+#s05c.off .pdc{opacity:0;transform:translateY(30px)}
+#s05c .pdd{position:relative;width:216px;height:216px;border-radius:50%;overflow:hidden;box-shadow:0 18px 30px -14px rgba(60,70,90,.35)}
+#s05c .pdd img{position:absolute;width:454.3px;max-width:none;height:auto;left:-117.4px;top:-31.3px}
+#s05c .pdc figcaption{margin-top:34px;font-size:24px;font-weight:600;letter-spacing:-.6px;color:#1a1a1a;white-space:nowrap}
+#s05c .pdt{left:80px;top:548px;margin:0;font-size:68px;font-weight:700;letter-spacing:-2.6px;line-height:1;color:var(--accent);transition:opacity .8s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
+#s05c.off .pdt{opacity:0;transform:translateY(24px)}
 #s05c .lbl,#s05d .lbl{left:80px;top:54px;margin:0;font-size:17px;font-weight:600;line-height:1.33;letter-spacing:-.5px;color:#fc5814}
 #s05c .bar{left:633px;width:805px;height:0;border-top:1px solid #fc5814;transform:rotate(.28deg);transform-origin:0 0}
 #s05c .no{left:633px;margin:0;font-size:17px;font-weight:600;line-height:1.33;letter-spacing:-.5px;color:#fc5814}
@@ -623,6 +631,11 @@ body.gb-open{overflow:hidden}
   #s05c,#s05d{height:auto!important;padding:40px 20px 56px!important}
   #s05c .bar,#s05c .ln,#s05d .hl,#s05d .vl,#s05d .hd{display:none}
   #s05c .big{font-size:26px}
+  #s05c .pdc{display:block;width:56%!important;margin:0 auto 28px!important;align-self:center}
+  #s05c .pdd{width:100%;height:auto;aspect-ratio:1}
+  #s05c .pdd img{width:210.3%;left:-54.4%;top:-14.5%}
+  #s05c .pdc figcaption{font-size:16px;margin-top:12px}
+  #s05c .pdt{font-size:44px;margin:12px 0 20px}
   #s05c .it{width:100%!important;border-bottom:.5px solid rgba(252,88,20,.4);padding:6px 0}
   #s05d .ttl{font-size:40px;letter-spacing:-2px}
   #s05d .grp{margin-top:20px}
@@ -1112,49 +1125,13 @@ body.gb-open{overflow:hidden}
   <div class="a ph cols"><img src="v3/colors.webp" alt="밝은 회색, 하늘색, 짙은 회색 세 가지 색의 둥근 MiMO가 위아래 원판과 네 개의 빛을 보여준다." loading="lazy"></div>
 </section>
 
-<!-- ============ P3 HOW MiMO MOVES (movement → expression) ============ -->
-<section class="sec psec" id="pMove" data-label="Movement" data-tone="light">
-  <p class="pe rv">How MiMO Moves</p>
-  <h2 class="ph2 rv">MiMO는 이렇게 움직여서,<br>이런 감정을 표현합니다</h2>
-  <div class="pmoves">
-    <figure class="pm rv"><img src="img/present/move_lift.webp" alt="승강" loading="lazy"><figcaption><b>승강</b><span><i>움직임</i>몸체 전체가 위아래로 오르내립니다</span><span class="x"><i>표현</i>함께 들썩이는 흥, 화음, 살며시 깨우기</span></figcaption></figure>
-    <figure class="pm rv"><img src="img/present/move_one.webp" alt="원판 하나의 움직임" loading="lazy"><figcaption><b>원판 하나의 움직임</b><span><i>움직임</i>한쪽 원판이 들리며 기울어집니다</span><span class="x"><i>표현</i>리듬 맞추기, 말 걸기, 궁금함</span></figcaption></figure>
-    <figure class="pm rv"><img src="img/present/move_two.webp" alt="원판 두 개의 움직임" loading="lazy"><figcaption><b>원판 두 개의 움직임</b><span><i>움직임</i>두 원판이 함께 펼쳐지고 감쌉니다</span><span class="x"><i>표현</i>축하, 걱정, 마주 안아주기</span></figcaption></figure>
-  </div>
-  <p class="pnote rv">윗면의 네 개의 빛은 AI의 상태를 표현합니다. 다음 장에서 이어집니다.</p>
-</section>
-
-<!-- ============ 05b LIGHT STATES ============ -->
-<section class="sec" id="s05b" data-label="Light" data-tone="light" aria-label="MiMO 빛 상태 여섯 가지">
- <div class="stick"><div class="board">
-  <div class="st-item" data-i="0"><img src="img/state1.gif" alt="01 대기 상태의 빛 움직임" loading="lazy"></div><div class="st-cap"><span class="k">01 대기</span><span class="h">입력 대기</span><p>네 점이 하나로 모여 천천히 밝아졌다 어두워집니다. 대화를 기다리는 미모의 숨결을 표현합니다.</p></div>
-  <div class="st-item" data-i="1"><img src="img/state2.gif" alt="02 듣는 중 상태의 빛 움직임" loading="lazy"></div><div class="st-cap"><span class="k">02 듣는 중</span><span class="h">사용자 음성 수신</span><p>하나로 모였던 빛이 네 점으로 펼쳐집니다. 가운데 두 점은 목소리 크기에 따라 길어졌다 짧아집니다.</p></div>
-  <div class="st-item" data-i="2"><img src="img/state3.gif" alt="03 생각·처리 중 상태의 빛 움직임" loading="lazy"></div><div class="st-cap"><span class="k">03 생각·처리 중</span><span class="h">입력 분석 및 응답 생성</span><p>네 점이 차례로 밝아지며 빛의 흐름을 만듭니다. 들은 말을 처리하고 응답을 준비하는 상태를 보여줍니다.</p></div>
-  <div class="st-item" data-i="3"><img src="img/state4.gif" alt="04 응답·말하기 상태의 빛 움직임" loading="lazy"></div><div class="st-cap"><span class="k">04 응답·말하기</span><span class="h">음성 응답 출력</span><p>점들이 잠시 모였다가 빛과 함께 펼쳐집니다. 미모가 말을 시작하면 가운데 두 점이 말소리에 맞춰 움직입니다.</p></div>
-  <div class="st-item" data-i="4"><img src="img/state5.gif" alt="05 터치·동작 인식 상태의 빛 움직임" loading="lazy"></div><div class="st-cap"><span class="k">05 터치·동작 인식</span><span class="h">터치 입력 확인</span><p>손이 닿은 방향에서 둥근 파문이 짧게 퍼져 나갑니다. 터치가 전달되었음을 빛으로 알려줍니다.</p></div>
-  <div class="st-item" data-i="5"><img src="img/state6.gif" alt="06 둘만의 신호 상태의 빛 움직임" loading="lazy"></div><div class="st-cap"><span class="k">06 둘만의 신호</span><span class="h">상호작용 리듬 동기화</span><p>두 점이 서로 다가와 만나고, 반짝인 뒤 다시 벌어집니다. 하이파이브와 리듬을 주고받는 순간을 표현합니다.</p></div>
-  <p class="st-l" aria-live="polite"><span class="k">01 대기</span><span class="h">입력 대기</span></p>
-  <p class="st-r">네 점이 하나로 모여 천천히 밝아졌다 어두워집니다.<br>대화를 기다리는 미모의 숨결을 표현합니다.</p>
- </div></div>
-</section>
-
-<!-- ============ P4 WHAT I CAN DO TO MiMO (touch → response) ============ -->
-<section class="sec psec" id="pInput" data-label="Touch Input" data-tone="light">
-  <p class="pe rv">Touch → Response</p>
-  <h2 class="ph2 rv">내가 MiMO에게 할 수 있는 것</h2>
-  <p class="plead rv">리서치에서 찾은 다섯 가지 상호작용이, 그대로 MiMO에게 건네는 손길이 됩니다.</p>
-  <ul class="pin">
-    <li class="rv"><b>톡톡 두드리기</b><em>주의·유도 · 친근·놀이</em><svg viewBox="0 0 22 12" aria-hidden="true"><path d="M1 6 H19 M14 1 L20 6 L14 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>두드린 리듬을 따라 함께 움직여요</span></li>
-    <li class="rv"><b>어깨·팔 흔들기</b><em>친근·놀이</em><svg viewBox="0 0 22 12" aria-hidden="true"><path d="M1 6 H19 M14 1 L20 6 L14 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>움직임과 박자에 맞춰 함께 춤춰요</span></li>
-    <li class="rv"><b>꾹 누르기</b><em>위로·지지</em><svg viewBox="0 0 22 12" aria-hidden="true"><path d="M1 6 H19 M14 1 L20 6 L14 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>누르는 힘만큼 노래에 화음을 더해요</span></li>
-    <li class="rv"><b>하이파이브 · 주먹인사</b><em>인사·의례</em><svg viewBox="0 0 22 12" aria-hidden="true"><path d="M1 6 H19 M14 1 L20 6 L14 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>원판을 내밀어 함께 축하해요</span></li>
-    <li class="rv"><b>끌어안기</b><em>애정·유대</em><svg viewBox="0 0 22 12" aria-hidden="true"><path d="M1 6 H19 M14 1 L20 6 L14 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>닿은 쪽으로 몸을 감싸 안아줘요</span></li>
-  </ul>
-</section>
-
 <!-- ============ 05c INPUT DATA ============ -->
 <section class="sec off" id="s05c" data-label="Input Data" data-tone="light">
-  <p class="a lbl">사용자 INPUT DATA</p>
+  <figure class="a pdc" style="left:112px"><div class="pdd"><img src="img/state1.gif" alt="MiMO 대기 상태의 빛" loading="lazy"></div><figcaption>대기</figcaption></figure>
+  <figure class="a pdc" style="left:469px"><div class="pdd"><img src="img/state3.gif" alt="MiMO 생각 중 상태의 빛" loading="lazy"></div><figcaption>생각 중</figcaption></figure>
+  <figure class="a pdc" style="left:826px"><div class="pdd"><img src="img/state2.gif" alt="MiMO 듣고 말하는 중 상태의 빛" loading="lazy"></div><figcaption>듣고 말하는 중</figcaption></figure>
+  <figure class="a pdc" style="left:1185px"><div class="pdd"><img src="img/state6.gif" alt="MiMO 신호 연결 상태의 빛" loading="lazy"></div><figcaption>신호 연결</figcaption></figure>
+  <h2 class="a pdt">Ponding</h2>
   <i class="a bar" style="top:563px" aria-hidden="true"></i><i class="a bar" style="top:738.2px" aria-hidden="true"></i>
   <p class="a no" style="top:578px">01</p><h3 class="a big" style="top:562px">User Signal</h3>
   <p class="a no" style="top:761px">02</p><h3 class="a big" style="top:745px">Context</h3>
@@ -1171,6 +1148,33 @@ body.gb-open{overflow:hidden}
   <i class="a ln" style="top:784.8px" aria-hidden="true"></i>
   <i class="a ln" style="top:827.8px" aria-hidden="true"></i>
 </section>
+
+<!-- ============ P3 HOW MiMO MOVES (movement → expression) ============ -->
+<section class="sec psec" id="pMove" data-label="Movement" data-tone="light">
+  <p class="pe rv">How MiMO Moves</p>
+  <h2 class="ph2 rv">MiMO는 이렇게 움직여서,<br>이런 감정을 표현합니다</h2>
+  <div class="pmoves">
+    <figure class="pm rv"><img src="img/present/move_lift.webp" alt="승강" loading="lazy"><figcaption><b>승강</b><span><i>움직임</i>몸체 전체가 위아래로 오르내립니다</span><span class="x"><i>표현</i>함께 들썩이는 흥, 화음, 살며시 깨우기</span></figcaption></figure>
+    <figure class="pm rv"><img src="img/present/move_one.webp" alt="원판 하나의 움직임" loading="lazy"><figcaption><b>원판 하나의 움직임</b><span><i>움직임</i>한쪽 원판이 들리며 기울어집니다</span><span class="x"><i>표현</i>리듬 맞추기, 말 걸기, 궁금함</span></figcaption></figure>
+    <figure class="pm rv"><img src="img/present/move_two.webp" alt="원판 두 개의 움직임" loading="lazy"><figcaption><b>원판 두 개의 움직임</b><span><i>움직임</i>두 원판이 함께 펼쳐지고 감쌉니다</span><span class="x"><i>표현</i>축하, 걱정, 마주 안아주기</span></figcaption></figure>
+  </div>
+  <p class="pnote rv">윗면의 네 개의 빛은 AI의 상태를 표현합니다. 다음 장에서 이어집니다.</p>
+</section>
+
+<!-- ============ P4 WHAT I CAN DO TO MiMO (touch → response) ============ -->
+<section class="sec psec" id="pInput" data-label="Touch Input" data-tone="light">
+  <p class="pe rv">Touch → Response</p>
+  <h2 class="ph2 rv">내가 MiMO에게 할 수 있는 것</h2>
+  <p class="plead rv">리서치에서 찾은 다섯 가지 상호작용이, 그대로 MiMO에게 건네는 손길이 됩니다.</p>
+  <ul class="pin">
+    <li class="rv"><b>톡톡 두드리기</b><em>주의·유도 · 친근·놀이</em><svg viewBox="0 0 22 12" aria-hidden="true"><path d="M1 6 H19 M14 1 L20 6 L14 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>두드린 리듬을 따라 함께 움직여요</span></li>
+    <li class="rv"><b>어깨·팔 흔들기</b><em>친근·놀이</em><svg viewBox="0 0 22 12" aria-hidden="true"><path d="M1 6 H19 M14 1 L20 6 L14 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>움직임과 박자에 맞춰 함께 춤춰요</span></li>
+    <li class="rv"><b>꾹 누르기</b><em>위로·지지</em><svg viewBox="0 0 22 12" aria-hidden="true"><path d="M1 6 H19 M14 1 L20 6 L14 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>누르는 힘만큼 노래에 화음을 더해요</span></li>
+    <li class="rv"><b>하이파이브 · 주먹인사</b><em>인사·의례</em><svg viewBox="0 0 22 12" aria-hidden="true"><path d="M1 6 H19 M14 1 L20 6 L14 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>원판을 내밀어 함께 축하해요</span></li>
+    <li class="rv"><b>끌어안기</b><em>애정·유대</em><svg viewBox="0 0 22 12" aria-hidden="true"><path d="M1 6 H19 M14 1 L20 6 L14 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>닿은 쪽으로 몸을 감싸 안아줘요</span></li>
+  </ul>
+</section>
+
 
 <!-- ============ 02 MOMENTS ============ -->
 <section class="sec" id="s02" data-label="Moments" data-tone="dark">
