@@ -556,16 +556,9 @@ body.gb-open{overflow:hidden}
 #s05c.off .no,#s05c.off .big{opacity:0;transform:translateY(24px)}
 #s05c.off .it{opacity:0;transform:translateX(30px)}
 #s05c .it{position:absolute}
-#s05c .it::after{content:"";position:absolute;left:0;top:50%;width:6px;height:6px;margin-top:-3px;border-radius:50%;background:#fc5814;opacity:0;transform:scale(0);transition:opacity .25s,transform .25s}
-#s05c .it:hover::after,#s05c .it.ping::after{opacity:1;transform:scale(1)}
 #s05c .it span:last-child{transition:transform .3s cubic-bezier(.2,.8,.2,1)}
-#s05c .it:hover span:last-child,#s05c .it.ping span:last-child{transform:translateX(8px)}
+#s05c .it:hover span:last-child{transform:translateX(8px)}
 #s05c .big{transition-property:opacity,transform,letter-spacing}
-#s05c .sig{left:633px;top:561px;width:9px;height:9px;margin:-4px 0 0 -4px;border-radius:50%;background:#fc5814;box-shadow:0 0 0 0 rgba(252,88,20,.45);animation:sigRun 6s cubic-bezier(.45,0,.55,1) infinite,sigPulse 1.5s ease-out infinite}
-#s05c .sig.s2{top:736px;animation-delay:-3s,-.7s}
-#s05c.off .sig{opacity:0}
-@keyframes sigRun{0%{transform:translateX(0)}50%{transform:translateX(805px)}100%{transform:translateX(0)}}
-@keyframes sigPulse{0%{box-shadow:0 0 0 0 rgba(252,88,20,.45)}100%{box-shadow:0 0 0 12px rgba(252,88,20,0)}}
 #s05d .ttl{transition:opacity .9s ease,transform 1s cubic-bezier(.2,.8,.2,1),letter-spacing 1.2s cubic-bezier(.2,.8,.2,1)}
 #s05d.off .ttl{opacity:0;transform:translateY(30px);letter-spacing:12px}
 #s05d .hl,#s05d .vl{transition:transform 1.2s cubic-bezier(.2,.8,.2,1) .2s}
@@ -594,8 +587,8 @@ body.gb-open{overflow:hidden}
 #s05d .row .c:hover{color:#ffb489}
 #s05d .row.live>img{animation:scBob 2.2s ease-in-out infinite}
 @keyframes scBob{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-5px) rotate(-1deg)}}
-@media (prefers-reduced-motion:reduce){#s05c .sig,#s05d .hd img,#s05d .row.live>img{animation:none}}
-@media (max-width:999px){#s05c .sig{display:none}#s05d .row:hover{background:none}}
+@media (prefers-reduced-motion:reduce){#s05d .hd img,#s05d .row.live>img{animation:none}}
+@media (max-width:999px){#s05d .row:hover{background:none}}
 
 /* ---------- 05c input data / 05d scenarios (Figma 3378:8322, 3378:8350) ---------- */
 #s05c{height:915px;background:var(--bg-canvas)}
@@ -995,7 +988,6 @@ body.gb-open{overflow:hidden}
 <section class="sec off" id="s05c" data-label="Input Data" data-tone="light">
   <p class="a lbl">사용자 INPUT DATA</p>
   <i class="a bar" style="top:563px" aria-hidden="true"></i><i class="a bar" style="top:738.2px" aria-hidden="true"></i>
-  <i class="a sig" aria-hidden="true"></i><i class="a sig s2" aria-hidden="true"></i>
   <p class="a no" style="top:578px">01</p><h3 class="a big" style="top:562px">User Signal</h3>
   <p class="a no" style="top:761px">02</p><h3 class="a big" style="top:745px">Context</h3>
   <p class="a it" style="top:577.9px"><span>01.1</span><span>접촉</span></p>
@@ -1438,10 +1430,8 @@ body.gb-open{overflow:hidden}
     ic.querySelectorAll('.no,.big').forEach((e,k)=>e.style.setProperty('--d',(.25+(k%2)*.12+Math.floor(k/2)*.35)+'s'));
     its.forEach((e,k)=>e.style.setProperty('--d',(.5+k*.11)+'s'));
     ic.querySelectorAll('.ln').forEach((e,k)=>e.style.setProperty('--d',(.6+k*.11)+'s'));
-    let pi=0, pt=null;
-    const ping=()=>{ its.forEach(e=>e.classList.remove('ping')); its[pi%its.length].classList.add('ping'); pi++ };
     if(reduce) ic.classList.remove('off');
-    else new IntersectionObserver(es=>es.forEach(e=>{ if(e.intersectionRatio>=.3){ ic.classList.remove('off'); if(!pt) pt=setInterval(ping,900) } else if(e.intersectionRatio===0){ ic.classList.add('off'); clearInterval(pt); pt=null; its.forEach(x=>x.classList.remove('ping')) } }),{threshold:[0,.3]}).observe(ic) }
+    else new IntersectionObserver(es=>es.forEach(e=>{ if(e.intersectionRatio>=.3){ ic.classList.remove('off') } else if(e.intersectionRatio===0){ ic.classList.add('off') } }),{threshold:[0,.3]}).observe(ic) }
   /* scenarios: title opens up, grid draws, each row slides in when it reaches the screen; hovering a cell lights its column icon */
   { const sc=document.getElementById('s05d'), rows=[...sc.querySelectorAll('.row')], hds=[...sc.querySelectorAll('.hd')];
     hds.forEach((h,k)=>h.style.setProperty('--d',(.3+k*.12)+'s'));
