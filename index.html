@@ -549,6 +549,38 @@ body.gb-open{overflow:hidden}
 .dd-code input{width:100%;font:inherit;font-size:15px;padding:10px 14px;border:1px solid #ccc;border-radius:12px;background:#fff;color:var(--text-primary)}
 
 @media (max-width:999px){.toc{grid-template-columns:1fr}}
+/* ---------- 02e findings: fixed left title, six findings slide on the right over a slowly rippling field ---------- */
+#s02e{height:848px;overflow:hidden;background:#f6efe9}
+#s02e .fb{left:-60px;top:-50px;width:1638px;height:948px;background:url(img/findings_bg.jpg) center/cover no-repeat;transform-origin:62% 55%;animation:fbWave 9s ease-in-out infinite alternate;will-change:transform}
+#s02e .fb2{opacity:.5;mix-blend-mode:multiply;animation:fbWave2 7s ease-in-out infinite alternate}
+@keyframes fbWave{0%{transform:translate(0,0) scale(1) skewX(0deg)}35%{transform:translate(-14px,6px) scale(1.025,1.01) skewX(-1.6deg)}70%{transform:translate(10px,-8px) scale(1.01,1.035) skewX(1.2deg)}100%{transform:translate(-6px,10px) scale(1.03,1.015) skewX(-.8deg)}}
+@keyframes fbWave2{0%{transform:translate(8px,-4px) scale(1.02) skewY(.4deg)}50%{transform:translate(-12px,8px) scale(1.04,1.02) skewY(-.6deg)}100%{transform:translate(6px,4px) scale(1.01,1.04) skewY(.5deg)}}
+#s02e .fl{left:83px;top:380px;width:1354px;height:0;border-top:1px solid rgba(80,60,40,.25)}
+#s02e .fx{left:83px;top:396px;margin:0;font-size:33px;line-height:1.25;font-weight:700;letter-spacing:-1px;color:#111}
+#s02e .fs{left:909px;top:352px;width:528px;height:150px}
+#s02e .sl{position:absolute;inset:0;color:#fff;opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .8s cubic-bezier(.2,.8,.2,1);pointer-events:none}
+#s02e .sl.on{opacity:1;transform:none}
+#s02e .sl.out{opacity:0;transform:translateY(-18px)}
+#s02e .sl .n,#s02e .sl .src{position:absolute;top:2px;margin:0;font-size:15px;letter-spacing:-.3px}
+#s02e .sl .n{left:0;font-family:var(--font-dm);font-variation-settings:"opsz" 14}
+#s02e .sl .src{right:0}
+#s02e .sl .t,#s02e .sl .tag{position:absolute;top:42px;margin:0;font-size:32px;font-weight:600;letter-spacing:-1px;line-height:1.2;white-space:nowrap}
+#s02e .sl .t{left:0}#s02e .sl .tag{right:0}
+#s02e .sl .d{position:absolute;left:0;top:108px;margin:0;font-size:15px;line-height:1.6;letter-spacing:-.35px;white-space:nowrap}
+#s02e .dots{left:909px;top:560px;display:flex;gap:8px;margin:0;padding:0;list-style:none}
+#s02e .dots button{width:22px;height:4px;border:0;border-radius:2px;background:rgba(255,255,255,.45);cursor:pointer;padding:0;transition:background .3s,width .3s}
+#s02e .dots button[aria-current="true"]{width:40px;background:#fff}
+@media (prefers-reduced-motion:reduce){#s02e .fb{animation:none}}
+@media (max-width:999px){
+  #s02e{padding:48px 20px 56px!important;min-height:620px}
+  #s02e .fb{position:absolute!important;inset:-30px!important;width:auto!important;height:auto!important;left:-30px!important;top:-30px!important}
+  #s02e .fl{display:none}
+  #s02e .fx{font-size:24px;position:relative!important}
+  #s02e .fs{position:relative!important;width:100%!important;height:200px;margin-top:240px}
+  #s02e .sl .t,#s02e .sl .tag{font-size:22px}#s02e .sl .d{white-space:normal;font-size:14px;top:84px}#s02e .sl .d br{display:none}
+  #s02e .dots{position:relative!important}
+}
+
 /* ---------- 02d key finding: the cushion lands, its ring orbits, the lights talk ---------- */
 #s02d{height:918px;background:#fff;overflow:hidden}
 #s02d .kf-blob{left:905px;top:30px;width:720px;height:900px;border-radius:48% 52% 46% 54%/40% 42% 58% 60%;background:radial-gradient(60% 55% at 45% 55%,rgba(250,160,135,.42),rgba(252,205,190,.22) 55%,rgba(255,255,255,0) 78%);filter:blur(18px);transition:transform 1.6s cubic-bezier(.2,.8,.2,1),opacity 1.4s ease}
@@ -799,14 +831,23 @@ body.gb-open{overflow:hidden}
 <!-- ============ 02b DOMAIN RESEARCH ============ -->
 <section class="sec off" id="s02b" data-label="Domain" data-tone="dark">
   <div class="a col" style="--d:0.00s;left:0.0px;background:#fd864b" aria-hidden="true"></div>
-  <div class="a col" style="--d:0.28s;left:379.5px;background:#f45d35" aria-hidden="true"></div>
-  <div class="a col" style="--d:0.56s;left:759.0px;background:#634825" aria-hidden="true"></div>
-  <div class="a col" style="--d:0.84s;left:1138.5px;background:#fb672a" aria-hidden="true"></div>
+  <div class="a col" style="--d:0.28s;left:379.5px;background:#fb672a" aria-hidden="true"></div>
+  <div class="a col" style="--d:0.56s;left:759.0px;background:#f45d35" aria-hidden="true"></div>
+  <div class="a col" style="--d:0.84s;left:1138.5px;background:#634825" aria-hidden="true"></div>
   <h2 class="a dr-h"><b>Domain Research Process</b></h2>
   <div class="cell" style="--d:0.25s;background:#fd864b"><p class="a no" style="left:80px">01</p><h3 class="a ti" style="left:80px">관계와 정서적 경험</h3><img class="a ic" src="img/dr_icon1.webp" alt="" style="left:136.75px;top:339.50px;width:106.0px;height:65.0px"><p class="a tx" style="left:80px">친밀감과 응답성에 관한 문헌·사례를 통해<br>상대의 호응이 즐거움과 위로로 이어지는<br>과정을 탐색</p></div>
-  <div class="cell" style="--d:0.53s;background:#f45d35"><p class="a no" style="left:436px">02</p><h3 class="a ti" style="left:436px">비언어적 표현과 소통</h3><img class="a ic" src="img/dr_icon2.webp" alt="" style="left:526.50px;top:319.50px;width:86.5px;height:105.0px"><p class="a tx" style="left:444px">접촉·몸짓·소리를 유형화하고, 같은 행동도<br>상황과 관계에 따라 달라지는 의미를 분석</p></div>
-  <div class="cell" style="--d:0.81s;background:#634825"><p class="a no" style="left:816px">03</p><h3 class="a ti" style="left:816px">차량 안의 행동과 맥락</h3><img class="a ic" src="img/dr_icon3.webp" alt="" style="left:893.50px;top:328.75px;width:112.0px;height:86.5px"><p class="a tx" style="left:816px">음악 감상·대화·휴식 중의 행동과 자세를 살펴<br>차 안에서 자연스럽게 교류할 수 있는 조건을<br>정리</p></div>
-  <div class="cell" style="--d:1.09s;background:#fb672a"><p class="a no" style="left:1188px">04</p><h3 class="a ti" style="left:1188px">AI의 물리적 상호작용</h3><img class="a ic" src="img/dr_icon4.webp" alt="" style="left:1283.75px;top:330.75px;width:92.0px;height:82.5px"><p class="a tx" style="left:1186px">표현을 따라 하거나 보태고, 기다리는 응답을<br>검토해 움직임·소리·빛으로 호응하는 방식에<br>연결</p></div>
+  <div class="cell" style="--d:0.53s;background:#fb672a"><p class="a no" style="left:436px">02</p><h3 class="a ti" style="left:436px">비언어적 표현과 소통</h3><img class="a ic" src="img/dr_icon2.webp" alt="" style="left:526.50px;top:319.50px;width:86.5px;height:105.0px"><p class="a tx" style="left:443px">접촉·몸짓·소리를 유형화하고, 같은 행동도<br>상황과 관계에 따라 달라지는 의미를 분석</p></div>
+  <div class="cell" style="--d:0.81s;background:#f45d35"><p class="a no" style="left:808px">03</p><h3 class="a ti" style="left:808px">행동을 비교 가능한 단위로 분류</h3><img class="a ic" src="img/dr_icon4.webp" alt="" style="left:903.50px;top:330.75px;width:92.0px;height:82.5px"><p class="a tx" style="left:806px">사례에서 행동을 추출하고 접촉 부위, 힘의 방<br>식, 지속 시간, 반복, 방향, 자세 등을 기준으<br>로 소팅</p></div>
+  <div class="cell" style="--d:1.09s;background:#634825"><p class="a no" style="left:1195px">04</p><h3 class="a ti" style="left:1195px">차량 안의 행동과 맥락</h3><img class="a ic" src="img/dr_icon3.webp" alt="" style="left:1273.25px;top:328.75px;width:112.0px;height:86.5px"><p class="a tx" style="left:1195px">음악 감상·대화·휴식 중의 행동과 자세를 살펴<br>차 안에서 자연스럽게 교류할 수 있는 조건을<br>정리</p></div>
+</section>
+
+<!-- ============ 02e FINDINGS ============ -->
+<section class="sec" id="s02e" data-label="Findings" data-tone="dark" aria-label="관계와 정서적 경험 연구">
+  <div class="a fb" aria-hidden="true"></div><div class="a fb fb2" aria-hidden="true"></div>
+  <i class="a fl" aria-hidden="true"></i>
+  <h2 class="a fx">01 관계와 정서적 경험</h2>
+  <div class="a fs" aria-live="polite"><div class="sl on" aria-hidden="false"><p class="n">01</p><p class="src">Reis &amp; Shaver (1988)</p><p class="t">알아줄때 오는 친밀감</p><p class="tag">신호</p><p class="d">상대가 나를 이해하고 아껴준다고 느낄 때 친밀감이 생긴다는<br>모델. 접촉을 그 신호의 하나로 꼽음.</p></div><div class="sl" aria-hidden="true"><p class="n">02</p><p class="src">커플 일상 연구</p><p class="t">응답성과 스킨십의 선순환</p><p class="tag">순환</p><p class="d">상대가 잘 알아준 날엔 스킨십이 늘고, 스킨십을 받은<br>다음 날엔 상대를 더 응답적으로 느낌.</p></div><div class="sl" aria-hidden="true"><p class="n">03</p><p class="src">Löken et al. (2009)</p><p class="t">피부에 있는 '다정함 센서'</p><p class="tag">감각</p><p class="d">느린 쓰다듬기에만 반응하는 신경(C-촉각 섬유)을 발견.<br>이 신경이 가장 활발한 속도가 가장 기분 좋게 느껴짐.</p></div><div class="sl" aria-hidden="true"><p class="n">04</p><p class="src">Pawling et al. (2017)</p><p class="t">쓰다듬으면 웃는다</p><p class="tag">반응</p><p class="d">팔을 천천히 쓰다듬자 미소 근육이 실제로 움직임.<br>부드러운 손길이 긍정 감정을 직접 일으킴.</p></div><div class="sl" aria-hidden="true"><p class="n">05</p><p class="src">Croy 연구팀</p><p class="t">손길은 상대에게 맞춰진다</p><p class="tag">조율</p><p class="d">사람들은 자기 취향이 아니라 받는 사람이 가장 좋아할<br>속도로 쓰다듬음. 호감이 클수록 더 잘 맞춤.</p></div><div class="sl" aria-hidden="true"><p class="n">06</p><p class="src">Debrot et al. (2014)</p><p class="t">나쁜 감정 습관의 완충제</p><p class="tag">완충</p><p class="d">감정을 억누르면 커플 모두 기분이 나빠지지만,<br>파트너의 응답적 스킨십이 그 악영향을 줄여줌.</p></div></div>
+  <ul class="a dots"><li><button type="button" data-i="0" aria-label="1번째 연구" aria-current="true"></button></li><li><button type="button" data-i="1" aria-label="2번째 연구"></button></li><li><button type="button" data-i="2" aria-label="3번째 연구"></button></li><li><button type="button" data-i="3" aria-label="4번째 연구"></button></li><li><button type="button" data-i="4" aria-label="5번째 연구"></button></li><li><button type="button" data-i="5" aria-label="6번째 연구"></button></li></ul>
 </section>
 
 <!-- ============ 02b2 TOUCH INTERACTION 11 ============ -->
@@ -1236,6 +1277,18 @@ body.gb-open{overflow:hidden}
   { const kf=document.getElementById('s02d');
     if(reduce) kf.classList.remove('off');
     else new IntersectionObserver(es=>es.forEach(e=>{ if(e.intersectionRatio>=.3) kf.classList.remove('off'); else if(e.intersectionRatio===0) kf.classList.add('off') }),{threshold:[0,.3]}).observe(kf) }
+  }catch(err){ console.warn(err) }
+  try{
+
+  /* findings: one study at a time; advances every 4 s while in view, dots jump to a study */
+  { const fx=document.getElementById('s02e'), sls=[...fx.querySelectorAll('.sl')], dts=[...fx.querySelectorAll('.dots button')];
+    let cur=0, seen=false;
+    const go=i=>{ if(i===cur) return; const prev=sls[cur]; prev.classList.remove('on'); prev.classList.add('out'); prev.setAttribute('aria-hidden','true'); setTimeout(()=>prev.classList.remove('out'),800);
+      cur=(i+sls.length)%sls.length; sls[cur].classList.add('on'); sls[cur].setAttribute('aria-hidden','false'); dts.forEach((d,k)=>d.setAttribute('aria-current',String(k===cur))) };
+    dts.forEach(d=>d.addEventListener('click',()=>{ go(+d.dataset.i); t0=Date.now() }));
+    let t0=Date.now();
+    new IntersectionObserver(es=>es.forEach(e=>{ seen=e.isIntersecting; if(seen) t0=Date.now() }),{threshold:.3}).observe(fx);
+    setInterval(()=>{ if(seen&&Date.now()-t0>=4000){ go(cur+1); t0=Date.now() } },250) }
   }catch(err){ console.warn(err) }
   /* pies sweep in, numbers count up */
   const pio=new IntersectionObserver(es=>es.forEach(e=>{
