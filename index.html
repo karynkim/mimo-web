@@ -549,6 +549,12 @@ body.gb-open{overflow:hidden}
 .dd-code input{width:100%;font:inherit;font-size:15px;padding:10px 14px;border:1px solid #ccc;border-radius:12px;background:#fff;color:var(--text-primary)}
 
 @media (max-width:999px){.toc{grid-template-columns:1fr}}
+#s05v{height:924px;background:#53350f}
+#s05v .vwrap{left:80px;top:40px;width:1358px;height:764px;border-radius:12px;overflow:hidden;background:#000}
+#s05v video{display:block;width:100%;height:100%;object-fit:cover}
+#s05v .snd{position:absolute;right:20px;top:20px;padding:10px 18px;border:0;border-radius:999px;background:rgba(255,255,255,.92);color:#53350f;font:600 15px/1 inherit;font-family:inherit;cursor:pointer;transition:opacity .3s}
+#s05v .snd.on{opacity:0;pointer-events:none}
+@media (max-width:999px){#s05v{height:auto!important;padding:0 20px 56px!important}#s05v .vwrap{position:relative!important;left:auto!important;top:auto!important;width:100%!important;height:auto!important;aspect-ratio:16/9}}
 /* ---------- 05c / 05d motion ---------- */
 #s05c .bar,#s05c .ln{transform-origin:0 0;transition:transform 1.1s cubic-bezier(.2,.8,.2,1) var(--d,0s)}
 #s05c .no,#s05c .big,#s05c .it{transition:opacity .7s ease var(--d,0s),transform .8s cubic-bezier(.2,.8,.2,1) var(--d,0s)}
@@ -1034,6 +1040,12 @@ body.gb-open{overflow:hidden}
   <div class="a row" style="top:1478px"><img src="img/sc_sleep.webp" alt="기대어 잠들면, 몸을 살짝 움직여 깨워줘요 장면 일러스트" loading="lazy" style="top:36.5px"><h3 style="top:27.0px">기대어 잠들면,<br>몸을 살짝 움직여 깨워줘요</h3><p class="cp" style="top:98.0px">설정한 시간이나 도착 시점에<br>맞춰 작게 움직여요. 몸을<br>일으키거나 대답하면 멈춰요.</p><p class="c" data-k="소리" style="left:657px;top:70.6px">경쾌한 짧은 호응 소리</p><p class="c" data-k="원판" style="left:841.25px;top:70.6px">상단 원판을 짧게 상승·<br>하강하며 끄덕임</p><p class="c" data-k="MiMO 디스플레이" style="left:1025.5px;top:70.6px">웃는 눈에서 듣는 표정으로 전환</p><p class="c" data-k="UI" style="left:1209.75px;top:70.6px">“뭐가 그렇게 재미있어? 나도 궁금해!” 라는 메세지<br>제공</p></div>
 </section>
 
+<!-- ============ 05v FILM ============ -->
+<section class="sec" id="s05v" data-label="Film" data-tone="dark" aria-label="MiMO 트램펄린 광고 영상">
+  <div class="a vwrap"><video id="mimoFilm" src="img/mimo_trampoline.mp4" poster="img/mimo_trampoline_poster.jpg" muted loop playsinline controls preload="metadata"></video>
+  <button class="snd" type="button" aria-label="소리 켜기">소리 켜기</button></div>
+</section>
+
 <!-- ============ 05b LIGHT STATES ============ -->
 <section class="sec" id="s05b" data-label="Light" data-tone="light" aria-label="MiMO 빛 상태 여섯 가지">
  <div class="stick"><div class="board">
@@ -1443,6 +1455,12 @@ body.gb-open{overflow:hidden}
     sc.querySelectorAll('.row .c').forEach(c=>{ const k=[...c.parentNode.querySelectorAll('.c')].indexOf(c);
       c.addEventListener('pointerenter',()=>hds[k]&&hds[k].classList.add('hot')); c.addEventListener('pointerleave',()=>hds[k]&&hds[k].classList.remove('hot')) }) }
   }catch(err){ console.warn(err) }
+  try{
+    const v=document.getElementById('mimoFilm'), b=document.querySelector('#s05v .snd');
+    b.addEventListener('click',()=>{ v.muted=false; v.play(); b.classList.add('on') });
+    v.addEventListener('volumechange',()=>b.classList.toggle('on',!v.muted));
+    new IntersectionObserver(es=>es.forEach(e=>{ if(e.intersectionRatio>=.4){ const p=v.play(); if(p&&p.catch)p.catch(()=>{}) } else v.pause() }),{threshold:[0,.4]}).observe(v);
+  }catch(err){ window.__errs&&window.__errs.push(String(err)) }
   /* pies sweep in, numbers count up */
   const pio=new IntersectionObserver(es=>es.forEach(e=>{
     const panel=e.target.parentElement.closest('.a'); const arc=e.target.querySelector('.arc'); const p=+arc.dataset.p;
