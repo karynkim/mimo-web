@@ -203,6 +203,10 @@ svg.logo{display:block;overflow:visible}
 .car-ph img{width:100%;height:100%;object-fit:cover;display:block}
 .top9{left:0;top:0;width:1518px;height:855px;background:linear-gradient(130.4deg,#fff 0%,var(--bg-canvas) 98.4%)}
 .app{left:296px;top:135px;width:926px;height:586px;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.ipad{left:159px;top:46px;width:1200px;aspect-ratio:931/592}
+.ipad-bz{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
+.ipad-scr{position:absolute;left:1.364%;top:2.145%;width:97.248%;height:95.54%;overflow:hidden;border-radius:3.33% / 5.24%;background:#fcfbfa;z-index:1}
+.ipad-scr iframe{position:absolute;left:0;top:0;width:1440px;height:900px;border:0;transform-origin:0 0;transform:scale(var(--k,.81))}
 .end{left:0;top:0;width:1518px;height:856px;background:var(--dawn);color:var(--on-accent)}
 .end .wm{position:absolute;left:620px;top:388px;width:278.975px;height:80.529px;color:var(--on-accent)}
 .tm{position:absolute;left:1047px;font-family:var(--font-dm);font-variation-settings:"opsz" 14;line-height:1.1}
@@ -289,6 +293,7 @@ svg.logo{display:block;overflow:visible}
   #s09{padding:0}
   .top9{height:auto!important;padding:40px 16px;margin:0;width:100%!important}
   .app{width:100%!important;height:auto!important}
+  .ipad{position:relative!important;left:auto!important;top:auto!important;width:100%!important}
   .end{height:auto!important;margin:0;width:100%!important;padding:80px 20px 140px;display:flex;flex-direction:column;gap:22px}
   .end .wm{position:static;width:180px;height:52px;align-self:center;margin-bottom:40px}
   .tm,.ct{position:static}
@@ -1223,7 +1228,7 @@ body.gb-open{overflow:hidden}
 
 <!-- ============ P6 APP + IN-CAR PHOTO (presentation) ============ -->
 <section class="sec" id="pApp" data-label="App" data-tone="light">
-  <div class="a top9"><div class="a ph app" id="app"><img src="../v3/app.webp" alt="MiMO 앱 화면: Today's Picks 음악 추천과 Bugs Top 100 목록, 하단 재생 바" loading="lazy"></div></div>
+  <div class="a top9"><div class="a ipad" id="app"><div class="ipad-scr"><iframe src="https://karynkim.github.io/MiMO/" title="MiMO 앱" loading="lazy" allow="autoplay; microphone; fullscreen"></iframe></div><img class="ipad-bz" src="../v3/ipad_bezel.svg" alt="" aria-hidden="true"></div></div>
 </section>
 
 <section class="sec" id="pCar" data-label="In Car" data-tone="dark">
@@ -1735,6 +1740,12 @@ body.gb-open{overflow:hidden}
     go.addEventListener('click',()=>{ if(S.classList.contains('on')) return; const f=document.createElement('iframe');
       f.src='../present/simulator.html'; f.title='MiMO 쿠션 손으로 만지기 시뮬레이터'; f.allow='camera; microphone; fullscreen'; f.setAttribute('allowfullscreen','');
       S.appendChild(f); S.classList.add('on') }) }
+  }catch(err){ console.warn(err) }
+  try{
+  /* app screen: the live MiMO web app runs inside the iPad bezel, scaled to fit the screen */
+  { const scr=document.querySelector('.ipad-scr'), fr=scr&&scr.querySelector('iframe');
+    if(fr){ const fit=()=>{ const w=scr.clientWidth, h=scr.clientHeight; fr.style.height=Math.round(1440*h/w)+'px'; scr.style.setProperty('--k',(w/1440).toFixed(4)) };
+      fit(); new ResizeObserver(fit).observe(scr) } }
   }catch(err){ console.warn(err) }
   /* pies sweep in, numbers count up */
   const pio=new IntersectionObserver(es=>es.forEach(e=>{
