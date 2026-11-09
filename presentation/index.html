@@ -628,7 +628,7 @@ body.gb-open{overflow:hidden}
 
 /* ---------- 05c input data / 05d scenarios (Figma 3378:8322, 3378:8350) ---------- */
 #s05c{height:915px;background:var(--bg-canvas)}
-#s05c .pdc{top:104px;width:216px;margin:0;text-align:center;transition:opacity .8s ease,transform .9s cubic-bezier(.2,.8,.2,1)}
+#s05c .pdc{top:104px;width:216px;margin:0;text-align:center}
 #s05c .pdc:nth-of-type(2){transition-delay:.08s}#s05c .pdc:nth-of-type(3){transition-delay:.16s}#s05c .pdc:nth-of-type(4){transition-delay:.24s}
 #s05c.off .pdc{opacity:0;transform:translateY(30px)}
 #s05c .pdd{position:relative;width:216px;height:216px;border-radius:50%;overflow:hidden;box-shadow:0 18px 30px -14px rgba(60,70,90,.35)}
@@ -1188,7 +1188,7 @@ body.gb-open{overflow:hidden}
 </section>
 
 <!-- ============ 05c INPUT DATA ============ -->
-<section class="sec off" id="s05c" data-label="Input Data" data-tone="light">
+<section class="sec" id="s05c" data-label="Input Data" data-tone="light">
   <figure class="a pdc" style="left:112px"><div class="pdd"><img src="../img/state1.gif" alt="MiMO 대기 상태의 빛" loading="lazy"></div><figcaption>대기</figcaption></figure>
   <figure class="a pdc" style="left:469px"><div class="pdd"><img src="../img/state3.gif" alt="MiMO 생각 중 상태의 빛" loading="lazy"></div><figcaption>생각 중</figcaption></figure>
   <figure class="a pdc" style="left:826px"><div class="pdd"><img src="../img/state2.gif" alt="MiMO 듣고 말하는 중 상태의 빛" loading="lazy"></div><figcaption>듣고 말하는 중</figcaption></figure>
@@ -1677,8 +1677,7 @@ body.gb-open{overflow:hidden}
     ic.querySelectorAll('.no,.big').forEach((e,k)=>e.style.setProperty('--d',(.25+(k%2)*.12+Math.floor(k/2)*.35)+'s'));
     its.forEach((e,k)=>e.style.setProperty('--d',(.5+k*.11)+'s'));
     ic.querySelectorAll('.ln').forEach((e,k)=>e.style.setProperty('--d',(.6+k*.11)+'s'));
-    if(reduce) ic.classList.remove('off');
-    else new IntersectionObserver(es=>es.forEach(e=>{ if(e.intersectionRatio>=.3){ ic.classList.remove('off') } else if(e.intersectionRatio===0){ ic.classList.add('off') } }),{threshold:[0,.3]}).observe(ic) }
+    ic.classList.remove('off') }   /* presentation: no entrance animation */
   /* scenarios: title opens up, grid draws, each row slides in when it reaches the screen; hovering a cell lights its column icon */
   if(document.getElementById('s05d')){ const sc=document.getElementById('s05d'), rows=[...sc.querySelectorAll('.row')], hds=[...sc.querySelectorAll('.hd')];
     hds.forEach((h,k)=>h.style.setProperty('--d',(.3+k*.12)+'s'));
