@@ -88,7 +88,7 @@ svg.logo{display:block;overflow:visible}
 .t32{font-family:var(--font-dm);font-variation-settings:"opsz" 14;font-weight:500;font-size:32px;line-height:1;letter-spacing:-1.92px}
 
 /* ---------- 01 ---------- */
-#s01{height:2430px;background:var(--bg-canvas)}
+#s01{height:1368px;background:#111}
 .hero{left:0;top:0;width:1518px;height:1368px;overflow:hidden}
 .hero img{width:100%;height:100%;object-fit:cover;transform-origin:50% 30%;will-change:transform}
 .leds{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
@@ -865,7 +865,7 @@ body.gb-open{overflow:hidden}
 }
 
 /* ===================== presentation branch ===================== */
-#s01{height:1840px}
+#s01{height:1368px}
 #pProc{height:780px;background:var(--bg-canvas)}
 #pProc .dp-h{top:200px}
 #pProc .step{top:314px}
@@ -972,13 +972,10 @@ body.gb-open{overflow:hidden}
 <main class="stage" id="stage">
 
 <!-- ============ 01 MiMO ============ -->
-<section class="sec" id="s01" data-label="MiMO" data-tone="light">
-  <div class="a hero" id="hero"><img id="heroImg" src="../v3/hero.webp" alt="청바지를 입은 사람이 둥근 회색 MiMO 위에 손을 얹고 있다. 윗면에 네 개의 흰 빛이 켜져 있다." fetchpriority="high">
+<section class="sec" id="s01" data-label="MiMO" data-tone="dark">
+  <div class="a hero" id="hero"><img id="heroImg" src="../v3/hero_pres.webp" alt="AIVD 산학협력 프로젝트 최종 발표회, 2026년 11월 9일, 한동대학교 · LG전자. 청바지를 입은 사람이 둥근 회색 MiMO 위에 손을 얹고 있다." fetchpriority="high">
   </div>
-  <h1 class="a" style="left:0;top:0;margin:0"><span class="sr">MiMO</span><svg class="logo a wm" style="left:80.03px;top:1432.38px;width:390.93px;height:109.95px;position:absolute" aria-hidden="true"><use href="#sym-wordmark"/></svg></h1>
-  <p class="a tag trim rv">나의 몸짓을 AI에게 전하고,<br>움직임으로 답하는 감정 매개체</p>
-  <p class="a body b16 trim rv" style="left:771px;width:318px">자율주행이 확대되며 차 안은 이동 뿐 아니라 생활 공간이 되었습니다. 차량 속 AI는 발전하지만, 소통은 여전히 화면과의 대화입니다. 그러나 사람은 말뿐 아니라 손길과 몸짓으로 감정을 전합니다. 연구에 따르면, 손길만으로 50%의 감정이 전달됩니다.</p>
-  <p class="a body b16 trim rv" style="left:1120.4px;width:330px">우리는 사람 사이의 비언어적 소통을 연구하고, 차 안에서 꼭 필요한 다섯 가지 상호작용을 찾았습니다. MiMO는 그 표현을 AI에게 전하고, 움직임과 빛으로 답합니다. 말하지 않아도, 감각으로 전해지는 호응. MiMO.</p>
+  <h1 class="sr">MiMO — AIVD 산학협력 프로젝트 최종 발표회</h1>
 </section>
 
 <!-- ============ P0 AD FILM (presentation) ============ -->
@@ -1248,8 +1245,7 @@ body.gb-open{overflow:hidden}
 
 <!-- ============ 05v FILM ============ -->
 <section class="sec" id="s05v" data-label="Film" data-tone="dark" aria-label="MiMO 트램펄린 광고 영상">
-  <div class="a vwrap"><video id="mimoFilm" src="../img/mimo_trampoline.mp4" poster="../img/mimo_trampoline_poster.jpg" muted loop playsinline controls preload="metadata"></video>
-  <button class="snd" type="button" aria-label="소리 켜기">소리 켜기</button></div>
+  <div class="a vwrap"><video id="mimoFilm" src="../img/mimo_trampoline.mp4" poster="../img/mimo_trampoline_poster.jpg" muted loop playsinline controls preload="metadata"></video></div>
 </section>
 
 <!-- ============ P5 DEMO ============ -->
@@ -1655,8 +1651,6 @@ body.gb-open{overflow:hidden}
   }catch(err){ console.warn(err) }
   try{
     const v=document.getElementById('mimoFilm'), b=document.querySelector('#s05v .snd');
-    b.addEventListener('click',()=>{ v.muted=false; v.play(); b.classList.add('on') });
-    v.addEventListener('volumechange',()=>b.classList.toggle('on',!v.muted));
     new IntersectionObserver(es=>es.forEach(e=>{ if(e.intersectionRatio>=.4){ const p=v.play(); if(p&&p.catch)p.catch(()=>{}) } else v.pause() }),{threshold:[0,.4]}).observe(v);
   }catch(err){ window.__errs&&window.__errs.push(String(err)) }
   try{
