@@ -564,6 +564,10 @@ body.gb-open{overflow:hidden}
 #s05v{height:854px;background:#000}
 #s05v .vwrap{left:0;top:0;width:1518px;height:854px;overflow:hidden;background:#000}
 #s05v video{display:block;width:100%;height:100%;object-fit:cover}
+#pOutro{height:854px;background:#000}
+#pOutro video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+#pOutro .snd{position:absolute;right:24px;bottom:24px;padding:12px 20px;border:0;border-radius:999px;background:rgba(255,255,255,.92);color:#53350f;font:inherit;font-size:15px;font-weight:600;cursor:pointer}
+@media (max-width:999px){#pOutro{height:auto!important;aspect-ratio:16/9;position:relative}}
 #pSim{height:900px;background:#1b1a19;color:#fcfbfa}
 #pSim .sim-cover{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;background:radial-gradient(60% 60% at 50% 45%,#3a3633 0%,#1b1a19 70%)}
 #pSim .sim-e{margin:0;font-family:var(--font-dm);font-size:18px;font-weight:600;color:#ff7b39}
@@ -1144,17 +1148,17 @@ body.gb-open{overflow:hidden}
 <!-- ============ 04 TOUCH ============ -->
 <section class="sec" id="s04" data-label="Touch" data-tone="light">
   <div class="a band" style="height:930px">
-    <figure class="a touch rv" style="left:80px;top:85px;width:260px"><div class="ph" style="height:200px;--ar:260/200"><img src="v3/tc01.webp" alt="손을 펴고 MiMO에게 다가가 인사하는 일러스트" loading="lazy" style="object-position:60% 50%"></div><figcaption style="margin-top:14px"><p class="tt">인사·연결 시작</p></figcaption></figure>
-    <figure class="a touch rv" style="left:362px;top:85px;width:180px"><div class="ph" style="height:300px;--ar:180/300"><img src="v3/tc02.webp" alt="손가락으로 MiMO 옆을 톡 건드리는 일러스트" loading="lazy" style="object-position:72% 50%"></div><figcaption style="margin-top:14px"><p class="tt">주의 끌기·부르기</p></figcaption></figure>
-    <figure class="a touch rv" style="left:564px;top:85px;width:200px"><div class="ph" style="height:180px;--ar:200/180"><img src="v3/tc03.webp" alt="손바닥을 MiMO 옆에 대자 반응하는 일러스트" loading="lazy" style="object-position:32% 50%"></div><figcaption style="margin-top:14px"><p class="tt">경청·반응</p></figcaption></figure>
-    <figure class="a touch rv" style="left:786px;top:85px;width:220px"><div class="ph" style="height:260px;--ar:220/260"><img src="v3/tc04.webp" alt="MiMO 위로 엄지를 세우는 일러스트" loading="lazy" style="object-position:38% 50%"></div><figcaption style="margin-top:14px"><p class="tt">동의·긍정</p></figcaption></figure>
-    <figure class="a touch rv" style="left:1028px;top:85px;width:180px"><div class="ph" style="height:220px;--ar:180/220"><img src="v3/tc05.webp" alt="손바닥으로 MiMO를 밀어내는 일러스트" loading="lazy" style="object-position:36% 50%"></div><figcaption style="margin-top:14px"><p class="tt">부정·거절</p></figcaption></figure>
-    <figure class="a touch rv" style="left:1230px;top:85px;width:208px"><div class="ph" style="height:160px;--ar:208/160"><img src="v3/tc06.webp" alt="MiMO 위에서 두 손이 하이파이브하는 일러스트" loading="lazy" style="object-position:50% 40%"></div><figcaption style="margin-top:14px"><p class="tt">기쁨·축하</p></figcaption></figure>
-    <figure class="a touch rv" style="left:80px;top:477px;width:230px"><div class="ph" style="height:260px;--ar:230/260"><img src="v3/tc07.webp" alt="MiMO 위에 손을 얹어 토닥이는 일러스트" loading="lazy" style="object-position:50% 50%"></div><figcaption style="margin-top:14px"><p class="tt">위로·격려</p></figcaption></figure>
-    <figure class="a touch rv" style="left:332px;top:477px;width:300px"><div class="ph" style="height:180px;--ar:300/180"><img src="v3/tc08.webp" alt="두 손으로 MiMO를 감싸 안는 일러스트" loading="lazy" style="object-position:50% 50%"></div><figcaption style="margin-top:14px"><p class="tt">친밀·애정</p></figcaption></figure>
-    <figure class="a touch rv" style="left:654px;top:477px;width:200px"><div class="ph" style="height:320px;--ar:200/320"><img src="v3/tc09.webp" alt="두 손가락으로 MiMO를 콕 찌르는 일러스트" loading="lazy" style="object-position:45% 50%"></div><figcaption style="margin-top:14px"><p class="tt">장난·친근함</p></figcaption></figure>
-    <figure class="a touch rv" style="left:876px;top:477px;width:280px"><div class="ph" style="height:200px;--ar:280/200"><img src="v3/tc10.webp" alt="MiMO 앞에서 두 손을 펼치며 놀라는 일러스트" loading="lazy" style="object-position:50% 50%"></div><figcaption style="margin-top:14px"><p class="tt">놀람</p></figcaption></figure>
-    <figure class="a touch rv" style="left:1178px;top:477px;width:260px"><div class="ph" style="height:240px;--ar:260/240"><img src="v3/tc11.webp" alt="MiMO 위에서 두 손을 맞잡고 긴장하는 일러스트" loading="lazy" style="object-position:50% 50%"></div><figcaption style="margin-top:14px"><p class="tt">불만·긴장</p></figcaption></figure>
+    <figure class="a touch" style="left:80px;top:85px;width:260px"><div class="ph" style="height:200px;--ar:260/200"><img src="v3/tc01.webp" alt="손을 펴고 MiMO에게 다가가 인사하는 일러스트" loading="lazy" style="object-position:60% 50%"></div><figcaption style="margin-top:14px"><p class="tt">인사·연결 시작</p></figcaption></figure>
+    <figure class="a touch" style="left:362px;top:85px;width:180px"><div class="ph" style="height:300px;--ar:180/300"><img src="v3/tc02.webp" alt="손가락으로 MiMO 옆을 톡 건드리는 일러스트" loading="lazy" style="object-position:72% 50%"></div><figcaption style="margin-top:14px"><p class="tt">주의 끌기·부르기</p></figcaption></figure>
+    <figure class="a touch" style="left:564px;top:85px;width:200px"><div class="ph" style="height:180px;--ar:200/180"><img src="v3/tc03.webp" alt="손바닥을 MiMO 옆에 대자 반응하는 일러스트" loading="lazy" style="object-position:32% 50%"></div><figcaption style="margin-top:14px"><p class="tt">경청·반응</p></figcaption></figure>
+    <figure class="a touch" style="left:786px;top:85px;width:220px"><div class="ph" style="height:260px;--ar:220/260"><img src="v3/tc04.webp" alt="MiMO 위로 엄지를 세우는 일러스트" loading="lazy" style="object-position:38% 50%"></div><figcaption style="margin-top:14px"><p class="tt">동의·긍정</p></figcaption></figure>
+    <figure class="a touch" style="left:1028px;top:85px;width:180px"><div class="ph" style="height:220px;--ar:180/220"><img src="v3/tc05.webp" alt="손바닥으로 MiMO를 밀어내는 일러스트" loading="lazy" style="object-position:36% 50%"></div><figcaption style="margin-top:14px"><p class="tt">부정·거절</p></figcaption></figure>
+    <figure class="a touch" style="left:1230px;top:85px;width:208px"><div class="ph" style="height:160px;--ar:208/160"><img src="v3/tc06.webp" alt="MiMO 위에서 두 손이 하이파이브하는 일러스트" loading="lazy" style="object-position:50% 40%"></div><figcaption style="margin-top:14px"><p class="tt">기쁨·축하</p></figcaption></figure>
+    <figure class="a touch" style="left:80px;top:477px;width:230px"><div class="ph" style="height:260px;--ar:230/260"><img src="v3/tc07.webp" alt="MiMO 위에 손을 얹어 토닥이는 일러스트" loading="lazy" style="object-position:50% 50%"></div><figcaption style="margin-top:14px"><p class="tt">위로·격려</p></figcaption></figure>
+    <figure class="a touch" style="left:332px;top:477px;width:300px"><div class="ph" style="height:180px;--ar:300/180"><img src="v3/tc08.webp" alt="두 손으로 MiMO를 감싸 안는 일러스트" loading="lazy" style="object-position:50% 50%"></div><figcaption style="margin-top:14px"><p class="tt">친밀·애정</p></figcaption></figure>
+    <figure class="a touch" style="left:654px;top:477px;width:200px"><div class="ph" style="height:320px;--ar:200/320"><img src="v3/tc09.webp" alt="두 손가락으로 MiMO를 콕 찌르는 일러스트" loading="lazy" style="object-position:45% 50%"></div><figcaption style="margin-top:14px"><p class="tt">장난·친근함</p></figcaption></figure>
+    <figure class="a touch" style="left:876px;top:477px;width:280px"><div class="ph" style="height:200px;--ar:280/200"><img src="v3/tc10.webp" alt="MiMO 앞에서 두 손을 펼치며 놀라는 일러스트" loading="lazy" style="object-position:50% 50%"></div><figcaption style="margin-top:14px"><p class="tt">놀람</p></figcaption></figure>
+    <figure class="a touch" style="left:1178px;top:477px;width:260px"><div class="ph" style="height:240px;--ar:260/240"><img src="v3/tc11.webp" alt="MiMO 위에서 두 손을 맞잡고 긴장하는 일러스트" loading="lazy" style="object-position:50% 50%"></div><figcaption style="margin-top:14px"><p class="tt">불만·긴장</p></figcaption></figure>
     <audio id="touchSnd" src="mimo_sound.mp3" preload="auto"></audio>
   </div>
 </section>
@@ -1262,6 +1266,12 @@ body.gb-open{overflow:hidden}
     <button type="button" class="sim-go">시뮬레이터 열기</button>
     <a class="sim-new" href="present/simulator.html" target="_blank" rel="noopener">새 창에서 열기 ↗</a>
   </div>
+</section>
+
+<!-- ============ P7 OUTRO FILM (sound on when it scrolls in) ============ -->
+<section class="sec" id="pOutro" data-label="Outro" data-tone="dark" aria-label="MiMO 영상">
+  <video id="outroFilm" src="v3/mimo_outro.mp4" poster="v3/mimo_outro_poster.jpg" playsinline preload="auto"></video>
+  <button class="snd" type="button" hidden>소리 켜기</button>
 </section>
 
 <!-- ============ 09 TEAM ============ -->
@@ -1746,6 +1756,15 @@ body.gb-open{overflow:hidden}
   { const scr=document.querySelector('.ipad-scr'), fr=scr&&scr.querySelector('iframe');
     if(fr){ const fit=()=>{ const w=scr.clientWidth, h=scr.clientHeight; fr.style.height=Math.round(1440*h/w)+'px'; scr.style.setProperty('--k',(w/1440).toFixed(4)) };
       fit(); new ResizeObserver(fit).observe(scr) } }
+  }catch(err){ console.warn(err) }
+  try{
+  /* outro film: plays with sound as soon as it scrolls into view (falls back to muted until the first click if the browser blocks sound) */
+  { const S=document.getElementById('pOutro'), v=document.getElementById('outroFilm'), b=S.querySelector('.snd');
+    const unmute=()=>{ v.muted=false; v.volume=1; b.hidden=true };
+    const play=()=>{ v.muted=false; const p=v.play(); if(p&&p.catch) p.catch(()=>{ v.muted=true; v.play().catch(()=>{}); b.hidden=false }) };
+    b.addEventListener('click',e=>{ e.stopPropagation(); unmute(); v.play() });
+    ['pointerdown','keydown','touchend'].forEach(ev=>addEventListener(ev,()=>{ if(!v.paused&&v.muted) unmute() },{capture:true,passive:true}));
+    new IntersectionObserver(es=>es.forEach(e=>{ if(e.intersectionRatio>=.55){ if(v.ended) v.currentTime=0; play() } else if(e.intersectionRatio<.2){ v.pause() } }),{threshold:[0,.2,.55]}).observe(S) }
   }catch(err){ console.warn(err) }
   /* pies sweep in, numbers count up */
   const pio=new IntersectionObserver(es=>es.forEach(e=>{
