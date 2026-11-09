@@ -1100,19 +1100,6 @@ body.gb-open{overflow:hidden}
   </ol>
 </section>
 
-<!-- ============ 02b DOMAIN RESEARCH ============ -->
-<section class="sec" id="s02b" data-label="Domain" data-tone="dark">
-  <div class="a col" style="--d:0.00s;left:0.0px;background:#fd864b" aria-hidden="true"></div>
-  <div class="a col" style="--d:0.28s;left:379.5px;background:#fb672a" aria-hidden="true"></div>
-  <div class="a col" style="--d:0.56s;left:759.0px;background:#f45d35" aria-hidden="true"></div>
-  <div class="a col" style="--d:0.84s;left:1138.5px;background:#634825" aria-hidden="true"></div>
-  <h2 class="a dr-h"><b>Domain Research Process</b></h2>
-  <div class="cell" style="--d:0.25s;background:#fd864b"><p class="a no" style="left:80px">01</p><h3 class="a ti" style="left:80px">관계와 정서적 경험</h3><img class="a ic" src="../img/dr_icon1.webp" alt="" style="left:136.75px;top:339.50px;width:106.0px;height:65.0px"><p class="a tx" style="left:80px">친밀감과 응답성에 관한 문헌·사례를 통해<br>상대의 호응이 즐거움과 위로로 이어지는<br>과정을 탐색</p></div>
-  <div class="cell" style="--d:0.53s;background:#fb672a"><p class="a no" style="left:436px">02</p><h3 class="a ti" style="left:436px">비언어적 표현과 소통</h3><img class="a ic" src="../img/dr_icon2.webp" alt="" style="left:526.50px;top:319.50px;width:86.5px;height:105.0px"><p class="a tx" style="left:443px">접촉·몸짓·소리를 유형화하고, 같은 행동도<br>상황과 관계에 따라 달라지는 의미를 분석</p></div>
-  <div class="cell" style="--d:0.81s;background:#f45d35"><p class="a no" style="left:808px">03</p><h3 class="a ti" style="left:808px">행동을 비교 가능한 단위로 분류</h3><img class="a ic" src="../img/dr_icon4.webp" alt="" style="left:903.50px;top:330.75px;width:92.0px;height:82.5px"><p class="a tx" style="left:806px">사례에서 행동을 추출하고 접촉 부위, 힘의 방<br>식, 지속 시간, 반복, 방향, 자세 등을 기준으<br>로 소팅</p></div>
-  <div class="cell" style="--d:1.09s;background:#634825"><p class="a no" style="left:1195px">04</p><h3 class="a ti" style="left:1195px">차량 안의 행동과 맥락</h3><img class="a ic" src="../img/dr_icon3.webp" alt="" style="left:1273.25px;top:328.75px;width:112.0px;height:86.5px"><p class="a tx" style="left:1195px">음악 감상·대화·휴식 중의 행동과 자세를 살펴<br>차 안에서 자연스럽게 교류할 수 있는 조건을<br>정리</p></div>
-</section>
-
 <!-- ============ 02e FINDINGS ============ -->
 <section class="sec" id="s02e" data-label="Findings" data-tone="dark" aria-label="관계와 정서적 경험 연구">
   <div class="a fb" aria-hidden="true"></div><div class="a fb fb2" aria-hidden="true"></div>
@@ -1571,7 +1558,7 @@ body.gb-open{overflow:hidden}
   try{
   /* domain research: the four columns come in one after another, every time */
   { const dr=document.getElementById('s02b');
-    dr.classList.remove('off') }   /* presentation: no entrance animation */
+    if(dr) dr.classList.remove('off') }   /* presentation: no entrance animation */
   }catch(err){ console.warn(err) }
   try{
   /* light states: the section pins while the next GIF slides up into the centre and grows */
