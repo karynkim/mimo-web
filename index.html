@@ -880,11 +880,12 @@ body.gb-open{overflow:hidden}
 }
 
 /* ---------- 01b project goal (circles cross into the next section) ---------- */
-#s01b{height:740px;overflow:visible;z-index:2;background:linear-gradient(180deg,var(--bg-canvas) 0%,#ffceb6 100%)}
+#s01b{height:1060px;overflow:visible;z-index:2;background:linear-gradient(180deg,var(--bg-canvas) 0%,#ffceb6 100%)}
 #s01b .diag{display:none}
 #s01b .diag{left:0;top:0;width:586px;height:266px;background:var(--white);clip-path:polygon(0 0,100% 0,0 100%)}
 #s01b .g-h{left:0;top:84px;width:1518px;margin:0;text-align:center;font-family:var(--font-dm);font-variation-settings:"opsz" 14;font-weight:600;font-size:42px;line-height:1;letter-spacing:-1.5px;color:var(--accent)}
 #s01b .g-p{left:0;top:150px;width:1518px;margin:0;text-align:center;font-size:16px;line-height:1.5;letter-spacing:-.4px;color:var(--brown)}
+#s01b .g-flow{left:272.5px;top:700px;width:973px;height:231px}
 #s01b .g-logo{left:0;top:72px;width:1518px;margin:0;text-align:center}
 #s01b .g-logo img{width:470px;height:auto;display:inline-block}
 #s01b .circ{top:300px;width:298px;height:298px;border-radius:50%;background:var(--white);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;color:var(--brown)}
@@ -896,6 +897,7 @@ body.gb-open{overflow:hidden}
   #s01b .diag{display:none}
   #s01b .g-h,#s01b .g-p,#s01b .g-logo{width:100%!important}
   #s01b .g-logo img{width:min(260px,70vw)}
+  #s01b .g-flow{position:relative!important;left:auto!important;top:auto!important;width:100%!important;height:auto!important;margin-top:24px}
   #s01b .circ{width:min(260px,80vw)!important;height:min(260px,80vw)}
   #s01b .arw{transform:rotate(90deg);margin:0}
 }
@@ -1084,6 +1086,7 @@ body.gb-open{overflow:hidden}
   <div class="a diag" aria-hidden="true"></div>
   <h2 class="a g-logo"><img src="v3/mimo_logo.svg" alt="MiMO"></h2>  <div class="a circ rv" style="left:311px"><h3>표현의 확장</h3><p>말과 손길, 몸짓으로<br>감정과 의도를 전하기</p></div>
   <div class="a circ rv" style="left:610px"><h3>상황에 맞는 호응</h3><p>지금의 맥락을 이해하고<br>움직임, 소리, 빛으로 답하기</p></div>
+  <img class="a g-flow" src="v3/concept_flow.svg" alt="사람이 몸짓·손길로 MiMO에 전하면, MiMO가 감정 신호로 AI에 전하고 AI는 반응으로 돌려주며, AI와 차량은 정보를 주고받는다." loading="lazy">
   <div class="a circ rv" style="left:909px"><h3>이어지는 교류</h3><p>돌아온 호응이 다음 표현으로<br>이어지며 서로 주고받기</p></div>
 </section>
 
