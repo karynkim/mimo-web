@@ -196,10 +196,14 @@ svg.logo{display:block;overflow:visible}
 .lockup{left:1047px;top:1450.5px;display:flex;align-items:center;gap:11.249px;color:var(--on-accent)}
 
 /* ---------- 09 ---------- */
-#s09{height:1711px}
+#s09{height:856px}
+#pApp{height:855px}
+#pCar{height:1273px;background:#111}
+.car-ph{left:0;top:0;width:1518px;height:1273px;overflow:hidden}
+.car-ph img{width:100%;height:100%;object-fit:cover;display:block}
 .top9{left:0;top:0;width:1518px;height:855px;background:linear-gradient(130.4deg,#fff 0%,var(--bg-canvas) 98.4%)}
 .app{left:296px;top:135px;width:926px;height:586px;transition:transform .8s cubic-bezier(.2,.7,.2,1)}
-.end{left:0;top:855px;width:1518px;height:856px;background:var(--dawn);color:var(--on-accent)}
+.end{left:0;top:0;width:1518px;height:856px;background:var(--dawn);color:var(--on-accent)}
 .end .wm{position:absolute;left:620px;top:388px;width:278.975px;height:80.529px;color:var(--on-accent)}
 .tm{position:absolute;left:1047px;font-family:var(--font-dm);font-variation-settings:"opsz" 14;line-height:1.1}
 .tm b{display:block;font-weight:400;font-size:24px;letter-spacing:-.48px}
@@ -214,6 +218,7 @@ svg.logo{display:block;overflow:visible}
   .sec{width:100%;height:auto!important;display:flex;flex-direction:column;gap:18px;padding:0 20px 64px}
   .a{position:relative!important;left:auto!important;top:auto!important;right:auto!important;width:auto!important;max-width:100%}
   .trim{text-box:none}
+  .car-ph{height:auto!important}.car-ph img{height:auto}#pCar,#pApp{height:auto!important;padding:0!important}
   .hero,.dawn,.hug,.car,.cols,.band,.top9,.end,.panel-l,.panel-r{margin:0 -20px;width:calc(100% + 40px)!important}
   .hero{height:auto!important;aspect-ratio:1518/1368}
   #s01 .wm{width:180px!important;height:52px!important;margin-top:28px}
@@ -1222,6 +1227,15 @@ body.gb-open{overflow:hidden}
   </ul>
 </section>
 
+<!-- ============ P6 APP + IN-CAR PHOTO (presentation) ============ -->
+<section class="sec" id="pApp" data-label="App" data-tone="light">
+  <div class="a top9"><div class="a ph app" id="app"><img src="../v3/app.webp" alt="MiMO 앱 화면: Today's Picks 음악 추천과 Bugs Top 100 목록, 하단 재생 바" loading="lazy"></div></div>
+</section>
+
+<section class="sec" id="pCar" data-label="In Car" data-tone="dark">
+  <div class="a car-ph"><img src="../v3/car_tablet.webp" alt="뒷좌석 탑승자가 앞좌석 뒤 디스플레이의 MiMO Harmony 화면에서 원을 손가락으로 누르고 있다." loading="lazy"></div>
+</section>
+
 <!-- ============ 05d SCENARIOS (scroll gallery) ============ -->
 <section class="sec" id="pScn" data-label="Scenarios" data-tone="light" aria-label="MiMO 사용 시나리오 여덟 가지">
   <div class="scn-st">
@@ -1260,7 +1274,6 @@ body.gb-open{overflow:hidden}
 
 <!-- ============ 09 TEAM ============ -->
 <section class="sec" id="s09" data-label="Team" data-tone="dark">
-  <div class="a top9"><div class="a ph app" id="app"><img src="../v3/app.webp" alt="MiMO 앱 화면: Today's Picks 음악 추천과 Bugs Top 100 목록, 하단 재생 바" loading="lazy"></div></div>
   <footer class="a end">
     <svg class="logo wm" role="img" aria-label="MiMO" style="left:621px;top:390px;width:276.4px;height:77.75px"><use href="#sym-wordmark"/></svg>
     <div class="tm" style="top:627px"><b>Jinhee Lee</b><span>UX Designer</span></div>
