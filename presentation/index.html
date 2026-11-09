@@ -708,6 +708,11 @@ body.gb-open{overflow:hidden}
 
 /* ---------- 02e findings: fixed left title, six findings slide on the right over a slowly rippling field ---------- */
 #s02e{height:848px;overflow:hidden;background:#f6efe9}
+#s02e .fx-st{position:relative;height:848px;overflow:hidden}
+#s02e.scrolly{height:calc(848px + 6 * 420px);overflow:visible}
+#s02e.scrolly .fx-st{position:sticky;top:0;height:max(848px,calc(100vh / var(--z)))}
+#s02e.scrolly .fb{height:calc(100% + 100px)}
+#s02e.scrolly .fx-st>:not(.fb){transform:translateY(max(0px,calc((100vh / var(--z) - 848px) / 2)))}
 #s02e .fb{left:-60px;top:-50px;width:1638px;height:948px;background:url(../img/findings_bg.jpg) center/cover no-repeat;transform-origin:62% 55%;animation:fbWave 9s ease-in-out infinite alternate;will-change:transform}
 #s02e .fb2{opacity:.5;mix-blend-mode:multiply;animation:fbWave2 7s ease-in-out infinite alternate}
 @keyframes fbWave{0%{transform:translate(0,0) scale(1) skewX(0deg)}35%{transform:translate(-14px,6px) scale(1.025,1.01) skewX(-1.6deg)}70%{transform:translate(10px,-8px) scale(1.01,1.035) skewX(1.2deg)}100%{transform:translate(-6px,10px) scale(1.03,1.015) skewX(-.8deg)}}
@@ -1104,11 +1109,13 @@ body.gb-open{overflow:hidden}
 
 <!-- ============ 02e FINDINGS ============ -->
 <section class="sec" id="s02e" data-label="Findings" data-tone="dark" aria-label="관계와 정서적 경험 연구">
+  <div class="fx-st">
   <div class="a fb" aria-hidden="true"></div><div class="a fb fb2" aria-hidden="true"></div>
   <i class="a fl" aria-hidden="true"></i>
   <h2 class="a fx">01 관계와 정서적 경험</h2>
   <div class="a fs" aria-live="polite"><div class="sl on" aria-hidden="false"><p class="n">01</p><p class="src">Reis &amp; Shaver (1988)</p><p class="t">알아줄때 오는 친밀감</p><p class="tag">신호</p><p class="d">상대가 나를 이해하고 아껴준다고 느낄 때 친밀감이 생긴다는<br>모델. 접촉을 그 신호의 하나로 꼽음.</p></div><div class="sl" aria-hidden="true"><p class="n">02</p><p class="src">Jolink, Chang &amp; Algoe (2022)</p><p class="t">응답성과 스킨십의 선순환</p><p class="tag">순환</p><p class="d">상대가 잘 알아준 날엔 스킨십이 늘고, 스킨십을 받은<br>다음 날엔 상대를 더 응답적으로 느낌.</p></div><div class="sl" aria-hidden="true"><p class="n">03</p><p class="src">Löken et al. (2009)</p><p class="t">피부에 있는 '다정함 센서'</p><p class="tag">감각</p><p class="d">느린 쓰다듬기에만 반응하는 신경(C-촉각 섬유)을 발견.<br>이 신경이 가장 활발한 속도가 가장 기분 좋게 느껴짐.</p></div><div class="sl" aria-hidden="true"><p class="n">04</p><p class="src">Pawling et al. (2017)</p><p class="t">쓰다듬으면 웃는다</p><p class="tag">반응</p><p class="d">팔을 천천히 쓰다듬자 미소 근육이 실제로 움직임.<br>부드러운 손길이 긍정 감정을 직접 일으킴.</p></div><div class="sl" aria-hidden="true"><p class="n">05</p><p class="src">Croy 연구팀</p><p class="t">손길은 상대에게 맞춰진다</p><p class="tag">조율</p><p class="d">사람들은 자기 취향이 아니라 받는 사람이 가장 좋아할<br>속도로 쓰다듬음. 호감이 클수록 더 잘 맞춤.</p></div><div class="sl" aria-hidden="true"><p class="n">06</p><p class="src">Debrot et al. (2014)</p><p class="t">나쁜 감정 습관의 완충제</p><p class="tag">완충</p><p class="d">감정을 억누르면 커플 모두 기분이 나빠지지만,<br>파트너의 응답적 스킨십이 그 악영향을 줄여줌.</p></div></div>
   <ul class="a dots"><li><button type="button" data-i="0" aria-label="1번째 연구" aria-current="true"></button></li><li><button type="button" data-i="1" aria-label="2번째 연구"></button></li><li><button type="button" data-i="2" aria-label="3번째 연구"></button></li><li><button type="button" data-i="3" aria-label="4번째 연구"></button></li><li><button type="button" data-i="4" aria-label="5번째 연구"></button></li><li><button type="button" data-i="5" aria-label="6번째 연구"></button></li></ul>
+  </div>
 </section>
 
 <!-- ============ 02c MEANINGS OF A TAP ============ -->
@@ -1640,8 +1647,18 @@ body.gb-open{overflow:hidden}
       cur=(i+sls.length)%sls.length; sls[cur].classList.add('on'); sls[cur].setAttribute('aria-hidden','false'); dts.forEach((d,k)=>d.setAttribute('aria-current',String(k===cur))) };
     dts.forEach(d=>d.addEventListener('click',()=>{ go(+d.dataset.i); t0=Date.now() }));
     let t0=Date.now();
+    /* scrolling down steps through the slides; Safari (no reliable sticky in the zoomed page) and phones keep the timer */
+    const SAF=/Safari\//.test(navigator.userAgent)&&!/Chrome|Chromium|CriOS|FxiOS|Edg|OPR|Claude/.test(navigator.userAgent), small=matchMedia('(max-width:999px)');
+    const scrolly=()=>!SAF&&!small.matches;
+    const setMode=()=>{ fx.classList.toggle('scrolly',scrolly()); fx.style.height=scrolly()?'calc(max(848px,100vh / var(--z)) + '+(sls.length-1)*420+'px)':'' };
+    setMode(); small.addEventListener?small.addEventListener('change',setMode):small.addListener(setMode);
+    const fromScroll=()=>{ if(!scrolly()) return; const r=fx.getBoundingClientRect(), st=fx.querySelector('.fx-st').getBoundingClientRect().height, span=r.height-st;
+      const p=Math.max(0,Math.min(.999,(-r.top+(innerHeight-st)/2)/Math.max(1,span))); go(Math.floor(p*sls.length)) };
+    addEventListener('scroll',()=>requestAnimationFrame(fromScroll),{passive:true}); fromScroll();
+    dts.forEach(d=>d.addEventListener('click',()=>{ if(!scrolly()) return; const r=fx.getBoundingClientRect(), st=fx.querySelector('.fx-st').getBoundingClientRect().height, span=r.height-st;
+      scrollBy({top:r.top-(innerHeight-st)/2+span*(+d.dataset.i+.5)/sls.length,behavior:reduce?'auto':'smooth'}) }));
     new IntersectionObserver(es=>es.forEach(e=>{ seen=e.isIntersecting; if(seen) t0=Date.now() }),{threshold:.3}).observe(fx);
-    setInterval(()=>{ if(seen&&Date.now()-t0>=4000){ go(cur+1); t0=Date.now() } },250) }
+    setInterval(()=>{ if(!scrolly()&&seen&&Date.now()-t0>=4000){ go(cur+1); t0=Date.now() } },250) }
   }catch(err){ console.warn(err) }
   try{
 
