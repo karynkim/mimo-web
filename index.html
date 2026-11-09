@@ -105,7 +105,7 @@ svg.logo{display:block;overflow:visible}
 .step:hover .ph{transform:translateY(-8px)}
 .plist{left:1186px;top:2074px;width:260px;list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px}
 .plist li{display:flex;gap:24px;align-items:center;height:20px;transition:color .25s}
-#quote .w{transition:color .9s ease-out}
+#quote .w{transition:color .25s linear}
 .plist .k{white-space:nowrap;width:24px;flex:none;text-align:center;font-family:var(--font-dm);font-variation-settings:"opsz" 14;font-weight:500;font-size:16px;line-height:1;letter-spacing:-.96px;font-variant-numeric:tabular-nums}
 .plist .v{width:212px;white-space:nowrap}
 .plist li.on{color:var(--accent)}
@@ -913,7 +913,7 @@ body.gb-open{overflow:hidden}
 .pg b{font-size:22px;color:var(--text-primary,#1a1a1a)}
 .pg span{font-size:16px}
 #pBg{overflow:visible;padding-bottom:0}
-#pBg+#s03{margin-top:-330px;background:transparent;position:relative;z-index:1}
+#pBg+#s03{margin-top:-60px;background:transparent;position:relative;z-index:1}
 @media (max-width:999px){#pBg+#s03{margin-top:0}}
 .ptor{position:relative;margin:200px -80px 0;height:calc(100vh / var(--z) + 1800px)}
 .ptor-st{position:sticky;top:0;height:calc(100vh / var(--z));overflow:hidden;perspective:1500px;perspective-origin:50% 45%}
@@ -1572,9 +1572,9 @@ body.gb-open{overflow:hidden}
     parts.forEach((txt,k)=>{ if(k) quote.append(document.createElement('br')); const tmp=document.createElement('div'); tmp.innerHTML=txt; tmp.textContent.split(/(\s+)/).forEach(w=>{ if(!w) return; if(/^\s+$/.test(w)) quote.append(w); else {const s=document.createElement('span');s.className='w';s.textContent=w;quote.append(s)} }) });
     const ws=[...quote.querySelectorAll('.w')];
     /* colour only (no opacity): opacity put each word on its own layer and nudged glyphs while scrolling */
-    const SOFT=6;
-    const qfx=()=>{const r=quote.getBoundingClientRect(); const p=cl((innerHeight*.95-r.top)/(r.height+innerHeight*.8)); const head=p*(ws.length+SOFT);
-      ws.forEach((w,i)=>{const k=Math.round(cl((head-i)/SOFT)*100); if(w._k!==k){w._k=k; w.style.color=`color-mix(in srgb, var(--accent) ${18+k*.82}%, var(--bg-canvas))`}})};
+    const SOFT=2;
+    const qfx=()=>{const r=quote.getBoundingClientRect(); const p=cl((innerHeight*.82-r.top)/(r.height+innerHeight*.3)); const head=p*(ws.length+SOFT);
+      ws.forEach((w,i)=>{const k=Math.round(cl((head-i)/SOFT)*100); if(w._k!==k){w._k=k; w.style.color=`color-mix(in srgb, var(--accent) ${12+k*.88}%, var(--bg-canvas))`}})};
     addEventListener('scroll',()=>requestAnimationFrame(qfx),{passive:true}); qfx();
   }
 
